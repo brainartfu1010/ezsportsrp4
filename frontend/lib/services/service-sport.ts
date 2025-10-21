@@ -1,4 +1,4 @@
-import { TypeSport, CreateSportDTO, UpdateSportDTO, TypeReorder } from '../types';
+import { TypeSport, TypeReorder } from '@/types/types';
 import axios from 'axios';
 
 // Use environment variable directly
@@ -7,8 +7,8 @@ const API_URL = `${process.env.NEXT_PUBLIC_API_URL}/admin/sports`;
 export const ServiceSport = {
   getSports: async (active?: boolean): Promise<TypeSport[]> => {
     try {
-      const response = await axios.get(API_URL, { 
-        params: { active } 
+      const response = await axios.get(API_URL, {
+        params: { active }
       });
       return response.data;
     } catch (error) {
@@ -27,7 +27,7 @@ export const ServiceSport = {
     }
   },
 
-  createSport: async (sportData: CreateSportDTO): Promise<TypeSport> => {
+  createSport: async (sportData: TypeSport): Promise<TypeSport> => {
     try {
       const response = await axios.post(API_URL, sportData);
       return response.data;
@@ -37,7 +37,7 @@ export const ServiceSport = {
     }
   },
 
-  updateSport: async (id: number, sportData: UpdateSportDTO): Promise<TypeSport> => {
+  updateSport: async (id: number, sportData: TypeSport): Promise<TypeSport> => {
     try {
       const response = await axios.patch(`${API_URL}/${id}`, sportData);
       return response.data;

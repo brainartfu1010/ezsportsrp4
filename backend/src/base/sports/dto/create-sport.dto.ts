@@ -1,6 +1,6 @@
 // import { ApiProperty } from '@nestjs/swagger';
 import { ApiProperty } from '@nestjs/swagger';
-import { IsString, IsOptional, IsBoolean, IsInt } from 'class-validator';
+import { IsString, IsOptional, IsBoolean, IsInt, IsBase64 } from 'class-validator';
 
 
 export class CreateSportDto {
@@ -27,4 +27,9 @@ export class CreateSportDto {
   @IsInt()
   @IsOptional()
   ord?: number = 0;
+
+  @ApiProperty({ description: 'The base64 image of the sport', required: false })
+  // @IsBase64()
+  @IsOptional()
+  base64?: string;
 }

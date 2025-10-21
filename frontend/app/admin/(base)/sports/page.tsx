@@ -9,9 +9,9 @@ import Table from "@/components/controls/table";
 import { Toolbar } from "@/components/controls/toolbar";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
-import { Avatar, AvatarFallback } from "@/components/ui/avatar";
-import { TypeSport, TypeReorder } from "@/lib/types";
-import { ServiceSport } from "@/lib/services/sport";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { TypeSport, TypeReorder } from "@/types/types";
+import { ServiceSport } from "@/lib/services/service-sport";
 import SportEditModal from "@/components/modals/modal-sport-edit";
 import { getSectionIcon } from "@/lib/utils";
 
@@ -120,7 +120,8 @@ export default function SportsPage() {
       header: "Sport Name",
       cell: (row) => (
         <div className="flex items-center space-x-3">
-          <Avatar>
+          <Avatar className="size-10">
+            <AvatarImage src={row.base64} />
             <AvatarFallback>{row.abbr}</AvatarFallback>
           </Avatar>
           <div>

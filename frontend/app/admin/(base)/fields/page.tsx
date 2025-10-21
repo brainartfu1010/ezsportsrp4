@@ -10,10 +10,10 @@ import Table from "@/components/controls/table";
 import { Toolbar } from "@/components/controls/toolbar";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
-import { Avatar, AvatarFallback } from "@/components/ui/avatar";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
-import { ServiceField } from "@/lib/services/fieldService";
-import { TypeField, TypeReorder } from "@/lib/types";
+import { ServiceField } from "@/lib/services/service-field";
+import { TypeField, TypeReorder, TypeSport } from "@/types/types";
 import FieldEditModal from "@/components/modals/modal-field-edit";
 import { getSectionIcon } from "@/lib/utils";
 import { useSports } from "@/hooks/useSports";
@@ -22,9 +22,7 @@ import { useCountries } from "@/hooks/useCountries";
 export default function FieldsPage() {
   const { sports } = useSports();
   const { countries } = useCountries();
-  const [entries, setEntries] = React.useState<(TypeField & { id: number })[]>(
-    []
-  );
+  const [entries, setEntries] = React.useState([]);
   const [entry, setEntry] = React.useState<TypeField | null>(null);
   const [keyword, setKeyword] = React.useState("");
   const [editing, setEditing] = React.useState(false);
@@ -127,6 +125,7 @@ export default function FieldsPage() {
       cell: (row) => (
         <div className="flex items-center space-x-3">
           <Avatar>
+            <AvatarImage src={row.base64} className="size-10" />
             <AvatarFallback>{row.abbr}</AvatarFallback>
           </Avatar>
           <div>

@@ -35,4 +35,9 @@ export class CreateFieldDto {
   @IsInt()
   @IsOptional()
   ord?: number = 0;
+
+  @ApiProperty({ description: 'The base64 of the field', required: false, example: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGQAAABkCAYAAABw4pVUAAABIElEQVR4nO3RMQoAIAxF0QYhuiSEsLJ4iVUQAh6fUfQFTdP08ZJEOZ6CKMiK7pOc4HkeMeEkXZI6IWZACBAChAAhQAgQAoQAIUAIEAKEACHQIpAqA1pEomUkmUDSAAAAAElFTkSuQmCC' })
+  @IsString()
+  @IsOptional()
+  base64?: string;
 }

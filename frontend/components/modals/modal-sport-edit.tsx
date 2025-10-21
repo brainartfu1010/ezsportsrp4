@@ -8,8 +8,8 @@ import { Switch } from "@/components/ui/switch";
 import AvatarPicker from "@/components/pickers/picker-avatar";
 import { Form, FormItem } from "@/components/controls/form";
 import { Separator } from "@/components/ui/separator";
-import { TypeSport } from "@/lib/types";
-import { ServiceSport } from "@/lib/services/sport";
+import { TypeSport } from "@/types/types";
+import { ServiceSport } from "@/lib/services/service-sport";
 
 type SportEditModalProps = {
   isOpen: boolean;
@@ -30,7 +30,7 @@ const SportEditModal: React.FC<SportEditModalProps> = ({
     base64: {
       label: "Sport Logo",
       schema: z.union([z.string(), z.null(), z.undefined()]).optional(),
-      control: <AvatarPicker />,
+      control: <AvatarPicker image={sport?.base64}  />,
       className: "flex flex-col",
       required: false,
     },

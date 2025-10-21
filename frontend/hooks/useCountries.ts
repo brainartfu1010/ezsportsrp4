@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
-import { TypeCountry } from '@/lib/types';
-import { ServiceCountry } from '@/lib/services/country';
+import { TypeCountry } from '@/types/types';
+import { ServiceCountry } from "@/lib/services/service-country";
 
 // Singleton-like cache for countries
 class CountriesCache {
@@ -9,7 +9,7 @@ class CountriesCache {
   private loading = false;
   private error: Error | null = null;
 
-  private constructor() {}
+  private constructor() { }
 
   static getInstance(): CountriesCache {
     if (!CountriesCache.instance) {
@@ -70,7 +70,7 @@ export function useCountries() {
 
   useEffect(() => {
     const cache = CountriesCache.getInstance();
-    
+
     // Only fetch if no countries are loaded
     if (state.countries.length === 0 && !state.loading) {
       cache.fetchCountries()

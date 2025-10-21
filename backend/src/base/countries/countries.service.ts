@@ -3,21 +3,28 @@ import { CreateCountryDto } from './dto/create-country.dto';
 import { UpdateCountryDto } from './dto/update-country.dto';
 import { PrismaService } from '../../prisma/prisma.service';
 import { Prisma } from '@prisma/client';
+import { AvatarUtils } from 'src/utils/avatar.utils';
 
 @Injectable()
 export class AdminCountriesService {
   constructor(private prisma: PrismaService) { }
 
   async create(createCountryDto: CreateCountryDto) {
-    console.log("Creating country:", createCountryDto);
-  
-    return await this.prisma.baseCountry.create({
+
+    const { base64, ...createData } = createCountryDto;
+
+    const result = await this.prisma.baseCountry.create({
       data: {
-        ...createCountryDto,
-        isActive: createCountryDto.isActive ?? true,
-        ord: createCountryDto.ord ?? (await this.determineNextOrder())
+        ...createData,
+        code: createData.code || ''
       }
     });
+
+    if (base64) {
+      AvatarUtils.saveBase64(base64, 'countries', result.id);
+    }
+
+    return result;
   }
 
   // Helper method to determine the next order value
@@ -30,14 +37,18 @@ export class AdminCountriesService {
   }
 
   async findAll(active?: boolean) {
-    const where = active !== undefined 
-      ? { isActive: active } as Prisma.BaseCountryWhereInput
-      : undefined;
-
-    return await this.prisma.baseCountry.findMany({
-      where,
+    const countries = await this.prisma.baseCountry.findMany({
+      where: active !== undefined
+        ? { isActive: active } as Prisma.BaseCountryWhereInput
+        : undefined,
       orderBy: { ord: 'asc' }
     });
+
+    // Attach avatars
+    return Promise.all(countries.map(async country => ({
+      ...country,
+      base64: AvatarUtils.getBase64('countries', country.id)
+    })));
   }
 
   async findOne(id: number) {
@@ -49,15 +60,29 @@ export class AdminCountriesService {
       throw new NotFoundException(`Country with ID ${id} not found`);
     }
 
-    return country;
+    // Attach avatar
+    return {
+      ...country,
+      base64: AvatarUtils.getBase64('countries', country.id)
+    };
   }
 
   async update(id: number, updateCountryDto: UpdateCountryDto) {
     try {
-      return await this.prisma.baseCountry.update({
+      const { base64, ...updateData } = updateCountryDto;
+
+      const result = await this.prisma.baseCountry.update({
         where: { id: Number(id) },
-        data: updateCountryDto
+        data: updateData
       });
+
+      if (base64) {
+        AvatarUtils.saveBase64(base64, 'countries', id);
+      } else if (base64 === null) {
+        AvatarUtils.deleteBase64('countries', id);
+      }
+
+      return result;
     } catch (error) {
       throw new NotFoundException(`Country with ID ${id} not found`);
     }

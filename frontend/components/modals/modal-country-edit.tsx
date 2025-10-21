@@ -8,9 +8,8 @@ import { Switch } from "@/components/ui/switch";
 import AvatarPicker from "@/components/pickers/picker-avatar";
 import { Form, FormItem } from "@/components/controls/form";
 import { Separator } from "@/components/ui/separator";
-import { TypeCountry } from "@/lib/types";
-import { ServiceSport } from "@/lib/services/sport";
-import { ServiceCountry } from "@/lib/services/country";
+import { TypeCountry } from "@/types/types";
+import { ServiceCountry } from "@/lib/services/service-country";
 
 type CountryEditModalProps = {
   isOpen: boolean;
@@ -28,10 +27,10 @@ const CountryEditModal: React.FC<CountryEditModalProps> = ({
   const formRef = React.useRef<HTMLFormElement>(null);
 
   const formConfig = {
-    flag: {
+    base64: {
       label: "Flag",
       schema: z.union([z.string(), z.null(), z.undefined()]).optional(),
-      control: <AvatarPicker layout="vertical" />,
+      control: <AvatarPicker image={country?.base64} />,
       className: "flex flex-col",
       required: false,
     },
@@ -86,6 +85,7 @@ const CountryEditModal: React.FC<CountryEditModalProps> = ({
         isActive: data.isActive,
         base64: data.base64 || undefined,
       };
+      console.log(countryData)
 
       if (country?.id) {
         ServiceCountry.updateCountry(country?.id, countryData).then(() => {
@@ -133,7 +133,7 @@ const CountryEditModal: React.FC<CountryEditModalProps> = ({
         className="flex gap-4"
         initialValues={country}
       >
-        <FormItem key="flag" className="w-[120px]" />
+        <FormItem key="base64" className="w-[120px]" />
         <Separator orientation="vertical" />
         <div className="space-y-4 w-full">
           <FormItem key="name" />

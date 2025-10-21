@@ -1,4 +1,4 @@
-import { TypeField } from '../types';
+import { TypeField } from '@/types/types';
 import axios from 'axios';
 
 const API_URL = `${process.env.NEXT_PUBLIC_API_URL}/admin/fields`;

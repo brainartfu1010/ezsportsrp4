@@ -1,6 +1,18 @@
 export interface TypeReorder { [key: number]: number }
 
 
+export type TypeSport = {
+  id: number;
+  name: string;
+  abbr?: string;
+  note?: string;
+  ord?: number;
+  base64?: string;
+  isActive?: boolean;
+  createdAt?: Date;
+  updatedAt?: Date;
+};
+
 export interface TypeCountry {
   id?: number;
   name: string;
@@ -13,18 +25,6 @@ export interface TypeCountry {
   createdAt?: Date;
   updatedAt?: Date;
 }
-
-export type TypeSport = {
-  id: number;
-  name: string;
-  abbr?: string;
-  note?: string;
-  ord?: number;
-  base64?: string;
-  isActive?: boolean;
-  createdAt?: Date;
-  updatedAt?: Date;
-};
 
 export interface TypeField {
   id?: number;

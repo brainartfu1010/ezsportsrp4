@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
-import { TypeSport } from '@/lib/types';
-import { ServiceSport } from '@/lib/services/sport';
+import { TypeSport } from '@/types/types';
+import { ServiceSport } from '@/lib/services/service-sport';
 
 // Singleton-like cache for sports
 class SportsCache {

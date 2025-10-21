@@ -4,16 +4,15 @@ import * as React from "react";
 import { SearchIcon } from "lucide-react";
 
 import { Card } from "@/components/controls/card";
-import Button, { Buttons } from "@/components/controls/button";
+import { Buttons } from "@/components/controls/button";
 import Table from "@/components/controls/table";
 import { Toolbar } from "@/components/controls/toolbar";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import CountryEditModal from "@/components/modals/modal-country-edit";
-import { TypeCountry, TypeReorder } from "@/lib/types";
-import { ServiceCountry } from "@/lib/services/country";
-import { GlobeIcon } from "lucide-react";
+import { TypeCountry, TypeReorder } from "@/types/types";
+import { ServiceCountry } from "@/lib/services/service-country";
 import { getSectionIcon } from "@/lib/utils";
 
 export default function CountriesPage() {
@@ -104,14 +103,16 @@ export default function CountriesPage() {
     setEditing(false);
   };
 
-  const handleReorder = (
-    newOrders: { [key: string]: number }[],
-    newData?: (TypeCountry & { id: number })[] | undefined
-  ) => {
+  const handleReorder = (newOrders: TypeReorder[], newData: TypeCountry[]) => {
     try {
-      if (!newData) return;
+      // if (!newData) return;
       ServiceCountry.reorderCountries(newOrders);
-      setEntries(newData);
+      setEntries(
+        newData.map((country) => ({
+          ...country,
+          id: country.id ?? Math.floor(Math.random() * 10000),
+        }))
+      );
     } catch (error) {
       console.error("Failed to reorder countries:", error);
     }
@@ -128,6 +129,7 @@ export default function CountriesPage() {
       cell: (row) => (
         <div className="flex items-center space-x-3">
           <Avatar>
+            <AvatarImage src={row.base64} className="size-10" />
             <AvatarFallback>{row.code}</AvatarFallback>
           </Avatar>
           <div>

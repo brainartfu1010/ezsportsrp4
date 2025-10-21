@@ -8,10 +8,9 @@ import { Switch } from "@/components/ui/switch";
 import AvatarPicker from "@/components/pickers/picker-avatar";
 import { Form, FormItem } from "@/components/controls/form";
 import { Separator } from "@/components/ui/separator";
-import { TypeField } from "@/lib/types";
+import { TypeField } from "@/types/types";
 import { ComboCountries } from "@/components/combos/combo-countries";
-import { ComboSports } from "@/components/combos/combo-sports";
-import { ServiceField } from "@/lib/services/fieldService";
+import { ServiceField } from "@/lib/services/service-field";
 import { CheckerSports } from "../checkers/checker-sports";
 
 type FieldEditModalProps = {
@@ -30,10 +29,10 @@ const FieldEditModal: React.FC<FieldEditModalProps> = ({
   const formRef = React.useRef<HTMLFormElement>(null);
 
   const formConfig = {
-    image: {
+    base64: {
       label: "Field Image",
       schema: z.union([z.string(), z.null(), z.undefined()]).optional(),
-      control: <AvatarPicker layout="vertical" />,
+      control: <AvatarPicker image={field?.base64} />,
       className: "flex flex-col",
       required: false,
     },
@@ -150,7 +149,7 @@ const FieldEditModal: React.FC<FieldEditModalProps> = ({
         className="flex gap-4"
         initialValues={field}
       >
-        <FormItem key="image" className="w-[120px]" />
+        <FormItem key="base64" className="w-[120px]" />
         <Separator orientation="vertical" />
         <div className="space-y-4 w-full">
           <div className="grid grid-cols-2 gap-4">

@@ -3,26 +3,41 @@ import { CreateSportDto } from './dto/create-sport.dto';
 import { UpdateSportDto } from './dto/update-sport.dto';
 import { PrismaService } from '../../prisma/prisma.service';
 import { Prisma } from '@prisma/client';
+import { AvatarUtils } from '../../utils/avatar.utils';
 
 @Injectable()
 export class SportsService {
   constructor(private prisma: PrismaService) { }
 
   async create(createSportDto: CreateSportDto) {
-    return await this.prisma.baseSport.create({
-      data: createSportDto
+    const { base64, ...createData } = createSportDto;
+
+    const sport = await this.prisma.baseSport.create({
+      data: createData
     });
+
+    if (base64) {
+      AvatarUtils.saveBase64(base64, 'sports', sport.id);
+    } else if (base64 === null) {
+      AvatarUtils.deleteBase64('sports', sport.id);
+    }
+
+    return sport;
   }
 
   async findAll(active?: boolean) {
-    const where = active !== undefined 
-      ? { isActive: active } as Prisma.BaseSportWhereInput
-      : undefined;
-
-    return await this.prisma.baseSport.findMany({
-      where,
+    const sports = await this.prisma.baseSport.findMany({
+      where: active !== undefined
+        ? { isActive: active } as Prisma.BaseSportWhereInput
+        : undefined,
       orderBy: { ord: 'asc' }
     });
+
+    // Attach avatars
+    return Promise.all(sports.map(async sport => ({
+      ...sport,
+      base64: await AvatarUtils.getBase64('sports', sport.id) || undefined
+    })));
   }
 
   async findOne(id: number) {
@@ -34,15 +49,29 @@ export class SportsService {
       throw new NotFoundException(`Sport with ID ${id} not found`);
     }
 
-    return sport;
+    // Attach avatar
+    return {
+      ...sport,
+      base64: await AvatarUtils.getBase64('sports', sport.id) || undefined
+    };
   }
 
   async update(id: number, updateSportDto: UpdateSportDto) {
     try {
-      return await this.prisma.baseSport.update({
+      const { base64, ...updateData } = updateSportDto;
+
+      if (base64) {
+        AvatarUtils.saveBase64(base64, 'sports', id);
+      } else if (base64 === null) {
+        AvatarUtils.deleteBase64('sports', id);
+      }
+
+      const sport = await this.prisma.baseSport.update({
         where: { id: Number(id) },
-        data: updateSportDto
+        data: updateData
       });
+
+      return sport;
     } catch (error) {
       throw new NotFoundException(`Sport with ID ${id} not found`);
     }
@@ -64,6 +93,9 @@ export class SportsService {
         throw new NotFoundException(`Sport with ID ${id} not found`);
       }
 
+      // Delete avatar if exists
+      AvatarUtils.deleteBase64('sports', id);
+
       // Perform delete
       return await this.prisma.baseSport.delete({
         where: { id: Number(id) }
@@ -76,6 +108,9 @@ export class SportsService {
   }
 
   async removeMany(ids: number[]) {
+    // Delete avatars for all sports being deleted
+    ids.forEach(id => AvatarUtils.deleteBase64('sports', id));
+
     return await this.prisma.baseSport.deleteMany({
       where: { id: { in: ids } }
     });
