@@ -1,0 +1,50 @@
+
+
+
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = "postgresql://postgres:postgres@localhost:5432/ezsportsrp_db?schema=public"
+}
+
+model BaseSport {
+  id          Int      @id @default(autoincrement())
+  name        String   @unique
+  abbr        String?
+  note        String?
+  isActive    Boolean  @default(true)
+  ord         Int      @default(0)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model BaseCountry {
+  id          Int      @id @default(autoincrement())
+  name        String   @unique
+  abbr        String?
+  code        String?   
+  note        String?
+  isActive    Boolean  @default(true)
+  ord         Int      @default(0)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model BaseField {
+  id          Int      @id @default(autoincrement())
+  name        String   @unique
+  abbr        String?
+  note        String?
+  isActive    Boolean  @default(true)
+  sportIds    Int[]
+  countryId   Int?
+  ord         Int      @default(0)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
