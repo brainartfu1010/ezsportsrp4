@@ -11,17 +11,17 @@ datasource db {
 }
 
 model BaseCompetition {
-  id          Decimal   @id(map: "base_competitions_pkey") @db.Decimal(20, 0)
-  name        String    @db.VarChar(100)
-  abbr        String?   @db.VarChar(100)
-  sportId     Decimal?  @db.Decimal(20, 0)
-  description String?
-  status      String    @db.VarChar(255)
-  startDate   DateTime? @db.Date
-  endDate     DateTime? @db.Date
-  ord         Int?
-  createdAt   DateTime? @db.Timestamp(6)
-  updatedAt   DateTime? @db.Timestamp(6)
+  id        Decimal   @id(map: "base_competitions_pkey") @db.Decimal(20, 0)
+  name      String    @db.VarChar(100)
+  abbr      String?   @db.VarChar(100)
+  sportId   Decimal?  @db.Decimal(20, 0)
+  note      String?
+  status    String    @db.VarChar(255)
+  startDate DateTime? @db.Date
+  endDate   DateTime? @db.Date
+  ord       Int?
+  createdAt DateTime? @db.Timestamp(6)
+  updatedAt DateTime? @db.Timestamp(6)
 
   @@index([sportId], map: "base_competitions_sport_id_foreign")
 }
@@ -113,7 +113,7 @@ model MatchEvent {
   eventType   String    @db.VarChar(255)
   minute      Int
   second      Int
-  description String?
+  note        String?
   eventData   String?
   fieldX      Decimal?  @db.Decimal(5, 2)
   fieldY      Decimal?  @db.Decimal(5, 2)
@@ -154,22 +154,22 @@ model MatchLineup {
 }
 
 model MatchMedia {
-  id          Decimal   @id(map: "match_media_pkey") @db.Decimal(20, 0)
-  matchId     Decimal   @db.Decimal(20, 0)
-  mediaType   String    @db.VarChar(255)
-  fileName    String    @db.VarChar(100)
-  filePath    String    @db.VarChar(100)
-  fileSize    BigInt?
-  mimeType    String?   @db.VarChar(100)
-  description String?
-  category    String?   @db.VarChar(100)
-  isPublic    Int       @db.SmallInt
-  uploadedBy  Decimal?  @db.Decimal(20, 0)
-  uploadedAt  DateTime  @db.Timestamp(6)
-  notes       String?
-  ord         Int
-  createdAt   DateTime? @db.Timestamp(6)
-  updatedAt   DateTime? @db.Timestamp(6)
+  id         Decimal   @id(map: "match_media_pkey") @db.Decimal(20, 0)
+  matchId    Decimal   @db.Decimal(20, 0)
+  mediaType  String    @db.VarChar(255)
+  fileName   String    @db.VarChar(100)
+  filePath   String    @db.VarChar(100)
+  fileSize   BigInt?
+  mimeType   String?   @db.VarChar(100)
+  note       String?
+  category   String?   @db.VarChar(100)
+  isPublic   Int       @db.SmallInt
+  uploadedBy Decimal?  @db.Decimal(20, 0)
+  uploadedAt DateTime  @db.Timestamp(6)
+  notes      String?
+  ord        Int
+  createdAt  DateTime? @db.Timestamp(6)
+  updatedAt  DateTime? @db.Timestamp(6)
 
   @@index([isPublic, uploadedAt], map: "match_media_is_public_uploaded_at_index")
   @@index([matchId, category], map: "match_media_match_id_category_index")
@@ -403,7 +403,7 @@ model OrgClub {
   id           Decimal   @id(map: "org_clubs_pkey") @default(dbgenerated("nextval('\"BaseField_id_seq\"'::regclass)")) @db.Decimal(20, 0)
   name         String    @db.VarChar(100)
   abbr         String?   @db.VarChar(100)
-  description  String?
+  note         String?
   foundedDate  DateTime? @db.Date
   address      String?   @db.VarChar(100)
   contactEmail String?   @db.VarChar(100)
@@ -419,7 +419,7 @@ model OrgLeague {
   id                   Decimal   @id(map: "org_leagues_pkey") @default(dbgenerated("nextval('\"BaseField_id_seq\"'::regclass)")) @db.Decimal(20, 0)
   name                 String    @db.VarChar(100)
   abbr                 String?   @db.VarChar(100)
-  description          String?
+  note                 String?
   gameModeId           Decimal?  @db.Decimal(20, 0)
   groupLevelId         Decimal?  @db.Decimal(20, 0)
   season               String?   @db.VarChar(100)
@@ -857,15 +857,15 @@ model SportRefereeType {
 }
 
 model SubFeature {
-  id          Decimal   @id(map: "subscription_features_pkey") @db.Decimal(20, 0)
-  name        String    @db.VarChar(100)
-  description String?
-  category    String?   @db.VarChar(100)
-  icon        String?   @db.VarChar(100)
-  isActive    Int       @db.SmallInt
-  ord         Int
-  createdAt   DateTime? @db.Timestamp(6)
-  updatedAt   DateTime? @db.Timestamp(6)
+  id        Decimal   @id(map: "subscription_features_pkey") @db.Decimal(20, 0)
+  name      String    @db.VarChar(100)
+  note      String?
+  category  String?   @db.VarChar(100)
+  icon      String?   @db.VarChar(100)
+  isActive  Int       @db.SmallInt
+  ord       Int
+  createdAt DateTime? @db.Timestamp(6)
+  updatedAt DateTime? @db.Timestamp(6)
 
   @@index([category, isActive], map: "subscription_features_category_is_active_index")
   @@index([isActive], map: "subscription_features_is_active_index")
@@ -922,7 +922,7 @@ model SubPlan {
   planType       String    @db.VarChar(255)
   price          Decimal   @db.Decimal(10, 2)
   isPopular      Int       @db.SmallInt
-  description    String?
+  note           String?
   features       String?
   maxTeams       Int?
   maxPlayers     Int?

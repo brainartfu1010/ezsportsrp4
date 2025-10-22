@@ -1,1 +1,139 @@
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { CreateTeamDto, UpdateTeamDto } from './dto';
+import { PrismaService } from '../../prisma/prisma.service';
+import { AvatarUtils } from '../../utils/avatar.utils';
+import { Prisma } from '@prisma/client';
+
+@Injectable()
+export class TeamsService {
+  constructor(private prisma: PrismaService) {}
+
+  async create(createTeamDto: CreateTeamDto) {
+    const { base64, ...createData } = createTeamDto;
+
+    const team = await (this.prisma as any).orgTeam.create({
+      data: {
+        ...createData,
+        status: 1, // Hardcoded default status
+        isActive: createData.isActive ?? true
+      }
+    });
+
+    if (base64) {
+      AvatarUtils.saveBase64(base64, 'teams', team.id);
+    } else if (base64 === null) {
+      AvatarUtils.deleteBase64('teams', team.id);
+    }
+
+    return team;
+  }
+
+  async findAll(params: {
+    skip?: number;
+    take?: number;
+    cursor?: Prisma.Decimal;
+    where?: Prisma.InputJsonObject;
+    orderBy?: Prisma.InputJsonObject | Prisma.SortOrder;
+  }) {
+    const { skip, take, cursor, where, orderBy } = params;
+    const teams = await (this.prisma as any).orgTeam.findMany({
+      skip,
+      take,
+      cursor: cursor ? { id: cursor } : undefined,
+      where,
+      orderBy: orderBy ?? { name: 'asc' }
+    });
+
+    return Promise.all(teams.map(async team => ({
+      ...team,
+      base64: await AvatarUtils.getBase64('teams', team.id) || undefined
+    })));
+  }
+
+  async findOne(id: string) {
+    const team = await (this.prisma as any).orgTeam.findUnique({ 
+      where: { id }
+    });
+
+    if (!team) {
+      throw new NotFoundException(`Team with ID ${id} not found`);
+    }
+
+    return {
+      ...team,
+      base64: await AvatarUtils.getBase64('teams', team.id) || undefined
+    };
+  }
+
+  async update(id: string, updateTeamDto: UpdateTeamDto) {
+    try {
+      const { base64, ...updateData } = updateTeamDto;
+
+      if (base64) {
+        AvatarUtils.saveBase64(base64, 'teams', id);
+      } else if (base64 === null) {
+        AvatarUtils.deleteBase64('teams', id);
+      }
+
+      const team = await (this.prisma as any).orgTeam.update({
+        where: { id },
+        data: updateData
+      });
+
+      return team;
+    } catch (error) {
+      throw new NotFoundException(`Team with ID ${id} not found`);
+    }
+  }
+
+  async remove(id: string) {
+    try {
+      // Validate id
+      if (id === undefined || id === null) {
+        throw new NotFoundException('Invalid ID provided for deletion');
+      }
+
+      // Ensure id exists
+      const team = await (this.prisma as any).orgTeam.findUnique({
+        where: { id }
+      });
+
+      if (!team) {
+        throw new NotFoundException(`Team with ID ${id} not found`);
+      }
+
+      // Delete avatar if exists
+      AvatarUtils.deleteBase64('teams', id);
+
+      // Perform delete
+      return await (this.prisma as any).orgTeam.delete({ 
+        where: { id } 
+      });
+    } catch (error) {
+      // Log the original error for debugging
+      console.error('Delete team error:', error);
+      throw new NotFoundException(`Team with ID ${id} not found`);
+    }
+  }
+
+  async removeMany(ids: string[]) {
+    // Delete avatars for all teams being deleted
+    ids.forEach(id => AvatarUtils.deleteBase64('teams', id));
+
+    return await (this.prisma as any).orgTeam.deleteMany({
+      where: { id: { in: ids } }
+    });
+  }
+
+  async reorder(orders: { [key: string]: number }[]) {
+    const updatePromises = orders.map(async (item) => {
+      const [id, ord] = Object.entries(item)[0]; // Extract the only key-value pair
+      return (this.prisma as any).orgTeam.update({
+        where: { id },
+        data: { ord },
+      });
+    });
+
+    return Promise.all(updatePromises);
+  }
+}

@@ -15,7 +15,7 @@ model BaseCompetition {
   name        String    @db.VarChar(100)
   abbr        String?   @db.VarChar(100)
   sportId     Decimal?  @db.Decimal(20, 0)
-  description String?
+  note        String?
   status      String    @db.VarChar(255)
   startDate   DateTime? @db.Date
   endDate     DateTime? @db.Date
@@ -113,7 +113,7 @@ model MatchEvent {
   eventType   String    @db.VarChar(255)
   minute      Int
   second      Int
-  description String?
+  note        String?
   eventData   String?
   fieldX      Decimal?  @db.Decimal(5, 2)
   fieldY      Decimal?  @db.Decimal(5, 2)
@@ -161,7 +161,7 @@ model MatchMedia {
   filePath    String    @db.VarChar(100)
   fileSize    BigInt?
   mimeType    String?   @db.VarChar(100)
-  description String?
+  note        String?
   category    String?   @db.VarChar(100)
   isPublic    Int       @db.SmallInt
   uploadedBy  Decimal?  @db.Decimal(20, 0)
@@ -403,7 +403,7 @@ model OrgClub {
   id           Decimal   @id(map: "org_clubs_pkey") @default(dbgenerated("nextval('\"BaseField_id_seq\"'::regclass)")) @db.Decimal(20, 0)
   name         String    @db.VarChar(100)
   abbr         String?   @db.VarChar(100)
-  description  String?
+  note         String?
   foundedDate  DateTime? @db.Date
   address      String?   @db.VarChar(100)
   contactEmail String?   @db.VarChar(100)
@@ -419,7 +419,7 @@ model OrgLeague {
   id                   Decimal   @id(map: "org_leagues_pkey") @default(dbgenerated("nextval('\"BaseField_id_seq\"'::regclass)")) @db.Decimal(20, 0)
   name                 String    @db.VarChar(100)
   abbr                 String?   @db.VarChar(100)
-  description          String?
+  note                 String?
   gameModeId           Decimal?  @db.Decimal(20, 0)
   groupLevelId         Decimal?  @db.Decimal(20, 0)
   season               String?   @db.VarChar(100)
@@ -859,7 +859,7 @@ model SportRefereeType {
 model SubFeature {
   id          Decimal   @id(map: "subscription_features_pkey") @db.Decimal(20, 0)
   name        String    @db.VarChar(100)
-  description String?
+  note        String?
   category    String?   @db.VarChar(100)
   icon        String?   @db.VarChar(100)
   isActive    Int       @db.SmallInt
@@ -922,7 +922,7 @@ model SubPlan {
   planType       String    @db.VarChar(255)
   price          Decimal   @db.Decimal(10, 2)
   isPopular      Int       @db.SmallInt
-  description    String?
+  note           String?
   features       String?
   maxTeams       Int?
   maxPlayers     Int?

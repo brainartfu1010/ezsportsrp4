@@ -5269,7 +5269,7 @@ export namespace Prisma {
     name: string | null
     abbr: string | null
     sportId: Decimal | null
-    description: string | null
+    note: string | null
     status: string | null
     startDate: Date | null
     endDate: Date | null
@@ -5283,7 +5283,7 @@ export namespace Prisma {
     name: string | null
     abbr: string | null
     sportId: Decimal | null
-    description: string | null
+    note: string | null
     status: string | null
     startDate: Date | null
     endDate: Date | null
@@ -5297,7 +5297,7 @@ export namespace Prisma {
     name: number
     abbr: number
     sportId: number
-    description: number
+    note: number
     status: number
     startDate: number
     endDate: number
@@ -5325,7 +5325,7 @@ export namespace Prisma {
     name?: true
     abbr?: true
     sportId?: true
-    description?: true
+    note?: true
     status?: true
     startDate?: true
     endDate?: true
@@ -5339,7 +5339,7 @@ export namespace Prisma {
     name?: true
     abbr?: true
     sportId?: true
-    description?: true
+    note?: true
     status?: true
     startDate?: true
     endDate?: true
@@ -5353,7 +5353,7 @@ export namespace Prisma {
     name?: true
     abbr?: true
     sportId?: true
-    description?: true
+    note?: true
     status?: true
     startDate?: true
     endDate?: true
@@ -5454,7 +5454,7 @@ export namespace Prisma {
     name: string
     abbr: string | null
     sportId: Decimal | null
-    description: string | null
+    note: string | null
     status: string
     startDate: Date | null
     endDate: Date | null
@@ -5487,7 +5487,7 @@ export namespace Prisma {
     name?: boolean
     abbr?: boolean
     sportId?: boolean
-    description?: boolean
+    note?: boolean
     status?: boolean
     startDate?: boolean
     endDate?: boolean
@@ -5501,7 +5501,7 @@ export namespace Prisma {
     name?: boolean
     abbr?: boolean
     sportId?: boolean
-    description?: boolean
+    note?: boolean
     status?: boolean
     startDate?: boolean
     endDate?: boolean
@@ -5515,7 +5515,7 @@ export namespace Prisma {
     name?: boolean
     abbr?: boolean
     sportId?: boolean
-    description?: boolean
+    note?: boolean
     status?: boolean
     startDate?: boolean
     endDate?: boolean
@@ -5529,7 +5529,7 @@ export namespace Prisma {
     name?: boolean
     abbr?: boolean
     sportId?: boolean
-    description?: boolean
+    note?: boolean
     status?: boolean
     startDate?: boolean
     endDate?: boolean
@@ -5538,7 +5538,7 @@ export namespace Prisma {
     updatedAt?: boolean
   }
 
-  export type BaseCompetitionOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "abbr" | "sportId" | "description" | "status" | "startDate" | "endDate" | "ord" | "createdAt" | "updatedAt", ExtArgs["result"]["baseCompetition"]>
+  export type BaseCompetitionOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "abbr" | "sportId" | "note" | "status" | "startDate" | "endDate" | "ord" | "createdAt" | "updatedAt", ExtArgs["result"]["baseCompetition"]>
 
   export type $BaseCompetitionPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "BaseCompetition"
@@ -5548,7 +5548,7 @@ export namespace Prisma {
       name: string
       abbr: string | null
       sportId: Prisma.Decimal | null
-      description: string | null
+      note: string | null
       status: string
       startDate: Date | null
       endDate: Date | null
@@ -5982,7 +5982,7 @@ export namespace Prisma {
     readonly name: FieldRef<"BaseCompetition", 'String'>
     readonly abbr: FieldRef<"BaseCompetition", 'String'>
     readonly sportId: FieldRef<"BaseCompetition", 'Decimal'>
-    readonly description: FieldRef<"BaseCompetition", 'String'>
+    readonly note: FieldRef<"BaseCompetition", 'String'>
     readonly status: FieldRef<"BaseCompetition", 'String'>
     readonly startDate: FieldRef<"BaseCompetition", 'DateTime'>
     readonly endDate: FieldRef<"BaseCompetition", 'DateTime'>
@@ -12945,7 +12945,7 @@ export namespace Prisma {
     eventType: string | null
     minute: number | null
     second: number | null
-    description: string | null
+    note: string | null
     eventData: string | null
     fieldX: Decimal | null
     fieldY: Decimal | null
@@ -12965,7 +12965,7 @@ export namespace Prisma {
     eventType: string | null
     minute: number | null
     second: number | null
-    description: string | null
+    note: string | null
     eventData: string | null
     fieldX: Decimal | null
     fieldY: Decimal | null
@@ -12985,7 +12985,7 @@ export namespace Prisma {
     eventType: number
     minute: number
     second: number
-    description: number
+    note: number
     eventData: number
     fieldX: number
     fieldY: number
@@ -13035,7 +13035,7 @@ export namespace Prisma {
     eventType?: true
     minute?: true
     second?: true
-    description?: true
+    note?: true
     eventData?: true
     fieldX?: true
     fieldY?: true
@@ -13055,7 +13055,7 @@ export namespace Prisma {
     eventType?: true
     minute?: true
     second?: true
-    description?: true
+    note?: true
     eventData?: true
     fieldX?: true
     fieldY?: true
@@ -13075,7 +13075,7 @@ export namespace Prisma {
     eventType?: true
     minute?: true
     second?: true
-    description?: true
+    note?: true
     eventData?: true
     fieldX?: true
     fieldY?: true
@@ -13182,7 +13182,7 @@ export namespace Prisma {
     eventType: string
     minute: number
     second: number
-    description: string | null
+    note: string | null
     eventData: string | null
     fieldX: Decimal | null
     fieldY: Decimal | null
@@ -13221,7 +13221,7 @@ export namespace Prisma {
     eventType?: boolean
     minute?: boolean
     second?: boolean
-    description?: boolean
+    note?: boolean
     eventData?: boolean
     fieldX?: boolean
     fieldY?: boolean
@@ -13241,7 +13241,7 @@ export namespace Prisma {
     eventType?: boolean
     minute?: boolean
     second?: boolean
-    description?: boolean
+    note?: boolean
     eventData?: boolean
     fieldX?: boolean
     fieldY?: boolean
@@ -13261,7 +13261,7 @@ export namespace Prisma {
     eventType?: boolean
     minute?: boolean
     second?: boolean
-    description?: boolean
+    note?: boolean
     eventData?: boolean
     fieldX?: boolean
     fieldY?: boolean
@@ -13281,7 +13281,7 @@ export namespace Prisma {
     eventType?: boolean
     minute?: boolean
     second?: boolean
-    description?: boolean
+    note?: boolean
     eventData?: boolean
     fieldX?: boolean
     fieldY?: boolean
@@ -13293,7 +13293,7 @@ export namespace Prisma {
     updatedAt?: boolean
   }
 
-  export type MatchEventOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "matchId" | "playerId" | "teamId" | "eventType" | "minute" | "second" | "description" | "eventData" | "fieldX" | "fieldY" | "isConfirmed" | "createdBy" | "notes" | "ord" | "createdAt" | "updatedAt", ExtArgs["result"]["matchEvent"]>
+  export type MatchEventOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "matchId" | "playerId" | "teamId" | "eventType" | "minute" | "second" | "note" | "eventData" | "fieldX" | "fieldY" | "isConfirmed" | "createdBy" | "notes" | "ord" | "createdAt" | "updatedAt", ExtArgs["result"]["matchEvent"]>
 
   export type $MatchEventPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "MatchEvent"
@@ -13306,7 +13306,7 @@ export namespace Prisma {
       eventType: string
       minute: number
       second: number
-      description: string | null
+      note: string | null
       eventData: string | null
       fieldX: Prisma.Decimal | null
       fieldY: Prisma.Decimal | null
@@ -13746,7 +13746,7 @@ export namespace Prisma {
     readonly eventType: FieldRef<"MatchEvent", 'String'>
     readonly minute: FieldRef<"MatchEvent", 'Int'>
     readonly second: FieldRef<"MatchEvent", 'Int'>
-    readonly description: FieldRef<"MatchEvent", 'String'>
+    readonly note: FieldRef<"MatchEvent", 'String'>
     readonly eventData: FieldRef<"MatchEvent", 'String'>
     readonly fieldX: FieldRef<"MatchEvent", 'Decimal'>
     readonly fieldY: FieldRef<"MatchEvent", 'Decimal'>
@@ -15300,7 +15300,7 @@ export namespace Prisma {
     filePath: string | null
     fileSize: bigint | null
     mimeType: string | null
-    description: string | null
+    note: string | null
     category: string | null
     isPublic: number | null
     uploadedBy: Decimal | null
@@ -15319,7 +15319,7 @@ export namespace Prisma {
     filePath: string | null
     fileSize: bigint | null
     mimeType: string | null
-    description: string | null
+    note: string | null
     category: string | null
     isPublic: number | null
     uploadedBy: Decimal | null
@@ -15338,7 +15338,7 @@ export namespace Prisma {
     filePath: number
     fileSize: number
     mimeType: number
-    description: number
+    note: number
     category: number
     isPublic: number
     uploadedBy: number
@@ -15377,7 +15377,7 @@ export namespace Prisma {
     filePath?: true
     fileSize?: true
     mimeType?: true
-    description?: true
+    note?: true
     category?: true
     isPublic?: true
     uploadedBy?: true
@@ -15396,7 +15396,7 @@ export namespace Prisma {
     filePath?: true
     fileSize?: true
     mimeType?: true
-    description?: true
+    note?: true
     category?: true
     isPublic?: true
     uploadedBy?: true
@@ -15415,7 +15415,7 @@ export namespace Prisma {
     filePath?: true
     fileSize?: true
     mimeType?: true
-    description?: true
+    note?: true
     category?: true
     isPublic?: true
     uploadedBy?: true
@@ -15521,7 +15521,7 @@ export namespace Prisma {
     filePath: string
     fileSize: bigint | null
     mimeType: string | null
-    description: string | null
+    note: string | null
     category: string | null
     isPublic: number
     uploadedBy: Decimal | null
@@ -15559,7 +15559,7 @@ export namespace Prisma {
     filePath?: boolean
     fileSize?: boolean
     mimeType?: boolean
-    description?: boolean
+    note?: boolean
     category?: boolean
     isPublic?: boolean
     uploadedBy?: boolean
@@ -15578,7 +15578,7 @@ export namespace Prisma {
     filePath?: boolean
     fileSize?: boolean
     mimeType?: boolean
-    description?: boolean
+    note?: boolean
     category?: boolean
     isPublic?: boolean
     uploadedBy?: boolean
@@ -15597,7 +15597,7 @@ export namespace Prisma {
     filePath?: boolean
     fileSize?: boolean
     mimeType?: boolean
-    description?: boolean
+    note?: boolean
     category?: boolean
     isPublic?: boolean
     uploadedBy?: boolean
@@ -15616,7 +15616,7 @@ export namespace Prisma {
     filePath?: boolean
     fileSize?: boolean
     mimeType?: boolean
-    description?: boolean
+    note?: boolean
     category?: boolean
     isPublic?: boolean
     uploadedBy?: boolean
@@ -15627,7 +15627,7 @@ export namespace Prisma {
     updatedAt?: boolean
   }
 
-  export type MatchMediaOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "matchId" | "mediaType" | "fileName" | "filePath" | "fileSize" | "mimeType" | "description" | "category" | "isPublic" | "uploadedBy" | "uploadedAt" | "notes" | "ord" | "createdAt" | "updatedAt", ExtArgs["result"]["matchMedia"]>
+  export type MatchMediaOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "matchId" | "mediaType" | "fileName" | "filePath" | "fileSize" | "mimeType" | "note" | "category" | "isPublic" | "uploadedBy" | "uploadedAt" | "notes" | "ord" | "createdAt" | "updatedAt", ExtArgs["result"]["matchMedia"]>
 
   export type $MatchMediaPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "MatchMedia"
@@ -15640,7 +15640,7 @@ export namespace Prisma {
       filePath: string
       fileSize: bigint | null
       mimeType: string | null
-      description: string | null
+      note: string | null
       category: string | null
       isPublic: number
       uploadedBy: Prisma.Decimal | null
@@ -16079,7 +16079,7 @@ export namespace Prisma {
     readonly filePath: FieldRef<"MatchMedia", 'String'>
     readonly fileSize: FieldRef<"MatchMedia", 'BigInt'>
     readonly mimeType: FieldRef<"MatchMedia", 'String'>
-    readonly description: FieldRef<"MatchMedia", 'String'>
+    readonly note: FieldRef<"MatchMedia", 'String'>
     readonly category: FieldRef<"MatchMedia", 'String'>
     readonly isPublic: FieldRef<"MatchMedia", 'Int'>
     readonly uploadedBy: FieldRef<"MatchMedia", 'Decimal'>
@@ -28239,7 +28239,7 @@ export namespace Prisma {
     id: Decimal | null
     name: string | null
     abbr: string | null
-    description: string | null
+    note: string | null
     foundedDate: Date | null
     address: string | null
     contactEmail: string | null
@@ -28255,7 +28255,7 @@ export namespace Prisma {
     id: Decimal | null
     name: string | null
     abbr: string | null
-    description: string | null
+    note: string | null
     foundedDate: Date | null
     address: string | null
     contactEmail: string | null
@@ -28271,7 +28271,7 @@ export namespace Prisma {
     id: number
     name: number
     abbr: number
-    description: number
+    note: number
     foundedDate: number
     address: number
     contactEmail: number
@@ -28299,7 +28299,7 @@ export namespace Prisma {
     id?: true
     name?: true
     abbr?: true
-    description?: true
+    note?: true
     foundedDate?: true
     address?: true
     contactEmail?: true
@@ -28315,7 +28315,7 @@ export namespace Prisma {
     id?: true
     name?: true
     abbr?: true
-    description?: true
+    note?: true
     foundedDate?: true
     address?: true
     contactEmail?: true
@@ -28331,7 +28331,7 @@ export namespace Prisma {
     id?: true
     name?: true
     abbr?: true
-    description?: true
+    note?: true
     foundedDate?: true
     address?: true
     contactEmail?: true
@@ -28434,7 +28434,7 @@ export namespace Prisma {
     id: Decimal
     name: string
     abbr: string | null
-    description: string | null
+    note: string | null
     foundedDate: Date | null
     address: string | null
     contactEmail: string | null
@@ -28469,7 +28469,7 @@ export namespace Prisma {
     id?: boolean
     name?: boolean
     abbr?: boolean
-    description?: boolean
+    note?: boolean
     foundedDate?: boolean
     address?: boolean
     contactEmail?: boolean
@@ -28485,7 +28485,7 @@ export namespace Prisma {
     id?: boolean
     name?: boolean
     abbr?: boolean
-    description?: boolean
+    note?: boolean
     foundedDate?: boolean
     address?: boolean
     contactEmail?: boolean
@@ -28501,7 +28501,7 @@ export namespace Prisma {
     id?: boolean
     name?: boolean
     abbr?: boolean
-    description?: boolean
+    note?: boolean
     foundedDate?: boolean
     address?: boolean
     contactEmail?: boolean
@@ -28517,7 +28517,7 @@ export namespace Prisma {
     id?: boolean
     name?: boolean
     abbr?: boolean
-    description?: boolean
+    note?: boolean
     foundedDate?: boolean
     address?: boolean
     contactEmail?: boolean
@@ -28529,7 +28529,7 @@ export namespace Prisma {
     updatedAt?: boolean
   }
 
-  export type OrgClubOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "abbr" | "description" | "foundedDate" | "address" | "contactEmail" | "contactPhone" | "website" | "status" | "ord" | "createdAt" | "updatedAt", ExtArgs["result"]["orgClub"]>
+  export type OrgClubOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "abbr" | "note" | "foundedDate" | "address" | "contactEmail" | "contactPhone" | "website" | "status" | "ord" | "createdAt" | "updatedAt", ExtArgs["result"]["orgClub"]>
 
   export type $OrgClubPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "OrgClub"
@@ -28538,7 +28538,7 @@ export namespace Prisma {
       id: Prisma.Decimal
       name: string
       abbr: string | null
-      description: string | null
+      note: string | null
       foundedDate: Date | null
       address: string | null
       contactEmail: string | null
@@ -28974,7 +28974,7 @@ export namespace Prisma {
     readonly id: FieldRef<"OrgClub", 'Decimal'>
     readonly name: FieldRef<"OrgClub", 'String'>
     readonly abbr: FieldRef<"OrgClub", 'String'>
-    readonly description: FieldRef<"OrgClub", 'String'>
+    readonly note: FieldRef<"OrgClub", 'String'>
     readonly foundedDate: FieldRef<"OrgClub", 'DateTime'>
     readonly address: FieldRef<"OrgClub", 'String'>
     readonly contactEmail: FieldRef<"OrgClub", 'String'>
@@ -29384,7 +29384,7 @@ export namespace Prisma {
     id: Decimal | null
     name: string | null
     abbr: string | null
-    description: string | null
+    note: string | null
     gameModeId: Decimal | null
     groupLevelId: Decimal | null
     season: string | null
@@ -29405,7 +29405,7 @@ export namespace Prisma {
     id: Decimal | null
     name: string | null
     abbr: string | null
-    description: string | null
+    note: string | null
     gameModeId: Decimal | null
     groupLevelId: Decimal | null
     season: string | null
@@ -29426,7 +29426,7 @@ export namespace Prisma {
     id: number
     name: number
     abbr: number
-    description: number
+    note: number
     gameModeId: number
     groupLevelId: number
     season: number
@@ -29467,7 +29467,7 @@ export namespace Prisma {
     id?: true
     name?: true
     abbr?: true
-    description?: true
+    note?: true
     gameModeId?: true
     groupLevelId?: true
     season?: true
@@ -29488,7 +29488,7 @@ export namespace Prisma {
     id?: true
     name?: true
     abbr?: true
-    description?: true
+    note?: true
     gameModeId?: true
     groupLevelId?: true
     season?: true
@@ -29509,7 +29509,7 @@ export namespace Prisma {
     id?: true
     name?: true
     abbr?: true
-    description?: true
+    note?: true
     gameModeId?: true
     groupLevelId?: true
     season?: true
@@ -29617,7 +29617,7 @@ export namespace Prisma {
     id: Decimal
     name: string
     abbr: string | null
-    description: string | null
+    note: string | null
     gameModeId: Decimal | null
     groupLevelId: Decimal | null
     season: string | null
@@ -29657,7 +29657,7 @@ export namespace Prisma {
     id?: boolean
     name?: boolean
     abbr?: boolean
-    description?: boolean
+    note?: boolean
     gameModeId?: boolean
     groupLevelId?: boolean
     season?: boolean
@@ -29678,7 +29678,7 @@ export namespace Prisma {
     id?: boolean
     name?: boolean
     abbr?: boolean
-    description?: boolean
+    note?: boolean
     gameModeId?: boolean
     groupLevelId?: boolean
     season?: boolean
@@ -29699,7 +29699,7 @@ export namespace Prisma {
     id?: boolean
     name?: boolean
     abbr?: boolean
-    description?: boolean
+    note?: boolean
     gameModeId?: boolean
     groupLevelId?: boolean
     season?: boolean
@@ -29720,7 +29720,7 @@ export namespace Prisma {
     id?: boolean
     name?: boolean
     abbr?: boolean
-    description?: boolean
+    note?: boolean
     gameModeId?: boolean
     groupLevelId?: boolean
     season?: boolean
@@ -29737,7 +29737,7 @@ export namespace Prisma {
     updatedAt?: boolean
   }
 
-  export type OrgLeagueOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "abbr" | "description" | "gameModeId" | "groupLevelId" | "season" | "startDate" | "endDate" | "registrationDeadline" | "maxTeams" | "entryFee" | "subscribeEmail" | "rules" | "status" | "ord" | "createdAt" | "updatedAt", ExtArgs["result"]["orgLeague"]>
+  export type OrgLeagueOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "abbr" | "note" | "gameModeId" | "groupLevelId" | "season" | "startDate" | "endDate" | "registrationDeadline" | "maxTeams" | "entryFee" | "subscribeEmail" | "rules" | "status" | "ord" | "createdAt" | "updatedAt", ExtArgs["result"]["orgLeague"]>
 
   export type $OrgLeaguePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "OrgLeague"
@@ -29746,7 +29746,7 @@ export namespace Prisma {
       id: Prisma.Decimal
       name: string
       abbr: string | null
-      description: string | null
+      note: string | null
       gameModeId: Prisma.Decimal | null
       groupLevelId: Prisma.Decimal | null
       season: string | null
@@ -30187,7 +30187,7 @@ export namespace Prisma {
     readonly id: FieldRef<"OrgLeague", 'Decimal'>
     readonly name: FieldRef<"OrgLeague", 'String'>
     readonly abbr: FieldRef<"OrgLeague", 'String'>
-    readonly description: FieldRef<"OrgLeague", 'String'>
+    readonly note: FieldRef<"OrgLeague", 'String'>
     readonly gameModeId: FieldRef<"OrgLeague", 'Decimal'>
     readonly groupLevelId: FieldRef<"OrgLeague", 'Decimal'>
     readonly season: FieldRef<"OrgLeague", 'String'>
@@ -54496,7 +54496,7 @@ export namespace Prisma {
   export type SubFeatureMinAggregateOutputType = {
     id: Decimal | null
     name: string | null
-    description: string | null
+    note: string | null
     category: string | null
     icon: string | null
     isActive: number | null
@@ -54508,7 +54508,7 @@ export namespace Prisma {
   export type SubFeatureMaxAggregateOutputType = {
     id: Decimal | null
     name: string | null
-    description: string | null
+    note: string | null
     category: string | null
     icon: string | null
     isActive: number | null
@@ -54520,7 +54520,7 @@ export namespace Prisma {
   export type SubFeatureCountAggregateOutputType = {
     id: number
     name: number
-    description: number
+    note: number
     category: number
     icon: number
     isActive: number
@@ -54546,7 +54546,7 @@ export namespace Prisma {
   export type SubFeatureMinAggregateInputType = {
     id?: true
     name?: true
-    description?: true
+    note?: true
     category?: true
     icon?: true
     isActive?: true
@@ -54558,7 +54558,7 @@ export namespace Prisma {
   export type SubFeatureMaxAggregateInputType = {
     id?: true
     name?: true
-    description?: true
+    note?: true
     category?: true
     icon?: true
     isActive?: true
@@ -54570,7 +54570,7 @@ export namespace Prisma {
   export type SubFeatureCountAggregateInputType = {
     id?: true
     name?: true
-    description?: true
+    note?: true
     category?: true
     icon?: true
     isActive?: true
@@ -54669,7 +54669,7 @@ export namespace Prisma {
   export type SubFeatureGroupByOutputType = {
     id: Decimal
     name: string
-    description: string | null
+    note: string | null
     category: string | null
     icon: string | null
     isActive: number
@@ -54700,7 +54700,7 @@ export namespace Prisma {
   export type SubFeatureSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     name?: boolean
-    description?: boolean
+    note?: boolean
     category?: boolean
     icon?: boolean
     isActive?: boolean
@@ -54712,7 +54712,7 @@ export namespace Prisma {
   export type SubFeatureSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     name?: boolean
-    description?: boolean
+    note?: boolean
     category?: boolean
     icon?: boolean
     isActive?: boolean
@@ -54724,7 +54724,7 @@ export namespace Prisma {
   export type SubFeatureSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     name?: boolean
-    description?: boolean
+    note?: boolean
     category?: boolean
     icon?: boolean
     isActive?: boolean
@@ -54736,7 +54736,7 @@ export namespace Prisma {
   export type SubFeatureSelectScalar = {
     id?: boolean
     name?: boolean
-    description?: boolean
+    note?: boolean
     category?: boolean
     icon?: boolean
     isActive?: boolean
@@ -54745,7 +54745,7 @@ export namespace Prisma {
     updatedAt?: boolean
   }
 
-  export type SubFeatureOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "description" | "category" | "icon" | "isActive" | "ord" | "createdAt" | "updatedAt", ExtArgs["result"]["subFeature"]>
+  export type SubFeatureOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "note" | "category" | "icon" | "isActive" | "ord" | "createdAt" | "updatedAt", ExtArgs["result"]["subFeature"]>
 
   export type $SubFeaturePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "SubFeature"
@@ -54753,7 +54753,7 @@ export namespace Prisma {
     scalars: $Extensions.GetPayloadResult<{
       id: Prisma.Decimal
       name: string
-      description: string | null
+      note: string | null
       category: string | null
       icon: string | null
       isActive: number
@@ -55185,7 +55185,7 @@ export namespace Prisma {
   interface SubFeatureFieldRefs {
     readonly id: FieldRef<"SubFeature", 'Decimal'>
     readonly name: FieldRef<"SubFeature", 'String'>
-    readonly description: FieldRef<"SubFeature", 'String'>
+    readonly note: FieldRef<"SubFeature", 'String'>
     readonly category: FieldRef<"SubFeature", 'String'>
     readonly icon: FieldRef<"SubFeature", 'String'>
     readonly isActive: FieldRef<"SubFeature", 'Int'>
@@ -57926,7 +57926,7 @@ export namespace Prisma {
     planType: string | null
     price: Decimal | null
     isPopular: number | null
-    description: string | null
+    note: string | null
     features: string | null
     maxTeams: number | null
     maxPlayers: number | null
@@ -57945,7 +57945,7 @@ export namespace Prisma {
     planType: string | null
     price: Decimal | null
     isPopular: number | null
-    description: string | null
+    note: string | null
     features: string | null
     maxTeams: number | null
     maxPlayers: number | null
@@ -57964,7 +57964,7 @@ export namespace Prisma {
     planType: number
     price: number
     isPopular: number
-    description: number
+    note: number
     features: number
     maxTeams: number
     maxPlayers: number
@@ -58011,7 +58011,7 @@ export namespace Prisma {
     planType?: true
     price?: true
     isPopular?: true
-    description?: true
+    note?: true
     features?: true
     maxTeams?: true
     maxPlayers?: true
@@ -58030,7 +58030,7 @@ export namespace Prisma {
     planType?: true
     price?: true
     isPopular?: true
-    description?: true
+    note?: true
     features?: true
     maxTeams?: true
     maxPlayers?: true
@@ -58049,7 +58049,7 @@ export namespace Prisma {
     planType?: true
     price?: true
     isPopular?: true
-    description?: true
+    note?: true
     features?: true
     maxTeams?: true
     maxPlayers?: true
@@ -58155,7 +58155,7 @@ export namespace Prisma {
     planType: string
     price: Decimal
     isPopular: number
-    description: string | null
+    note: string | null
     features: string | null
     maxTeams: number | null
     maxPlayers: number | null
@@ -58193,7 +58193,7 @@ export namespace Prisma {
     planType?: boolean
     price?: boolean
     isPopular?: boolean
-    description?: boolean
+    note?: boolean
     features?: boolean
     maxTeams?: boolean
     maxPlayers?: boolean
@@ -58212,7 +58212,7 @@ export namespace Prisma {
     planType?: boolean
     price?: boolean
     isPopular?: boolean
-    description?: boolean
+    note?: boolean
     features?: boolean
     maxTeams?: boolean
     maxPlayers?: boolean
@@ -58231,7 +58231,7 @@ export namespace Prisma {
     planType?: boolean
     price?: boolean
     isPopular?: boolean
-    description?: boolean
+    note?: boolean
     features?: boolean
     maxTeams?: boolean
     maxPlayers?: boolean
@@ -58250,7 +58250,7 @@ export namespace Prisma {
     planType?: boolean
     price?: boolean
     isPopular?: boolean
-    description?: boolean
+    note?: boolean
     features?: boolean
     maxTeams?: boolean
     maxPlayers?: boolean
@@ -58263,7 +58263,7 @@ export namespace Prisma {
     updatedAt?: boolean
   }
 
-  export type SubPlanOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "planType" | "price" | "isPopular" | "description" | "features" | "maxTeams" | "maxPlayers" | "maxCoaches" | "maxReferees" | "storageLimitGb" | "isActive" | "ord" | "createdAt" | "updatedAt", ExtArgs["result"]["subPlan"]>
+  export type SubPlanOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "planType" | "price" | "isPopular" | "note" | "features" | "maxTeams" | "maxPlayers" | "maxCoaches" | "maxReferees" | "storageLimitGb" | "isActive" | "ord" | "createdAt" | "updatedAt", ExtArgs["result"]["subPlan"]>
 
   export type $SubPlanPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "SubPlan"
@@ -58274,7 +58274,7 @@ export namespace Prisma {
       planType: string
       price: Prisma.Decimal
       isPopular: number
-      description: string | null
+      note: string | null
       features: string | null
       maxTeams: number | null
       maxPlayers: number | null
@@ -58713,7 +58713,7 @@ export namespace Prisma {
     readonly planType: FieldRef<"SubPlan", 'String'>
     readonly price: FieldRef<"SubPlan", 'Decimal'>
     readonly isPopular: FieldRef<"SubPlan", 'Int'>
-    readonly description: FieldRef<"SubPlan", 'String'>
+    readonly note: FieldRef<"SubPlan", 'String'>
     readonly features: FieldRef<"SubPlan", 'String'>
     readonly maxTeams: FieldRef<"SubPlan", 'Int'>
     readonly maxPlayers: FieldRef<"SubPlan", 'Int'>
@@ -61304,7 +61304,7 @@ export namespace Prisma {
     name: 'name',
     abbr: 'abbr',
     sportId: 'sportId',
-    description: 'description',
+    note: 'note',
     status: 'status',
     startDate: 'startDate',
     endDate: 'endDate',
@@ -61414,7 +61414,7 @@ export namespace Prisma {
     eventType: 'eventType',
     minute: 'minute',
     second: 'second',
-    description: 'description',
+    note: 'note',
     eventData: 'eventData',
     fieldX: 'fieldX',
     fieldY: 'fieldY',
@@ -61455,7 +61455,7 @@ export namespace Prisma {
     filePath: 'filePath',
     fileSize: 'fileSize',
     mimeType: 'mimeType',
-    description: 'description',
+    note: 'note',
     category: 'category',
     isPublic: 'isPublic',
     uploadedBy: 'uploadedBy',
@@ -61680,7 +61680,7 @@ export namespace Prisma {
     id: 'id',
     name: 'name',
     abbr: 'abbr',
-    description: 'description',
+    note: 'note',
     foundedDate: 'foundedDate',
     address: 'address',
     contactEmail: 'contactEmail',
@@ -61699,7 +61699,7 @@ export namespace Prisma {
     id: 'id',
     name: 'name',
     abbr: 'abbr',
-    description: 'description',
+    note: 'note',
     gameModeId: 'gameModeId',
     groupLevelId: 'groupLevelId',
     season: 'season',
@@ -62101,7 +62101,7 @@ export namespace Prisma {
   export const SubFeatureScalarFieldEnum: {
     id: 'id',
     name: 'name',
-    description: 'description',
+    note: 'note',
     category: 'category',
     icon: 'icon',
     isActive: 'isActive',
@@ -62159,7 +62159,7 @@ export namespace Prisma {
     planType: 'planType',
     price: 'price',
     isPopular: 'isPopular',
-    description: 'description',
+    note: 'note',
     features: 'features',
     maxTeams: 'maxTeams',
     maxPlayers: 'maxPlayers',
@@ -62233,7 +62233,7 @@ export namespace Prisma {
   export const BaseCompetitionOrderByRelevanceFieldEnum: {
     name: 'name',
     abbr: 'abbr',
-    description: 'description',
+    note: 'note',
     status: 'status'
   };
 
@@ -62295,7 +62295,7 @@ export namespace Prisma {
 
   export const MatchEventOrderByRelevanceFieldEnum: {
     eventType: 'eventType',
-    description: 'description',
+    note: 'note',
     eventData: 'eventData',
     notes: 'notes'
   };
@@ -62317,7 +62317,7 @@ export namespace Prisma {
     fileName: 'fileName',
     filePath: 'filePath',
     mimeType: 'mimeType',
-    description: 'description',
+    note: 'note',
     category: 'category',
     notes: 'notes'
   };
@@ -62447,7 +62447,7 @@ export namespace Prisma {
   export const OrgClubOrderByRelevanceFieldEnum: {
     name: 'name',
     abbr: 'abbr',
-    description: 'description',
+    note: 'note',
     address: 'address',
     contactEmail: 'contactEmail',
     contactPhone: 'contactPhone',
@@ -62461,7 +62461,7 @@ export namespace Prisma {
   export const OrgLeagueOrderByRelevanceFieldEnum: {
     name: 'name',
     abbr: 'abbr',
-    description: 'description',
+    note: 'note',
     season: 'season',
     subscribeEmail: 'subscribeEmail',
     rules: 'rules',
@@ -62666,7 +62666,7 @@ export namespace Prisma {
 
   export const SubFeatureOrderByRelevanceFieldEnum: {
     name: 'name',
-    description: 'description',
+    note: 'note',
     category: 'category',
     icon: 'icon'
   };
@@ -62695,7 +62695,7 @@ export namespace Prisma {
   export const SubPlanOrderByRelevanceFieldEnum: {
     name: 'name',
     planType: 'planType',
-    description: 'description',
+    note: 'note',
     features: 'features'
   };
 
@@ -62828,7 +62828,7 @@ export namespace Prisma {
     name?: StringFilter<"BaseCompetition"> | string
     abbr?: StringNullableFilter<"BaseCompetition"> | string | null
     sportId?: DecimalNullableFilter<"BaseCompetition"> | Decimal | DecimalJsLike | number | string | null
-    description?: StringNullableFilter<"BaseCompetition"> | string | null
+    note?: StringNullableFilter<"BaseCompetition"> | string | null
     status?: StringFilter<"BaseCompetition"> | string
     startDate?: DateTimeNullableFilter<"BaseCompetition"> | Date | string | null
     endDate?: DateTimeNullableFilter<"BaseCompetition"> | Date | string | null
@@ -62842,7 +62842,7 @@ export namespace Prisma {
     name?: SortOrder
     abbr?: SortOrderInput | SortOrder
     sportId?: SortOrderInput | SortOrder
-    description?: SortOrderInput | SortOrder
+    note?: SortOrderInput | SortOrder
     status?: SortOrder
     startDate?: SortOrderInput | SortOrder
     endDate?: SortOrderInput | SortOrder
@@ -62860,7 +62860,7 @@ export namespace Prisma {
     name?: StringFilter<"BaseCompetition"> | string
     abbr?: StringNullableFilter<"BaseCompetition"> | string | null
     sportId?: DecimalNullableFilter<"BaseCompetition"> | Decimal | DecimalJsLike | number | string | null
-    description?: StringNullableFilter<"BaseCompetition"> | string | null
+    note?: StringNullableFilter<"BaseCompetition"> | string | null
     status?: StringFilter<"BaseCompetition"> | string
     startDate?: DateTimeNullableFilter<"BaseCompetition"> | Date | string | null
     endDate?: DateTimeNullableFilter<"BaseCompetition"> | Date | string | null
@@ -62874,7 +62874,7 @@ export namespace Prisma {
     name?: SortOrder
     abbr?: SortOrderInput | SortOrder
     sportId?: SortOrderInput | SortOrder
-    description?: SortOrderInput | SortOrder
+    note?: SortOrderInput | SortOrder
     status?: SortOrder
     startDate?: SortOrderInput | SortOrder
     endDate?: SortOrderInput | SortOrder
@@ -62896,7 +62896,7 @@ export namespace Prisma {
     name?: StringWithAggregatesFilter<"BaseCompetition"> | string
     abbr?: StringNullableWithAggregatesFilter<"BaseCompetition"> | string | null
     sportId?: DecimalNullableWithAggregatesFilter<"BaseCompetition"> | Decimal | DecimalJsLike | number | string | null
-    description?: StringNullableWithAggregatesFilter<"BaseCompetition"> | string | null
+    note?: StringNullableWithAggregatesFilter<"BaseCompetition"> | string | null
     status?: StringWithAggregatesFilter<"BaseCompetition"> | string
     startDate?: DateTimeNullableWithAggregatesFilter<"BaseCompetition"> | Date | string | null
     endDate?: DateTimeNullableWithAggregatesFilter<"BaseCompetition"> | Date | string | null
@@ -63366,7 +63366,7 @@ export namespace Prisma {
     eventType?: StringFilter<"MatchEvent"> | string
     minute?: IntFilter<"MatchEvent"> | number
     second?: IntFilter<"MatchEvent"> | number
-    description?: StringNullableFilter<"MatchEvent"> | string | null
+    note?: StringNullableFilter<"MatchEvent"> | string | null
     eventData?: StringNullableFilter<"MatchEvent"> | string | null
     fieldX?: DecimalNullableFilter<"MatchEvent"> | Decimal | DecimalJsLike | number | string | null
     fieldY?: DecimalNullableFilter<"MatchEvent"> | Decimal | DecimalJsLike | number | string | null
@@ -63386,7 +63386,7 @@ export namespace Prisma {
     eventType?: SortOrder
     minute?: SortOrder
     second?: SortOrder
-    description?: SortOrderInput | SortOrder
+    note?: SortOrderInput | SortOrder
     eventData?: SortOrderInput | SortOrder
     fieldX?: SortOrderInput | SortOrder
     fieldY?: SortOrderInput | SortOrder
@@ -63410,7 +63410,7 @@ export namespace Prisma {
     eventType?: StringFilter<"MatchEvent"> | string
     minute?: IntFilter<"MatchEvent"> | number
     second?: IntFilter<"MatchEvent"> | number
-    description?: StringNullableFilter<"MatchEvent"> | string | null
+    note?: StringNullableFilter<"MatchEvent"> | string | null
     eventData?: StringNullableFilter<"MatchEvent"> | string | null
     fieldX?: DecimalNullableFilter<"MatchEvent"> | Decimal | DecimalJsLike | number | string | null
     fieldY?: DecimalNullableFilter<"MatchEvent"> | Decimal | DecimalJsLike | number | string | null
@@ -63430,7 +63430,7 @@ export namespace Prisma {
     eventType?: SortOrder
     minute?: SortOrder
     second?: SortOrder
-    description?: SortOrderInput | SortOrder
+    note?: SortOrderInput | SortOrder
     eventData?: SortOrderInput | SortOrder
     fieldX?: SortOrderInput | SortOrder
     fieldY?: SortOrderInput | SortOrder
@@ -63458,7 +63458,7 @@ export namespace Prisma {
     eventType?: StringWithAggregatesFilter<"MatchEvent"> | string
     minute?: IntWithAggregatesFilter<"MatchEvent"> | number
     second?: IntWithAggregatesFilter<"MatchEvent"> | number
-    description?: StringNullableWithAggregatesFilter<"MatchEvent"> | string | null
+    note?: StringNullableWithAggregatesFilter<"MatchEvent"> | string | null
     eventData?: StringNullableWithAggregatesFilter<"MatchEvent"> | string | null
     fieldX?: DecimalNullableWithAggregatesFilter<"MatchEvent"> | Decimal | DecimalJsLike | number | string | null
     fieldY?: DecimalNullableWithAggregatesFilter<"MatchEvent"> | Decimal | DecimalJsLike | number | string | null
@@ -63572,7 +63572,7 @@ export namespace Prisma {
     filePath?: StringFilter<"MatchMedia"> | string
     fileSize?: BigIntNullableFilter<"MatchMedia"> | bigint | number | null
     mimeType?: StringNullableFilter<"MatchMedia"> | string | null
-    description?: StringNullableFilter<"MatchMedia"> | string | null
+    note?: StringNullableFilter<"MatchMedia"> | string | null
     category?: StringNullableFilter<"MatchMedia"> | string | null
     isPublic?: IntFilter<"MatchMedia"> | number
     uploadedBy?: DecimalNullableFilter<"MatchMedia"> | Decimal | DecimalJsLike | number | string | null
@@ -63591,7 +63591,7 @@ export namespace Prisma {
     filePath?: SortOrder
     fileSize?: SortOrderInput | SortOrder
     mimeType?: SortOrderInput | SortOrder
-    description?: SortOrderInput | SortOrder
+    note?: SortOrderInput | SortOrder
     category?: SortOrderInput | SortOrder
     isPublic?: SortOrder
     uploadedBy?: SortOrderInput | SortOrder
@@ -63614,7 +63614,7 @@ export namespace Prisma {
     filePath?: StringFilter<"MatchMedia"> | string
     fileSize?: BigIntNullableFilter<"MatchMedia"> | bigint | number | null
     mimeType?: StringNullableFilter<"MatchMedia"> | string | null
-    description?: StringNullableFilter<"MatchMedia"> | string | null
+    note?: StringNullableFilter<"MatchMedia"> | string | null
     category?: StringNullableFilter<"MatchMedia"> | string | null
     isPublic?: IntFilter<"MatchMedia"> | number
     uploadedBy?: DecimalNullableFilter<"MatchMedia"> | Decimal | DecimalJsLike | number | string | null
@@ -63633,7 +63633,7 @@ export namespace Prisma {
     filePath?: SortOrder
     fileSize?: SortOrderInput | SortOrder
     mimeType?: SortOrderInput | SortOrder
-    description?: SortOrderInput | SortOrder
+    note?: SortOrderInput | SortOrder
     category?: SortOrderInput | SortOrder
     isPublic?: SortOrder
     uploadedBy?: SortOrderInput | SortOrder
@@ -63660,7 +63660,7 @@ export namespace Prisma {
     filePath?: StringWithAggregatesFilter<"MatchMedia"> | string
     fileSize?: BigIntNullableWithAggregatesFilter<"MatchMedia"> | bigint | number | null
     mimeType?: StringNullableWithAggregatesFilter<"MatchMedia"> | string | null
-    description?: StringNullableWithAggregatesFilter<"MatchMedia"> | string | null
+    note?: StringNullableWithAggregatesFilter<"MatchMedia"> | string | null
     category?: StringNullableWithAggregatesFilter<"MatchMedia"> | string | null
     isPublic?: IntWithAggregatesFilter<"MatchMedia"> | number
     uploadedBy?: DecimalNullableWithAggregatesFilter<"MatchMedia"> | Decimal | DecimalJsLike | number | string | null
@@ -64715,7 +64715,7 @@ export namespace Prisma {
     id?: DecimalFilter<"OrgClub"> | Decimal | DecimalJsLike | number | string
     name?: StringFilter<"OrgClub"> | string
     abbr?: StringNullableFilter<"OrgClub"> | string | null
-    description?: StringNullableFilter<"OrgClub"> | string | null
+    note?: StringNullableFilter<"OrgClub"> | string | null
     foundedDate?: DateTimeNullableFilter<"OrgClub"> | Date | string | null
     address?: StringNullableFilter<"OrgClub"> | string | null
     contactEmail?: StringNullableFilter<"OrgClub"> | string | null
@@ -64731,7 +64731,7 @@ export namespace Prisma {
     id?: SortOrder
     name?: SortOrder
     abbr?: SortOrderInput | SortOrder
-    description?: SortOrderInput | SortOrder
+    note?: SortOrderInput | SortOrder
     foundedDate?: SortOrderInput | SortOrder
     address?: SortOrderInput | SortOrder
     contactEmail?: SortOrderInput | SortOrder
@@ -64751,7 +64751,7 @@ export namespace Prisma {
     NOT?: OrgClubWhereInput | OrgClubWhereInput[]
     name?: StringFilter<"OrgClub"> | string
     abbr?: StringNullableFilter<"OrgClub"> | string | null
-    description?: StringNullableFilter<"OrgClub"> | string | null
+    note?: StringNullableFilter<"OrgClub"> | string | null
     foundedDate?: DateTimeNullableFilter<"OrgClub"> | Date | string | null
     address?: StringNullableFilter<"OrgClub"> | string | null
     contactEmail?: StringNullableFilter<"OrgClub"> | string | null
@@ -64767,7 +64767,7 @@ export namespace Prisma {
     id?: SortOrder
     name?: SortOrder
     abbr?: SortOrderInput | SortOrder
-    description?: SortOrderInput | SortOrder
+    note?: SortOrderInput | SortOrder
     foundedDate?: SortOrderInput | SortOrder
     address?: SortOrderInput | SortOrder
     contactEmail?: SortOrderInput | SortOrder
@@ -64791,7 +64791,7 @@ export namespace Prisma {
     id?: DecimalWithAggregatesFilter<"OrgClub"> | Decimal | DecimalJsLike | number | string
     name?: StringWithAggregatesFilter<"OrgClub"> | string
     abbr?: StringNullableWithAggregatesFilter<"OrgClub"> | string | null
-    description?: StringNullableWithAggregatesFilter<"OrgClub"> | string | null
+    note?: StringNullableWithAggregatesFilter<"OrgClub"> | string | null
     foundedDate?: DateTimeNullableWithAggregatesFilter<"OrgClub"> | Date | string | null
     address?: StringNullableWithAggregatesFilter<"OrgClub"> | string | null
     contactEmail?: StringNullableWithAggregatesFilter<"OrgClub"> | string | null
@@ -64810,7 +64810,7 @@ export namespace Prisma {
     id?: DecimalFilter<"OrgLeague"> | Decimal | DecimalJsLike | number | string
     name?: StringFilter<"OrgLeague"> | string
     abbr?: StringNullableFilter<"OrgLeague"> | string | null
-    description?: StringNullableFilter<"OrgLeague"> | string | null
+    note?: StringNullableFilter<"OrgLeague"> | string | null
     gameModeId?: DecimalNullableFilter<"OrgLeague"> | Decimal | DecimalJsLike | number | string | null
     groupLevelId?: DecimalNullableFilter<"OrgLeague"> | Decimal | DecimalJsLike | number | string | null
     season?: StringNullableFilter<"OrgLeague"> | string | null
@@ -64831,7 +64831,7 @@ export namespace Prisma {
     id?: SortOrder
     name?: SortOrder
     abbr?: SortOrderInput | SortOrder
-    description?: SortOrderInput | SortOrder
+    note?: SortOrderInput | SortOrder
     gameModeId?: SortOrderInput | SortOrder
     groupLevelId?: SortOrderInput | SortOrder
     season?: SortOrderInput | SortOrder
@@ -64856,7 +64856,7 @@ export namespace Prisma {
     NOT?: OrgLeagueWhereInput | OrgLeagueWhereInput[]
     name?: StringFilter<"OrgLeague"> | string
     abbr?: StringNullableFilter<"OrgLeague"> | string | null
-    description?: StringNullableFilter<"OrgLeague"> | string | null
+    note?: StringNullableFilter<"OrgLeague"> | string | null
     gameModeId?: DecimalNullableFilter<"OrgLeague"> | Decimal | DecimalJsLike | number | string | null
     groupLevelId?: DecimalNullableFilter<"OrgLeague"> | Decimal | DecimalJsLike | number | string | null
     season?: StringNullableFilter<"OrgLeague"> | string | null
@@ -64877,7 +64877,7 @@ export namespace Prisma {
     id?: SortOrder
     name?: SortOrder
     abbr?: SortOrderInput | SortOrder
-    description?: SortOrderInput | SortOrder
+    note?: SortOrderInput | SortOrder
     gameModeId?: SortOrderInput | SortOrder
     groupLevelId?: SortOrderInput | SortOrder
     season?: SortOrderInput | SortOrder
@@ -64906,7 +64906,7 @@ export namespace Prisma {
     id?: DecimalWithAggregatesFilter<"OrgLeague"> | Decimal | DecimalJsLike | number | string
     name?: StringWithAggregatesFilter<"OrgLeague"> | string
     abbr?: StringNullableWithAggregatesFilter<"OrgLeague"> | string | null
-    description?: StringNullableWithAggregatesFilter<"OrgLeague"> | string | null
+    note?: StringNullableWithAggregatesFilter<"OrgLeague"> | string | null
     gameModeId?: DecimalNullableWithAggregatesFilter<"OrgLeague"> | Decimal | DecimalJsLike | number | string | null
     groupLevelId?: DecimalNullableWithAggregatesFilter<"OrgLeague"> | Decimal | DecimalJsLike | number | string | null
     season?: StringNullableWithAggregatesFilter<"OrgLeague"> | string | null
@@ -66838,7 +66838,7 @@ export namespace Prisma {
     NOT?: SubFeatureWhereInput | SubFeatureWhereInput[]
     id?: DecimalFilter<"SubFeature"> | Decimal | DecimalJsLike | number | string
     name?: StringFilter<"SubFeature"> | string
-    description?: StringNullableFilter<"SubFeature"> | string | null
+    note?: StringNullableFilter<"SubFeature"> | string | null
     category?: StringNullableFilter<"SubFeature"> | string | null
     icon?: StringNullableFilter<"SubFeature"> | string | null
     isActive?: IntFilter<"SubFeature"> | number
@@ -66850,7 +66850,7 @@ export namespace Prisma {
   export type SubFeatureOrderByWithRelationInput = {
     id?: SortOrder
     name?: SortOrder
-    description?: SortOrderInput | SortOrder
+    note?: SortOrderInput | SortOrder
     category?: SortOrderInput | SortOrder
     icon?: SortOrderInput | SortOrder
     isActive?: SortOrder
@@ -66866,7 +66866,7 @@ export namespace Prisma {
     OR?: SubFeatureWhereInput[]
     NOT?: SubFeatureWhereInput | SubFeatureWhereInput[]
     name?: StringFilter<"SubFeature"> | string
-    description?: StringNullableFilter<"SubFeature"> | string | null
+    note?: StringNullableFilter<"SubFeature"> | string | null
     category?: StringNullableFilter<"SubFeature"> | string | null
     icon?: StringNullableFilter<"SubFeature"> | string | null
     isActive?: IntFilter<"SubFeature"> | number
@@ -66878,7 +66878,7 @@ export namespace Prisma {
   export type SubFeatureOrderByWithAggregationInput = {
     id?: SortOrder
     name?: SortOrder
-    description?: SortOrderInput | SortOrder
+    note?: SortOrderInput | SortOrder
     category?: SortOrderInput | SortOrder
     icon?: SortOrderInput | SortOrder
     isActive?: SortOrder
@@ -66898,7 +66898,7 @@ export namespace Prisma {
     NOT?: SubFeatureScalarWhereWithAggregatesInput | SubFeatureScalarWhereWithAggregatesInput[]
     id?: DecimalWithAggregatesFilter<"SubFeature"> | Decimal | DecimalJsLike | number | string
     name?: StringWithAggregatesFilter<"SubFeature"> | string
-    description?: StringNullableWithAggregatesFilter<"SubFeature"> | string | null
+    note?: StringNullableWithAggregatesFilter<"SubFeature"> | string | null
     category?: StringNullableWithAggregatesFilter<"SubFeature"> | string | null
     icon?: StringNullableWithAggregatesFilter<"SubFeature"> | string | null
     isActive?: IntWithAggregatesFilter<"SubFeature"> | number
@@ -67116,7 +67116,7 @@ export namespace Prisma {
     planType?: StringFilter<"SubPlan"> | string
     price?: DecimalFilter<"SubPlan"> | Decimal | DecimalJsLike | number | string
     isPopular?: IntFilter<"SubPlan"> | number
-    description?: StringNullableFilter<"SubPlan"> | string | null
+    note?: StringNullableFilter<"SubPlan"> | string | null
     features?: StringNullableFilter<"SubPlan"> | string | null
     maxTeams?: IntNullableFilter<"SubPlan"> | number | null
     maxPlayers?: IntNullableFilter<"SubPlan"> | number | null
@@ -67135,7 +67135,7 @@ export namespace Prisma {
     planType?: SortOrder
     price?: SortOrder
     isPopular?: SortOrder
-    description?: SortOrderInput | SortOrder
+    note?: SortOrderInput | SortOrder
     features?: SortOrderInput | SortOrder
     maxTeams?: SortOrderInput | SortOrder
     maxPlayers?: SortOrderInput | SortOrder
@@ -67158,7 +67158,7 @@ export namespace Prisma {
     planType?: StringFilter<"SubPlan"> | string
     price?: DecimalFilter<"SubPlan"> | Decimal | DecimalJsLike | number | string
     isPopular?: IntFilter<"SubPlan"> | number
-    description?: StringNullableFilter<"SubPlan"> | string | null
+    note?: StringNullableFilter<"SubPlan"> | string | null
     features?: StringNullableFilter<"SubPlan"> | string | null
     maxTeams?: IntNullableFilter<"SubPlan"> | number | null
     maxPlayers?: IntNullableFilter<"SubPlan"> | number | null
@@ -67177,7 +67177,7 @@ export namespace Prisma {
     planType?: SortOrder
     price?: SortOrder
     isPopular?: SortOrder
-    description?: SortOrderInput | SortOrder
+    note?: SortOrderInput | SortOrder
     features?: SortOrderInput | SortOrder
     maxTeams?: SortOrderInput | SortOrder
     maxPlayers?: SortOrderInput | SortOrder
@@ -67204,7 +67204,7 @@ export namespace Prisma {
     planType?: StringWithAggregatesFilter<"SubPlan"> | string
     price?: DecimalWithAggregatesFilter<"SubPlan"> | Decimal | DecimalJsLike | number | string
     isPopular?: IntWithAggregatesFilter<"SubPlan"> | number
-    description?: StringNullableWithAggregatesFilter<"SubPlan"> | string | null
+    note?: StringNullableWithAggregatesFilter<"SubPlan"> | string | null
     features?: StringNullableWithAggregatesFilter<"SubPlan"> | string | null
     maxTeams?: IntNullableWithAggregatesFilter<"SubPlan"> | number | null
     maxPlayers?: IntNullableWithAggregatesFilter<"SubPlan"> | number | null
@@ -67378,7 +67378,7 @@ export namespace Prisma {
     name: string
     abbr?: string | null
     sportId?: Decimal | DecimalJsLike | number | string | null
-    description?: string | null
+    note?: string | null
     status: string
     startDate?: Date | string | null
     endDate?: Date | string | null
@@ -67392,7 +67392,7 @@ export namespace Prisma {
     name: string
     abbr?: string | null
     sportId?: Decimal | DecimalJsLike | number | string | null
-    description?: string | null
+    note?: string | null
     status: string
     startDate?: Date | string | null
     endDate?: Date | string | null
@@ -67406,7 +67406,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     abbr?: NullableStringFieldUpdateOperationsInput | string | null
     sportId?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
-    description?: NullableStringFieldUpdateOperationsInput | string | null
+    note?: NullableStringFieldUpdateOperationsInput | string | null
     status?: StringFieldUpdateOperationsInput | string
     startDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     endDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -67420,7 +67420,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     abbr?: NullableStringFieldUpdateOperationsInput | string | null
     sportId?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
-    description?: NullableStringFieldUpdateOperationsInput | string | null
+    note?: NullableStringFieldUpdateOperationsInput | string | null
     status?: StringFieldUpdateOperationsInput | string
     startDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     endDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -67434,7 +67434,7 @@ export namespace Prisma {
     name: string
     abbr?: string | null
     sportId?: Decimal | DecimalJsLike | number | string | null
-    description?: string | null
+    note?: string | null
     status: string
     startDate?: Date | string | null
     endDate?: Date | string | null
@@ -67448,7 +67448,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     abbr?: NullableStringFieldUpdateOperationsInput | string | null
     sportId?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
-    description?: NullableStringFieldUpdateOperationsInput | string | null
+    note?: NullableStringFieldUpdateOperationsInput | string | null
     status?: StringFieldUpdateOperationsInput | string
     startDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     endDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -67462,7 +67462,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     abbr?: NullableStringFieldUpdateOperationsInput | string | null
     sportId?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
-    description?: NullableStringFieldUpdateOperationsInput | string | null
+    note?: NullableStringFieldUpdateOperationsInput | string | null
     status?: StringFieldUpdateOperationsInput | string
     startDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     endDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -67974,7 +67974,7 @@ export namespace Prisma {
     eventType: string
     minute: number
     second: number
-    description?: string | null
+    note?: string | null
     eventData?: string | null
     fieldX?: Decimal | DecimalJsLike | number | string | null
     fieldY?: Decimal | DecimalJsLike | number | string | null
@@ -67994,7 +67994,7 @@ export namespace Prisma {
     eventType: string
     minute: number
     second: number
-    description?: string | null
+    note?: string | null
     eventData?: string | null
     fieldX?: Decimal | DecimalJsLike | number | string | null
     fieldY?: Decimal | DecimalJsLike | number | string | null
@@ -68014,7 +68014,7 @@ export namespace Prisma {
     eventType?: StringFieldUpdateOperationsInput | string
     minute?: IntFieldUpdateOperationsInput | number
     second?: IntFieldUpdateOperationsInput | number
-    description?: NullableStringFieldUpdateOperationsInput | string | null
+    note?: NullableStringFieldUpdateOperationsInput | string | null
     eventData?: NullableStringFieldUpdateOperationsInput | string | null
     fieldX?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     fieldY?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
@@ -68034,7 +68034,7 @@ export namespace Prisma {
     eventType?: StringFieldUpdateOperationsInput | string
     minute?: IntFieldUpdateOperationsInput | number
     second?: IntFieldUpdateOperationsInput | number
-    description?: NullableStringFieldUpdateOperationsInput | string | null
+    note?: NullableStringFieldUpdateOperationsInput | string | null
     eventData?: NullableStringFieldUpdateOperationsInput | string | null
     fieldX?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     fieldY?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
@@ -68054,7 +68054,7 @@ export namespace Prisma {
     eventType: string
     minute: number
     second: number
-    description?: string | null
+    note?: string | null
     eventData?: string | null
     fieldX?: Decimal | DecimalJsLike | number | string | null
     fieldY?: Decimal | DecimalJsLike | number | string | null
@@ -68074,7 +68074,7 @@ export namespace Prisma {
     eventType?: StringFieldUpdateOperationsInput | string
     minute?: IntFieldUpdateOperationsInput | number
     second?: IntFieldUpdateOperationsInput | number
-    description?: NullableStringFieldUpdateOperationsInput | string | null
+    note?: NullableStringFieldUpdateOperationsInput | string | null
     eventData?: NullableStringFieldUpdateOperationsInput | string | null
     fieldX?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     fieldY?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
@@ -68094,7 +68094,7 @@ export namespace Prisma {
     eventType?: StringFieldUpdateOperationsInput | string
     minute?: IntFieldUpdateOperationsInput | number
     second?: IntFieldUpdateOperationsInput | number
-    description?: NullableStringFieldUpdateOperationsInput | string | null
+    note?: NullableStringFieldUpdateOperationsInput | string | null
     eventData?: NullableStringFieldUpdateOperationsInput | string | null
     fieldX?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     fieldY?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
@@ -68219,7 +68219,7 @@ export namespace Prisma {
     filePath: string
     fileSize?: bigint | number | null
     mimeType?: string | null
-    description?: string | null
+    note?: string | null
     category?: string | null
     isPublic: number
     uploadedBy?: Decimal | DecimalJsLike | number | string | null
@@ -68238,7 +68238,7 @@ export namespace Prisma {
     filePath: string
     fileSize?: bigint | number | null
     mimeType?: string | null
-    description?: string | null
+    note?: string | null
     category?: string | null
     isPublic: number
     uploadedBy?: Decimal | DecimalJsLike | number | string | null
@@ -68257,7 +68257,7 @@ export namespace Prisma {
     filePath?: StringFieldUpdateOperationsInput | string
     fileSize?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
     mimeType?: NullableStringFieldUpdateOperationsInput | string | null
-    description?: NullableStringFieldUpdateOperationsInput | string | null
+    note?: NullableStringFieldUpdateOperationsInput | string | null
     category?: NullableStringFieldUpdateOperationsInput | string | null
     isPublic?: IntFieldUpdateOperationsInput | number
     uploadedBy?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
@@ -68276,7 +68276,7 @@ export namespace Prisma {
     filePath?: StringFieldUpdateOperationsInput | string
     fileSize?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
     mimeType?: NullableStringFieldUpdateOperationsInput | string | null
-    description?: NullableStringFieldUpdateOperationsInput | string | null
+    note?: NullableStringFieldUpdateOperationsInput | string | null
     category?: NullableStringFieldUpdateOperationsInput | string | null
     isPublic?: IntFieldUpdateOperationsInput | number
     uploadedBy?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
@@ -68295,7 +68295,7 @@ export namespace Prisma {
     filePath: string
     fileSize?: bigint | number | null
     mimeType?: string | null
-    description?: string | null
+    note?: string | null
     category?: string | null
     isPublic: number
     uploadedBy?: Decimal | DecimalJsLike | number | string | null
@@ -68314,7 +68314,7 @@ export namespace Prisma {
     filePath?: StringFieldUpdateOperationsInput | string
     fileSize?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
     mimeType?: NullableStringFieldUpdateOperationsInput | string | null
-    description?: NullableStringFieldUpdateOperationsInput | string | null
+    note?: NullableStringFieldUpdateOperationsInput | string | null
     category?: NullableStringFieldUpdateOperationsInput | string | null
     isPublic?: IntFieldUpdateOperationsInput | number
     uploadedBy?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
@@ -68333,7 +68333,7 @@ export namespace Prisma {
     filePath?: StringFieldUpdateOperationsInput | string
     fileSize?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
     mimeType?: NullableStringFieldUpdateOperationsInput | string | null
-    description?: NullableStringFieldUpdateOperationsInput | string | null
+    note?: NullableStringFieldUpdateOperationsInput | string | null
     category?: NullableStringFieldUpdateOperationsInput | string | null
     isPublic?: IntFieldUpdateOperationsInput | number
     uploadedBy?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
@@ -69587,7 +69587,7 @@ export namespace Prisma {
     id?: Decimal | DecimalJsLike | number | string
     name: string
     abbr?: string | null
-    description?: string | null
+    note?: string | null
     foundedDate?: Date | string | null
     address?: string | null
     contactEmail?: string | null
@@ -69603,7 +69603,7 @@ export namespace Prisma {
     id?: Decimal | DecimalJsLike | number | string
     name: string
     abbr?: string | null
-    description?: string | null
+    note?: string | null
     foundedDate?: Date | string | null
     address?: string | null
     contactEmail?: string | null
@@ -69619,7 +69619,7 @@ export namespace Prisma {
     id?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     name?: StringFieldUpdateOperationsInput | string
     abbr?: NullableStringFieldUpdateOperationsInput | string | null
-    description?: NullableStringFieldUpdateOperationsInput | string | null
+    note?: NullableStringFieldUpdateOperationsInput | string | null
     foundedDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     address?: NullableStringFieldUpdateOperationsInput | string | null
     contactEmail?: NullableStringFieldUpdateOperationsInput | string | null
@@ -69635,7 +69635,7 @@ export namespace Prisma {
     id?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     name?: StringFieldUpdateOperationsInput | string
     abbr?: NullableStringFieldUpdateOperationsInput | string | null
-    description?: NullableStringFieldUpdateOperationsInput | string | null
+    note?: NullableStringFieldUpdateOperationsInput | string | null
     foundedDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     address?: NullableStringFieldUpdateOperationsInput | string | null
     contactEmail?: NullableStringFieldUpdateOperationsInput | string | null
@@ -69651,7 +69651,7 @@ export namespace Prisma {
     id?: Decimal | DecimalJsLike | number | string
     name: string
     abbr?: string | null
-    description?: string | null
+    note?: string | null
     foundedDate?: Date | string | null
     address?: string | null
     contactEmail?: string | null
@@ -69667,7 +69667,7 @@ export namespace Prisma {
     id?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     name?: StringFieldUpdateOperationsInput | string
     abbr?: NullableStringFieldUpdateOperationsInput | string | null
-    description?: NullableStringFieldUpdateOperationsInput | string | null
+    note?: NullableStringFieldUpdateOperationsInput | string | null
     foundedDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     address?: NullableStringFieldUpdateOperationsInput | string | null
     contactEmail?: NullableStringFieldUpdateOperationsInput | string | null
@@ -69683,7 +69683,7 @@ export namespace Prisma {
     id?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     name?: StringFieldUpdateOperationsInput | string
     abbr?: NullableStringFieldUpdateOperationsInput | string | null
-    description?: NullableStringFieldUpdateOperationsInput | string | null
+    note?: NullableStringFieldUpdateOperationsInput | string | null
     foundedDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     address?: NullableStringFieldUpdateOperationsInput | string | null
     contactEmail?: NullableStringFieldUpdateOperationsInput | string | null
@@ -69699,7 +69699,7 @@ export namespace Prisma {
     id?: Decimal | DecimalJsLike | number | string
     name: string
     abbr?: string | null
-    description?: string | null
+    note?: string | null
     gameModeId?: Decimal | DecimalJsLike | number | string | null
     groupLevelId?: Decimal | DecimalJsLike | number | string | null
     season?: string | null
@@ -69720,7 +69720,7 @@ export namespace Prisma {
     id?: Decimal | DecimalJsLike | number | string
     name: string
     abbr?: string | null
-    description?: string | null
+    note?: string | null
     gameModeId?: Decimal | DecimalJsLike | number | string | null
     groupLevelId?: Decimal | DecimalJsLike | number | string | null
     season?: string | null
@@ -69741,7 +69741,7 @@ export namespace Prisma {
     id?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     name?: StringFieldUpdateOperationsInput | string
     abbr?: NullableStringFieldUpdateOperationsInput | string | null
-    description?: NullableStringFieldUpdateOperationsInput | string | null
+    note?: NullableStringFieldUpdateOperationsInput | string | null
     gameModeId?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     groupLevelId?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     season?: NullableStringFieldUpdateOperationsInput | string | null
@@ -69762,7 +69762,7 @@ export namespace Prisma {
     id?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     name?: StringFieldUpdateOperationsInput | string
     abbr?: NullableStringFieldUpdateOperationsInput | string | null
-    description?: NullableStringFieldUpdateOperationsInput | string | null
+    note?: NullableStringFieldUpdateOperationsInput | string | null
     gameModeId?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     groupLevelId?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     season?: NullableStringFieldUpdateOperationsInput | string | null
@@ -69783,7 +69783,7 @@ export namespace Prisma {
     id?: Decimal | DecimalJsLike | number | string
     name: string
     abbr?: string | null
-    description?: string | null
+    note?: string | null
     gameModeId?: Decimal | DecimalJsLike | number | string | null
     groupLevelId?: Decimal | DecimalJsLike | number | string | null
     season?: string | null
@@ -69804,7 +69804,7 @@ export namespace Prisma {
     id?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     name?: StringFieldUpdateOperationsInput | string
     abbr?: NullableStringFieldUpdateOperationsInput | string | null
-    description?: NullableStringFieldUpdateOperationsInput | string | null
+    note?: NullableStringFieldUpdateOperationsInput | string | null
     gameModeId?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     groupLevelId?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     season?: NullableStringFieldUpdateOperationsInput | string | null
@@ -69825,7 +69825,7 @@ export namespace Prisma {
     id?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     name?: StringFieldUpdateOperationsInput | string
     abbr?: NullableStringFieldUpdateOperationsInput | string | null
-    description?: NullableStringFieldUpdateOperationsInput | string | null
+    note?: NullableStringFieldUpdateOperationsInput | string | null
     gameModeId?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     groupLevelId?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     season?: NullableStringFieldUpdateOperationsInput | string | null
@@ -72057,7 +72057,7 @@ export namespace Prisma {
   export type SubFeatureCreateInput = {
     id: Decimal | DecimalJsLike | number | string
     name: string
-    description?: string | null
+    note?: string | null
     category?: string | null
     icon?: string | null
     isActive: number
@@ -72069,7 +72069,7 @@ export namespace Prisma {
   export type SubFeatureUncheckedCreateInput = {
     id: Decimal | DecimalJsLike | number | string
     name: string
-    description?: string | null
+    note?: string | null
     category?: string | null
     icon?: string | null
     isActive: number
@@ -72081,7 +72081,7 @@ export namespace Prisma {
   export type SubFeatureUpdateInput = {
     id?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     name?: StringFieldUpdateOperationsInput | string
-    description?: NullableStringFieldUpdateOperationsInput | string | null
+    note?: NullableStringFieldUpdateOperationsInput | string | null
     category?: NullableStringFieldUpdateOperationsInput | string | null
     icon?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: IntFieldUpdateOperationsInput | number
@@ -72093,7 +72093,7 @@ export namespace Prisma {
   export type SubFeatureUncheckedUpdateInput = {
     id?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     name?: StringFieldUpdateOperationsInput | string
-    description?: NullableStringFieldUpdateOperationsInput | string | null
+    note?: NullableStringFieldUpdateOperationsInput | string | null
     category?: NullableStringFieldUpdateOperationsInput | string | null
     icon?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: IntFieldUpdateOperationsInput | number
@@ -72105,7 +72105,7 @@ export namespace Prisma {
   export type SubFeatureCreateManyInput = {
     id: Decimal | DecimalJsLike | number | string
     name: string
-    description?: string | null
+    note?: string | null
     category?: string | null
     icon?: string | null
     isActive: number
@@ -72117,7 +72117,7 @@ export namespace Prisma {
   export type SubFeatureUpdateManyMutationInput = {
     id?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     name?: StringFieldUpdateOperationsInput | string
-    description?: NullableStringFieldUpdateOperationsInput | string | null
+    note?: NullableStringFieldUpdateOperationsInput | string | null
     category?: NullableStringFieldUpdateOperationsInput | string | null
     icon?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: IntFieldUpdateOperationsInput | number
@@ -72129,7 +72129,7 @@ export namespace Prisma {
   export type SubFeatureUncheckedUpdateManyInput = {
     id?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     name?: StringFieldUpdateOperationsInput | string
-    description?: NullableStringFieldUpdateOperationsInput | string | null
+    note?: NullableStringFieldUpdateOperationsInput | string | null
     category?: NullableStringFieldUpdateOperationsInput | string | null
     icon?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: IntFieldUpdateOperationsInput | number
@@ -72382,7 +72382,7 @@ export namespace Prisma {
     planType: string
     price: Decimal | DecimalJsLike | number | string
     isPopular: number
-    description?: string | null
+    note?: string | null
     features?: string | null
     maxTeams?: number | null
     maxPlayers?: number | null
@@ -72401,7 +72401,7 @@ export namespace Prisma {
     planType: string
     price: Decimal | DecimalJsLike | number | string
     isPopular: number
-    description?: string | null
+    note?: string | null
     features?: string | null
     maxTeams?: number | null
     maxPlayers?: number | null
@@ -72420,7 +72420,7 @@ export namespace Prisma {
     planType?: StringFieldUpdateOperationsInput | string
     price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     isPopular?: IntFieldUpdateOperationsInput | number
-    description?: NullableStringFieldUpdateOperationsInput | string | null
+    note?: NullableStringFieldUpdateOperationsInput | string | null
     features?: NullableStringFieldUpdateOperationsInput | string | null
     maxTeams?: NullableIntFieldUpdateOperationsInput | number | null
     maxPlayers?: NullableIntFieldUpdateOperationsInput | number | null
@@ -72439,7 +72439,7 @@ export namespace Prisma {
     planType?: StringFieldUpdateOperationsInput | string
     price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     isPopular?: IntFieldUpdateOperationsInput | number
-    description?: NullableStringFieldUpdateOperationsInput | string | null
+    note?: NullableStringFieldUpdateOperationsInput | string | null
     features?: NullableStringFieldUpdateOperationsInput | string | null
     maxTeams?: NullableIntFieldUpdateOperationsInput | number | null
     maxPlayers?: NullableIntFieldUpdateOperationsInput | number | null
@@ -72458,7 +72458,7 @@ export namespace Prisma {
     planType: string
     price: Decimal | DecimalJsLike | number | string
     isPopular: number
-    description?: string | null
+    note?: string | null
     features?: string | null
     maxTeams?: number | null
     maxPlayers?: number | null
@@ -72477,7 +72477,7 @@ export namespace Prisma {
     planType?: StringFieldUpdateOperationsInput | string
     price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     isPopular?: IntFieldUpdateOperationsInput | number
-    description?: NullableStringFieldUpdateOperationsInput | string | null
+    note?: NullableStringFieldUpdateOperationsInput | string | null
     features?: NullableStringFieldUpdateOperationsInput | string | null
     maxTeams?: NullableIntFieldUpdateOperationsInput | number | null
     maxPlayers?: NullableIntFieldUpdateOperationsInput | number | null
@@ -72496,7 +72496,7 @@ export namespace Prisma {
     planType?: StringFieldUpdateOperationsInput | string
     price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     isPopular?: IntFieldUpdateOperationsInput | number
-    description?: NullableStringFieldUpdateOperationsInput | string | null
+    note?: NullableStringFieldUpdateOperationsInput | string | null
     features?: NullableStringFieldUpdateOperationsInput | string | null
     maxTeams?: NullableIntFieldUpdateOperationsInput | number | null
     maxPlayers?: NullableIntFieldUpdateOperationsInput | number | null
@@ -72776,7 +72776,7 @@ export namespace Prisma {
     name?: SortOrder
     abbr?: SortOrder
     sportId?: SortOrder
-    description?: SortOrder
+    note?: SortOrder
     status?: SortOrder
     startDate?: SortOrder
     endDate?: SortOrder
@@ -72796,7 +72796,7 @@ export namespace Prisma {
     name?: SortOrder
     abbr?: SortOrder
     sportId?: SortOrder
-    description?: SortOrder
+    note?: SortOrder
     status?: SortOrder
     startDate?: SortOrder
     endDate?: SortOrder
@@ -72810,7 +72810,7 @@ export namespace Prisma {
     name?: SortOrder
     abbr?: SortOrder
     sportId?: SortOrder
-    description?: SortOrder
+    note?: SortOrder
     status?: SortOrder
     startDate?: SortOrder
     endDate?: SortOrder
@@ -73340,7 +73340,7 @@ export namespace Prisma {
     eventType?: SortOrder
     minute?: SortOrder
     second?: SortOrder
-    description?: SortOrder
+    note?: SortOrder
     eventData?: SortOrder
     fieldX?: SortOrder
     fieldY?: SortOrder
@@ -73374,7 +73374,7 @@ export namespace Prisma {
     eventType?: SortOrder
     minute?: SortOrder
     second?: SortOrder
-    description?: SortOrder
+    note?: SortOrder
     eventData?: SortOrder
     fieldX?: SortOrder
     fieldY?: SortOrder
@@ -73394,7 +73394,7 @@ export namespace Prisma {
     eventType?: SortOrder
     minute?: SortOrder
     second?: SortOrder
-    description?: SortOrder
+    note?: SortOrder
     eventData?: SortOrder
     fieldX?: SortOrder
     fieldY?: SortOrder
@@ -73519,7 +73519,7 @@ export namespace Prisma {
     filePath?: SortOrder
     fileSize?: SortOrder
     mimeType?: SortOrder
-    description?: SortOrder
+    note?: SortOrder
     category?: SortOrder
     isPublic?: SortOrder
     uploadedBy?: SortOrder
@@ -73547,7 +73547,7 @@ export namespace Prisma {
     filePath?: SortOrder
     fileSize?: SortOrder
     mimeType?: SortOrder
-    description?: SortOrder
+    note?: SortOrder
     category?: SortOrder
     isPublic?: SortOrder
     uploadedBy?: SortOrder
@@ -73566,7 +73566,7 @@ export namespace Prisma {
     filePath?: SortOrder
     fileSize?: SortOrder
     mimeType?: SortOrder
-    description?: SortOrder
+    note?: SortOrder
     category?: SortOrder
     isPublic?: SortOrder
     uploadedBy?: SortOrder
@@ -74397,7 +74397,7 @@ export namespace Prisma {
     id?: SortOrder
     name?: SortOrder
     abbr?: SortOrder
-    description?: SortOrder
+    note?: SortOrder
     foundedDate?: SortOrder
     address?: SortOrder
     contactEmail?: SortOrder
@@ -74418,7 +74418,7 @@ export namespace Prisma {
     id?: SortOrder
     name?: SortOrder
     abbr?: SortOrder
-    description?: SortOrder
+    note?: SortOrder
     foundedDate?: SortOrder
     address?: SortOrder
     contactEmail?: SortOrder
@@ -74434,7 +74434,7 @@ export namespace Prisma {
     id?: SortOrder
     name?: SortOrder
     abbr?: SortOrder
-    description?: SortOrder
+    note?: SortOrder
     foundedDate?: SortOrder
     address?: SortOrder
     contactEmail?: SortOrder
@@ -74461,7 +74461,7 @@ export namespace Prisma {
     id?: SortOrder
     name?: SortOrder
     abbr?: SortOrder
-    description?: SortOrder
+    note?: SortOrder
     gameModeId?: SortOrder
     groupLevelId?: SortOrder
     season?: SortOrder
@@ -74491,7 +74491,7 @@ export namespace Prisma {
     id?: SortOrder
     name?: SortOrder
     abbr?: SortOrder
-    description?: SortOrder
+    note?: SortOrder
     gameModeId?: SortOrder
     groupLevelId?: SortOrder
     season?: SortOrder
@@ -74512,7 +74512,7 @@ export namespace Prisma {
     id?: SortOrder
     name?: SortOrder
     abbr?: SortOrder
-    description?: SortOrder
+    note?: SortOrder
     gameModeId?: SortOrder
     groupLevelId?: SortOrder
     season?: SortOrder
@@ -76043,7 +76043,7 @@ export namespace Prisma {
   export type SubFeatureCountOrderByAggregateInput = {
     id?: SortOrder
     name?: SortOrder
-    description?: SortOrder
+    note?: SortOrder
     category?: SortOrder
     icon?: SortOrder
     isActive?: SortOrder
@@ -76061,7 +76061,7 @@ export namespace Prisma {
   export type SubFeatureMaxOrderByAggregateInput = {
     id?: SortOrder
     name?: SortOrder
-    description?: SortOrder
+    note?: SortOrder
     category?: SortOrder
     icon?: SortOrder
     isActive?: SortOrder
@@ -76073,7 +76073,7 @@ export namespace Prisma {
   export type SubFeatureMinOrderByAggregateInput = {
     id?: SortOrder
     name?: SortOrder
-    description?: SortOrder
+    note?: SortOrder
     category?: SortOrder
     icon?: SortOrder
     isActive?: SortOrder
@@ -76246,7 +76246,7 @@ export namespace Prisma {
     planType?: SortOrder
     price?: SortOrder
     isPopular?: SortOrder
-    description?: SortOrder
+    note?: SortOrder
     features?: SortOrder
     maxTeams?: SortOrder
     maxPlayers?: SortOrder
@@ -76278,7 +76278,7 @@ export namespace Prisma {
     planType?: SortOrder
     price?: SortOrder
     isPopular?: SortOrder
-    description?: SortOrder
+    note?: SortOrder
     features?: SortOrder
     maxTeams?: SortOrder
     maxPlayers?: SortOrder
@@ -76297,7 +76297,7 @@ export namespace Prisma {
     planType?: SortOrder
     price?: SortOrder
     isPopular?: SortOrder
-    description?: SortOrder
+    note?: SortOrder
     features?: SortOrder
     maxTeams?: SortOrder
     maxPlayers?: SortOrder

@@ -14,7 +14,7 @@ export class CreateLeagueDto {
   @ApiProperty({ description: 'Description of the league', required: false, example: 'Top-tier football league in England' })
   @IsString()
   @IsOptional()
-  description?: string;
+  note?: string;
 
   @ApiProperty({ description: 'Game mode ID', required: false, example: '1' })
   @IsDecimal()

@@ -1,10 +1,10 @@
 import { Controller, Get, Param, Query } from '@nestjs/common';
-import { AdminCountriesService } from '../countries.service';
+import { CountriesService } from './service';
 import { ApiOperation, ApiQuery, ApiResponse } from '@nestjs/swagger';
 
 @Controller('countries')
 export class HomeCountriesController {
-  constructor(private readonly countriesService: AdminCountriesService) { }
+  constructor(private readonly countriesService: CountriesService) { }
 
   @ApiOperation({ summary: 'Get all countries' })
   @ApiResponse({ status: 200, description: 'List of countries' })

@@ -1,20 +1,19 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
-import { CreateClubDto, UpdateClubDto } from './dto';
+import { ClubDto } from './dto';
 import { PrismaService } from '../../prisma/prisma.service';
 import { AvatarUtils } from '../../utils/avatar.utils';
 import { Prisma } from '@prisma/client';
 
 @Injectable()
 export class ClubsService {
-  constructor(private prisma: PrismaService) {}
+  constructor(private prisma: PrismaService) { }
 
-  async create(createClubDto: CreateClubDto) {
-    const { base64, ...createData } = createClubDto;
+  async create(clubDto: ClubDto) {
+    const { base64, ...createData } = clubDto;
 
     const club = await (this.prisma as any).orgClub.create({
       data: {
         ...createData,
-        status: createData.status ?? 'active'
       }
     });
 
@@ -26,17 +25,11 @@ export class ClubsService {
   async findAll(params: {
     skip?: number;
     take?: number;
-    cursor?: Prisma.OrgClubWhereUniqueInput;
-    where?: Prisma.OrgClubWhereInput;
-    orderBy?: Prisma.OrgClubOrderByWithRelationInput;
   }) {
-    const { skip, take, cursor, where, orderBy } = params;
+    const { skip, take } = params;
     const clubs = await (this.prisma as any).orgClub.findMany({
       skip,
       take,
-      cursor,
-      where,
-      orderBy: orderBy ?? { name: 'asc' }
     });
 
     return Promise.all(clubs.map(async club => ({
@@ -46,7 +39,7 @@ export class ClubsService {
   }
 
   async findOne(id: string) {
-    const club = await (this.prisma as any).orgClub.findUnique({ 
+    const club = await (this.prisma as any).orgClub.findUnique({
       where: { id }
     });
 
@@ -60,15 +53,15 @@ export class ClubsService {
     };
   }
 
-  async update(id: string, updateClubDto: UpdateClubDto) {
+  async update(id: string, clubDto: ClubDto) {
     try {
-      const { base64, ...updateData } = updateClubDto;
+      const { base64, ...updateData } = clubDto;
 
       AvatarUtils.saveBase64(base64, 'clubs', id);
 
       const club = await (this.prisma as any).orgClub.update({
         where: { id },
-        data: updateData
+        data: clubDto
       });
 
       return club;
@@ -81,8 +74,8 @@ export class ClubsService {
     try {
       AvatarUtils.deleteBase64('clubs', id);
 
-      return await (this.prisma as any).orgClub.delete({ 
-        where: { id } 
+      return await (this.prisma as any).orgClub.delete({
+        where: { id }
       });
     } catch (error) {
       throw new NotFoundException(`Club with ID ${id} not found`);

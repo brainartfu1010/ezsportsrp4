@@ -2,53 +2,45 @@ import { Controller, Get, Post, Body, Patch, Param, Delete, Query } from '@nestj
 import { TeamsService } from './service';
 import { CreateTeamDto } from './dto';
 
-// @Controller('teams')
-// @UseGuards(JwtAuthGuard, RolesGuard)
-// export class TeamsController {
-//   constructor(private readonly teamsService: TeamsService) {}
+@Controller('admin/teams')
+export class AdminTeamsController {
+  constructor(private readonly teamsService: TeamsService) {}
 
-//   @Post()
-//   @Roles(Role.ADMIN, Role.TEAM_MANAGER, Role.COACH)
-//   create(@Body() createTeamDto: CreateTeamDto) {
-//     return this.teamsService.create(createTeamDto);
-//   }
+  @Post()
+  create(@Body() createTeamDto: CreateTeamDto) {
+    return this.teamsService.create(createTeamDto);
+  }
 
-//   @Get()
-//   @Roles(Role.ADMIN, Role.TEAM_MANAGER, Role.COACH)
-//   findAll(
-//     @Query('skip') skip?: number,
-//     @Query('take') take?: number,
-//     @Query('clubId') clubId?: string,
-//     @Query('sportId') sportId?: string
-//   ) {
-//     return this.teamsService.findAll({
-//       skip: skip ? Number(skip) : undefined,
-//       take: take ? Number(take) : undefined,
-//       where: {
-//         clubId,
-//         sportId
-//       }
-//     });
-//   }
+  @Get()
+  findAll(
+    @Query('status') status?: string,
+    @Query('skip') skip?: number,
+    @Query('take') take?: number
+  ) {
+    return this.teamsService.findAll({
+      skip: skip ? Number(skip) : undefined,
+      take: take ? Number(take) : undefined,
+      where: { 
+        status
+      }
+    });
+  }
 
-//   @Get(':id')
-//   @Roles(Role.ADMIN, Role.TEAM_MANAGER, Role.COACH)
-//   findOne(@Param('id') id: string) {
-//     return this.teamsService.findOne(id);
-//   }
+  @Get(':id')
+  findOne(@Param('id') id: string) {
+    return this.teamsService.findOne(id);
+  }
 
-//   @Patch(':id')
-//   @Roles(Role.ADMIN, Role.TEAM_MANAGER, Role.COACH)
-//   update(
-//     @Param('id') id: string, 
-//     @Body() updateTeamDto: UpdateTeamDto
-//   ) {
-//     return this.teamsService.update(id, updateTeamDto);
-//   }
+  @Patch(':id')
+  update(
+    @Param('id') id: string, 
+    @Body() updateTeamDto: CreateTeamDto
+  ) {
+    return this.teamsService.update(id, updateTeamDto);
+  }
 
-//   @Delete(':id')
-//   @Roles(Role.ADMIN, Role.TEAM_MANAGER)
-//   remove(@Param('id') id: string) {
-//     return this.teamsService.remove(id);
-//   }
-// }
+  @Delete(':id')
+  remove(@Param('id') id: string) {
+    return this.teamsService.remove(id);
+  }
+}

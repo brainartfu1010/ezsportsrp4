@@ -1,5 +1,5 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
-import { CreateFieldDto, UpdateFieldDto } from './dto';
+import { FieldDto } from './dto';
 import { PrismaService } from '../../prisma/prisma.service';
 import { Prisma } from '@prisma/client';
 import { AvatarUtils } from 'src/utils/avatar.utils';
@@ -8,16 +8,14 @@ import { AvatarUtils } from 'src/utils/avatar.utils';
 export class FieldsService {
   constructor(private prisma: PrismaService) { }
 
-  async create(createFieldDto: CreateFieldDto) {
-    const { base64, ...createData } = createFieldDto;
+  async create(fieldDto: FieldDto) {
+    const { base64, ...createData } = fieldDto;
 
     const result = await this.prisma.baseField.create({
       data: createData
     });
 
-    if (base64) {
-      AvatarUtils.saveBase64(base64, 'fields', result.id);
-    }
+    AvatarUtils.saveBase64(base64, 'fields', result.id);
 
     return result;
   }
@@ -61,7 +59,6 @@ export class FieldsService {
       throw new NotFoundException(`Field with ID ${id} not found`);
     }
 
-    // Get base64 image
     const base64 = AvatarUtils.getBase64('fields', id);
 
     return {
@@ -70,20 +67,16 @@ export class FieldsService {
     };
   }
 
-  async update(id: number, updateFieldDto: UpdateFieldDto) {
+  async update(id: number, fieldDto: FieldDto) {
     try {
-      const { base64, ...updateData } = updateFieldDto;
+      const { base64, ...updateData } = fieldDto;
 
       const result = await this.prisma.baseField.update({
         where: { id: Number(id) },
         data: updateData
       });
 
-      if (base64) {
-        AvatarUtils.saveBase64(base64, 'fields', id);
-      } else if (base64 === null) {
-        AvatarUtils.deleteBase64('fields', id);
-      }
+      AvatarUtils.saveBase64(base64, 'fields', id);
 
       return result;
     } catch (error) {
@@ -107,6 +100,8 @@ export class FieldsService {
         throw new NotFoundException(`Field with ID ${id} not found`);
       }
 
+      AvatarUtils.deleteBase64('fields', id);
+
       // Perform delete
       return await this.prisma.baseField.delete({
         where: { id: Number(id) }
@@ -119,6 +114,9 @@ export class FieldsService {
   }
 
   async removeMany(ids: number[]) {
+    for (const id of ids) {
+      AvatarUtils.deleteBase64('fields', id);
+    }
     return await this.prisma.baseField.deleteMany({
       where: { id: { in: ids } }
     });

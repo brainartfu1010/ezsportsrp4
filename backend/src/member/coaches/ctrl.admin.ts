@@ -8,8 +8,8 @@ export class AdminCoachController {
   constructor(private readonly coachService: CoachService) { }
 
   @Post()
-  create(@Body() createCoachDto: CoachDto) {
-    return this.coachService.create(createCoachDto);
+  create(@Body() coachDto: CoachDto) {
+    return this.coachService.create(coachDto);
   }
 
   @Get()
@@ -24,8 +24,8 @@ export class AdminCoachController {
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateCoachDto: CoachDto) {
-    return this.coachService.update(id, updateCoachDto);
+  update(@Param('id') id: string, @Body() coachDto: CoachDto) {
+    return this.coachService.update(id, coachDto);
   }
 
   @Delete('bulk')

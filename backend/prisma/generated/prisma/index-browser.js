@@ -125,7 +125,7 @@ exports.Prisma.BaseCompetitionScalarFieldEnum = {
   name: 'name',
   abbr: 'abbr',
   sportId: 'sportId',
-  description: 'description',
+  note: 'note',
   status: 'status',
   startDate: 'startDate',
   endDate: 'endDate',
@@ -214,7 +214,7 @@ exports.Prisma.MatchEventScalarFieldEnum = {
   eventType: 'eventType',
   minute: 'minute',
   second: 'second',
-  description: 'description',
+  note: 'note',
   eventData: 'eventData',
   fieldX: 'fieldX',
   fieldY: 'fieldY',
@@ -249,7 +249,7 @@ exports.Prisma.MatchMediaScalarFieldEnum = {
   filePath: 'filePath',
   fileSize: 'fileSize',
   mimeType: 'mimeType',
-  description: 'description',
+  note: 'note',
   category: 'category',
   isPublic: 'isPublic',
   uploadedBy: 'uploadedBy',
@@ -441,7 +441,7 @@ exports.Prisma.OrgClubScalarFieldEnum = {
   id: 'id',
   name: 'name',
   abbr: 'abbr',
-  description: 'description',
+  note: 'note',
   foundedDate: 'foundedDate',
   address: 'address',
   contactEmail: 'contactEmail',
@@ -457,7 +457,7 @@ exports.Prisma.OrgLeagueScalarFieldEnum = {
   id: 'id',
   name: 'name',
   abbr: 'abbr',
-  description: 'description',
+  note: 'note',
   gameModeId: 'gameModeId',
   groupLevelId: 'groupLevelId',
   season: 'season',
@@ -793,7 +793,7 @@ exports.Prisma.SportRefereeTypeScalarFieldEnum = {
 exports.Prisma.SubFeatureScalarFieldEnum = {
   id: 'id',
   name: 'name',
-  description: 'description',
+  note: 'note',
   category: 'category',
   icon: 'icon',
   isActive: 'isActive',
@@ -842,7 +842,7 @@ exports.Prisma.SubPlanScalarFieldEnum = {
   planType: 'planType',
   price: 'price',
   isPopular: 'isPopular',
-  description: 'description',
+  note: 'note',
   features: 'features',
   maxTeams: 'maxTeams',
   maxPlayers: 'maxPlayers',
@@ -898,7 +898,7 @@ exports.Prisma.NullsOrder = {
 exports.Prisma.BaseCompetitionOrderByRelevanceFieldEnum = {
   name: 'name',
   abbr: 'abbr',
-  description: 'description',
+  note: 'note',
   status: 'status'
 };
 
@@ -939,7 +939,7 @@ exports.Prisma.GameMatcheOrderByRelevanceFieldEnum = {
 
 exports.Prisma.MatchEventOrderByRelevanceFieldEnum = {
   eventType: 'eventType',
-  description: 'description',
+  note: 'note',
   eventData: 'eventData',
   notes: 'notes'
 };
@@ -955,7 +955,7 @@ exports.Prisma.MatchMediaOrderByRelevanceFieldEnum = {
   fileName: 'fileName',
   filePath: 'filePath',
   mimeType: 'mimeType',
-  description: 'description',
+  note: 'note',
   category: 'category',
   notes: 'notes'
 };
@@ -1052,7 +1052,7 @@ exports.Prisma.MemberTeamManagerOrderByRelevanceFieldEnum = {
 exports.Prisma.OrgClubOrderByRelevanceFieldEnum = {
   name: 'name',
   abbr: 'abbr',
-  description: 'description',
+  note: 'note',
   address: 'address',
   contactEmail: 'contactEmail',
   contactPhone: 'contactPhone',
@@ -1063,7 +1063,7 @@ exports.Prisma.OrgClubOrderByRelevanceFieldEnum = {
 exports.Prisma.OrgLeagueOrderByRelevanceFieldEnum = {
   name: 'name',
   abbr: 'abbr',
-  description: 'description',
+  note: 'note',
   season: 'season',
   subscribeEmail: 'subscribeEmail',
   rules: 'rules',
@@ -1202,7 +1202,7 @@ exports.Prisma.SportRefereeTypeOrderByRelevanceFieldEnum = {
 
 exports.Prisma.SubFeatureOrderByRelevanceFieldEnum = {
   name: 'name',
-  description: 'description',
+  note: 'note',
   category: 'category',
   icon: 'icon'
 };
@@ -1222,7 +1222,7 @@ exports.Prisma.SubForUserOrderByRelevanceFieldEnum = {
 exports.Prisma.SubPlanOrderByRelevanceFieldEnum = {
   name: 'name',
   planType: 'planType',
-  description: 'description',
+  note: 'note',
   features: 'features'
 };
 

@@ -1,7 +1,7 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { IsString, IsOptional, IsBoolean, IsInt, IsArray } from 'class-validator';
 
-export class CreateFieldDto {
+export class FieldDto {
   @ApiProperty({ description: 'The name of the field', example: 'Soccer Field' })
   @IsString()
   name: string;
@@ -40,9 +40,4 @@ export class CreateFieldDto {
   @IsString()
   @IsOptional()
   base64?: string;
-}
-
-export class UpdateFieldDto extends CreateFieldDto {
-  // Inherits all properties from CreateFieldDto
-  // Can add additional validation or properties specific to update if needed
 }

@@ -2,7 +2,6 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { ClubAdminDto } from './dto';
 import { PrismaService } from '../../prisma/prisma.service';
 import { AvatarUtils } from '../../utils/avatar.utils';
-import { PrismaClient } from '@prisma/client';
 
 @Injectable()
 export class ClubAdminService {

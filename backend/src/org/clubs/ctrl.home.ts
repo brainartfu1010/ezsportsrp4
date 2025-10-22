@@ -14,7 +14,7 @@ export class HomeClubsController {
     @Query('status') status?: string
   ) {
     return this.clubsService.findAll({
-      where: { status }
+        
     });
   }
 
