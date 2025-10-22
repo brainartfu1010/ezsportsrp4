@@ -1,5 +1,5 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
-import { CreateSportDto, UpdateSportDto } from './dto';
+import { BaseSportDto } from './dto';
 import { PrismaService } from '../../prisma/prisma.service';
 import { Prisma } from '@prisma/client';
 import { AvatarUtils } from '../../utils/avatar.utils';
@@ -8,18 +8,17 @@ import { AvatarUtils } from '../../utils/avatar.utils';
 export class SportsService {
   constructor(private prisma: PrismaService) { }
 
-  async create(createSportDto: CreateSportDto) {
-    const { base64, ...createData } = createSportDto;
+  async create(data: BaseSportDto) {
+    const { base64, ...rest } = data;
 
     const sport = await this.prisma.baseSport.create({
-      data: createData
+      data: {
+        ...rest,
+        isActive: rest.isActive === 1
+      }
     });
 
-    if (base64) {
-      AvatarUtils.saveBase64(base64, 'sports', sport.id);
-    } else if (base64 === null) {
-      AvatarUtils.deleteBase64('sports', sport.id);
-    }
+    AvatarUtils.saveBase64(base64, 'sports', sport.id);
 
     return sport;
   }
@@ -55,19 +54,18 @@ export class SportsService {
     };
   }
 
-  async update(id: number, updateSportDto: UpdateSportDto) {
+  async update(id: number, data: BaseSportDto) {
     try {
-      const { base64, ...updateData } = updateSportDto;
+      const { base64, ...rest } = data;
 
-      if (base64) {
-        AvatarUtils.saveBase64(base64, 'sports', id);
-      } else if (base64 === null) {
-        AvatarUtils.deleteBase64('sports', id);
-      }
+      AvatarUtils.saveBase64(base64, 'sports', id);
 
       const sport = await this.prisma.baseSport.update({
         where: { id: Number(id) },
-        data: updateData
+        data: {
+          ...rest,
+          isActive: rest.isActive === 1
+        }
       });
 
       return sport;

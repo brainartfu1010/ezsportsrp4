@@ -1,13 +1,13 @@
 import { Controller, Get, Post, Body, Patch, Param, Delete, Query } from '@nestjs/common';
 import { GroupLevelsService } from './service';
-import { GroupLevelDto } from './dto';
+import { BaseGroupLevelDto } from './dto';
 
 @Controller('admin/group-levels')
 export class AdminGroupLevelsController {
   constructor(private readonly groupLevelsService: GroupLevelsService) {}
 
   @Post()
-  create(@Body() groupLevelDto: GroupLevelDto) {
+  create(@Body() groupLevelDto: BaseGroupLevelDto) {
     return this.groupLevelsService.create(groupLevelDto);
   }
 
@@ -21,7 +21,7 @@ export class AdminGroupLevelsController {
       skip: skip ? Number(skip) : undefined,
       take: take ? Number(take) : undefined,
       where: { 
-        isActive: status === 'active'
+        isActive: active
       },
       orderBy: { ord: 'asc' }
     });
@@ -35,7 +35,7 @@ export class AdminGroupLevelsController {
   @Patch(':id')
   update(
     @Param('id') id: string, 
-    @Body() groupLevelDto: GroupLevelDto
+    @Body() groupLevelDto: BaseGroupLevelDto
   ) {
     return this.groupLevelsService.update(id, groupLevelDto);
   }

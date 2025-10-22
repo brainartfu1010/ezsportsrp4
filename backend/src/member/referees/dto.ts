@@ -1,23 +1,23 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { IsNotEmpty, IsNumber, IsOptional, IsString, IsDecimal } from 'class-validator';
 
-export class RefereeDto {
-  @ApiProperty({ description: 'Person ID of the referee' })
+export class MemberRefereeDto {
+  @ApiProperty({ description: 'Person ID' })
   @IsNotEmpty()
-  @IsDecimal()
+  @IsNumber()
   personId: number;
 
-  @ApiProperty({ description: 'License number of the referee' })
+  @ApiProperty({ description: 'License number' })
   @IsNotEmpty()
   @IsString()
   licenseNumber: string;
 
-  @ApiProperty({ description: 'License level of the referee', required: false })
+  @ApiProperty({ description: 'License level', required: false })
   @IsOptional()
   @IsString()
   licenseLevel?: string;
 
-  @ApiProperty({ description: 'Certification of the referee', required: false })
+  @ApiProperty({ description: 'Certification', required: false })
   @IsOptional()
   @IsString()
   certification?: string;
@@ -27,19 +27,19 @@ export class RefereeDto {
   @IsString()
   refereeType: string;
 
-  @ApiProperty({ description: 'Specialization of the referee', required: false })
+  @ApiProperty({ description: 'Specialization', required: false })
   @IsOptional()
   @IsString()
   specialization?: string;
 
-  @ApiProperty({ description: 'Languages spoken', required: false })
+  @ApiProperty({ description: 'Languages', required: false })
   @IsOptional()
   @IsString()
   languages?: string;
 
   @ApiProperty({ description: 'Match fee', required: false })
   @IsOptional()
-  @IsNumber()
+  @IsDecimal()
   matchFee?: number;
 
   @ApiProperty({ description: 'Emergency contact name', required: false })
@@ -57,7 +57,7 @@ export class RefereeDto {
   @IsString()
   status: string;
 
-  @ApiProperty({ description: 'Bio of the referee', required: false })
+  @ApiProperty({ description: 'Biography', required: false })
   @IsOptional()
   @IsString()
   bio?: string;
@@ -67,8 +67,8 @@ export class RefereeDto {
   @IsNumber()
   ord: number;
 
-  @ApiProperty({ description: 'Base64 encoded avatar image', required: false })
+  @ApiProperty({ description: 'Base64 of the sport logo', required: false })
   @IsOptional()
   @IsString()
-  base64?: string | null;
+  base64?: string;
 }

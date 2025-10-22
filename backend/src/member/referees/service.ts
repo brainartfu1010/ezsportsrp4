@@ -1,5 +1,5 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
-import { RefereeDto } from './dto';
+import { MemberRefereeDto } from './dto';
 import { PrismaService } from '../../prisma/prisma.service';
 import { AvatarUtils } from '../../utils/avatar.utils';
 import { PrismaClient } from '@prisma/client';
@@ -8,7 +8,7 @@ import { PrismaClient } from '@prisma/client';
 export class RefereeService {
   constructor(private prisma: PrismaService) { }
 
-  async create(refereeDto: RefereeDto) {
+  async create(refereeDto: MemberRefereeDto) {
     const { base64, ...createData } = refereeDto;
 
     const referee = await (this.prisma as any).memberReferee.create({
@@ -55,7 +55,7 @@ export class RefereeService {
     };
   }
 
-  async update(id: string, updateRefereeDto: RefereeDto) {
+  async update(id: string, updateRefereeDto: MemberRefereeDto) {
     try {
       const { base64, ...updateData } = updateRefereeDto;
 

@@ -3,11 +3,11 @@ import { PrismaModule } from '../../prisma/prisma.module';
 import { ManagerTypeService } from './service';
 import { AdminManagerTypeController } from './ctrl.admin';
 import { HomeManagerTypeController } from './ctrl.home';
-import { ManagerTypeDto } from './dto';
+import { SportManagerTypeDto } from './dto';
 
 @Module({
   controllers: [AdminManagerTypeController, HomeManagerTypeController],
-  providers: [ManagerTypeService, ManagerTypeDto],
+  providers: [ManagerTypeService, SportManagerTypeDto],
   imports: [PrismaModule],
   exports: [ManagerTypeService]
 })

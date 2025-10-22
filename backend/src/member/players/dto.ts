@@ -1,21 +1,20 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsNotEmpty, IsNumber, IsOptional, IsString, IsDecimal, IsDate } from 'class-validator';
-import { Type } from 'class-transformer';
+import { IsNotEmpty, IsNumber, IsOptional, IsString, IsDate, IsDecimal } from 'class-validator';
 
-export class PlayerDto {
-  @ApiProperty({ description: 'Person ID of the player' })
+export class MemberPlayerDto {
+  @ApiProperty({ description: 'Person ID' })
   @IsNotEmpty()
-  @IsDecimal()
+  @IsNumber()
   personId: number;
 
-  @ApiProperty({ description: 'Height of the player', required: false })
+  @ApiProperty({ description: 'Height', required: false })
   @IsOptional()
-  @IsNumber()
+  @IsDecimal()
   height?: number;
 
-  @ApiProperty({ description: 'Weight of the player', required: false })
+  @ApiProperty({ description: 'Weight', required: false })
   @IsOptional()
-  @IsNumber()
+  @IsDecimal()
   weight?: number;
 
   @ApiProperty({ description: 'Preferred foot', required: false })
@@ -26,13 +25,11 @@ export class PlayerDto {
   @ApiProperty({ description: 'Contract start date', required: false })
   @IsOptional()
   @IsDate()
-  @Type(() => Date)
   contractStart?: Date;
 
   @ApiProperty({ description: 'Contract end date', required: false })
   @IsOptional()
   @IsDate()
-  @Type(() => Date)
   contractEnd?: Date;
 
   @ApiProperty({ description: 'Emergency contact name', required: false })
@@ -50,7 +47,7 @@ export class PlayerDto {
   @IsString()
   status: string;
 
-  @ApiProperty({ description: 'Bio of the player', required: false })
+  @ApiProperty({ description: 'Biography', required: false })
   @IsOptional()
   @IsString()
   bio?: string;
@@ -60,8 +57,8 @@ export class PlayerDto {
   @IsNumber()
   ord: number;
 
-  @ApiProperty({ description: 'Base64 encoded avatar image', required: false })
+  @ApiProperty({ description: 'Base64 of the sport logo', required: false })
   @IsOptional()
   @IsString()
-  base64?: string | null;
+  base64?: string;
 }

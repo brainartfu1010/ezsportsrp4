@@ -1,26 +1,21 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
-import { TrainingDto } from './dto';
+import { PlanTrainingDto } from './dto';
 import { PrismaService } from '../../prisma/prisma.service';
-import { AvatarUtils } from '../../utils/avatar.utils';
 import { Prisma } from '@prisma/client';
 
 @Injectable()
 export class PlanTrainingsService {
   constructor(private prisma: PrismaService) {}
 
-  async create(trainingDto: TrainingDto) {
-    const { base64, ...trainingData } = trainingDto;
-
+  async create(trainingDto: PlanTrainingDto) {
     const training = await (this.prisma as any).planTraining.create({
       data: {
-        ...trainingData,
-        status: trainingData.status ?? 'scheduled',
-        isAllMembers: trainingData.isAllMembers ?? 0,
-        recurringType: trainingData.recurringType ?? 1
+        ...trainingDto,
+        status: trainingDto.status ?? 'scheduled',
+        isAllMembers: trainingDto.isAllMembers ?? 0,
+        recurringType: trainingDto.recurringType ?? 1
       }
     });
-
-    AvatarUtils.saveBase64(base64, 'trainings', training.id);
 
     return training;
   }
@@ -43,7 +38,6 @@ export class PlanTrainingsService {
 
     return Promise.all(trainings.map(async training => ({
       ...training,
-      base64: await AvatarUtils.getBase64('trainings', training.id) || undefined
     })));
   }
 
@@ -56,18 +50,11 @@ export class PlanTrainingsService {
       throw new NotFoundException(`Training with ID ${id} not found`);
     }
 
-    return {
-      ...training,
-      base64: await AvatarUtils.getBase64('trainings', training.id) || undefined
-    };
+    return training;
   }
 
-  async update(id: string, trainingDto: TrainingDto) {
+  async update(id: string, trainingDto: PlanTrainingDto) {
     try {
-      const { base64, ...trainingData } = trainingDto;
-
-      AvatarUtils.saveBase64(base64, 'trainings', id);
-
       const training = await (this.prisma as any).planTraining.update({
         where: { id },
         data: trainingDto
@@ -81,7 +68,6 @@ export class PlanTrainingsService {
 
   async remove(id: string) {
     try {
-
       const training = await (this.prisma as any).planTraining.findUnique({
         where: { id }
       });
@@ -90,24 +76,16 @@ export class PlanTrainingsService {
         throw new NotFoundException(`Training with ID ${id} not found`);
       }
 
-      // Delete avatar if exists
-      AvatarUtils.deleteBase64('trainings', id);
-
-      // Perform delete
       return await (this.prisma as any).planTraining.delete({ 
         where: { id } 
       });
     } catch (error) {
-      // Log the original error for debugging
       console.error('Delete training error:', error);
       throw new NotFoundException(`Training with ID ${id} not found`);
     }
   }
 
   async removeMany(ids: string[]) {
-    // Delete avatars for all trainings being deleted
-    ids.forEach(id => AvatarUtils.deleteBase64('trainings', id));
-
     return await (this.prisma as any).planTraining.deleteMany({
       where: { id: { in: ids } }
     });
@@ -115,7 +93,7 @@ export class PlanTrainingsService {
 
   async reorder(orders: { [key: string]: number }[]) {
     const updatePromises = orders.map(async (item) => {
-      const [id, ord] = Object.entries(item)[0]; // Extract the only key-value pair
+      const [id, ord] = Object.entries(item)[0];
       return (this.prisma as any).planTraining.update({
         where: { id },
         data: { ord },

@@ -1,13 +1,13 @@
 import { Controller, Get, Post, Body, Patch, Param, Delete, Query } from '@nestjs/common';
 import { PlanTrainingsService } from './service';
-import { TrainingDto } from './dto';
+import { PlanTrainingDto } from './dto';
 
 @Controller('admin/trainings')
 export class AdminPlanTrainingsController {
   constructor(private readonly planTrainingsService: PlanTrainingsService) {}
 
   @Post()
-  create(@Body() trainingDto: TrainingDto) {
+  create(@Body() trainingDto: PlanTrainingDto) {
     return this.planTrainingsService.create(trainingDto);
   }
 
@@ -36,7 +36,7 @@ export class AdminPlanTrainingsController {
   @Patch(':id')
   update(
     @Param('id') id: string, 
-    @Body() trainingDto: TrainingDto
+    @Body() trainingDto: PlanTrainingDto
   ) {
     return this.planTrainingsService.update(id, trainingDto);
   }

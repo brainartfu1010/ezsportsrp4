@@ -1,23 +1,23 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsNotEmpty, IsNumber, IsOptional, IsString, IsDecimal } from 'class-validator';
+import { IsNotEmpty, IsNumber, IsOptional, IsString } from 'class-validator';
 
-export class CoachDto {
-  @ApiProperty({ description: 'Person ID of the coach' })
+export class MemberCoachDto {
+  @ApiProperty({ description: 'Person ID' })
   @IsNotEmpty()
-  @IsDecimal()
+  @IsNumber()
   personId: number;
 
-  @ApiProperty({ description: 'License number of the coach', required: false })
+  @ApiProperty({ description: 'License number', required: false })
   @IsOptional()
   @IsString()
   licenseNumber?: string;
 
-  @ApiProperty({ description: 'Certification of the coach', required: false })
+  @ApiProperty({ description: 'Certification', required: false })
   @IsOptional()
   @IsString()
   certification?: string;
 
-  @ApiProperty({ description: 'Specialization of the coach', required: false })
+  @ApiProperty({ description: 'Specialization', required: false })
   @IsOptional()
   @IsString()
   specialization?: string;
@@ -37,7 +37,7 @@ export class CoachDto {
   @IsString()
   status: string;
 
-  @ApiProperty({ description: 'Bio of the coach', required: false })
+  @ApiProperty({ description: 'Biography', required: false })
   @IsOptional()
   @IsString()
   bio?: string;
@@ -47,8 +47,8 @@ export class CoachDto {
   @IsNumber()
   ord?: number;
 
-  @ApiProperty({ description: 'Base64 encoded avatar image', required: false })
+  @ApiProperty({ description: 'Base64 of the sport logo', required: false })
   @IsOptional()
   @IsString()
-  base64?: string | null;
+  base64?: string;
 }

@@ -1,6 +1,6 @@
 import { Controller, Get, Post, Body, Patch, Param, Delete, Query } from '@nestjs/common';
 import { SponsorService } from './service';
-import { SponsorDto } from './dto';
+import { MemberSponsorDto } from './dto';
 import { ApiOperation, ApiQuery, ApiResponse } from '@nestjs/swagger';
 
 @Controller('admin/sponsors')
@@ -8,7 +8,7 @@ export class AdminSponsorController {
   constructor(private readonly sponsorService: SponsorService) { }
 
   @Post()
-  create(@Body() createSponsorDto: SponsorDto) {
+  create(@Body() createSponsorDto: MemberSponsorDto) {
     return this.sponsorService.create(createSponsorDto);
   }
 
@@ -28,7 +28,7 @@ export class AdminSponsorController {
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateSponsorDto: SponsorDto) {
+  update(@Param('id') id: string, @Body() updateSponsorDto: MemberSponsorDto) {
     return this.sponsorService.update(id, updateSponsorDto);
   }
 

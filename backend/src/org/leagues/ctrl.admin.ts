@@ -1,6 +1,6 @@
 import { Controller, Get, Post, Body, Patch, Param, Delete, Query } from '@nestjs/common';
 import { LeaguesService } from './service';
-import { CreateLeagueDto } from './dto';
+import { OrgLeagueDto as CreateLeagueDto } from './dto';
 
 @Controller('admin/leagues')
 export class AdminLeaguesController {

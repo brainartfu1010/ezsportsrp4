@@ -3,11 +3,11 @@ import { PrismaModule } from '../../prisma/prisma.module';
 import { SponsorService } from './service';
 import { AdminSponsorController } from './ctrl.admin';
 import { HomeSponsorController } from './ctrl.home';
-import { SponsorDto } from './dto';
+import { MemberSponsorDto } from './dto';
 
 @Module({
   controllers: [AdminSponsorController, HomeSponsorController],
-  providers: [SponsorService, SponsorDto],
+  providers: [SponsorService, MemberSponsorDto],
   imports: [PrismaModule],
   exports: [SponsorService]
 })

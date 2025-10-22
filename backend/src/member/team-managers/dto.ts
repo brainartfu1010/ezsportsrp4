@@ -1,17 +1,15 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsNotEmpty, IsNumber, IsOptional, IsString, IsDecimal, IsDate } from 'class-validator';
-import { Type } from 'class-transformer';
+import { IsNotEmpty, IsNumber, IsOptional, IsString, IsDate } from 'class-validator';
 
-export class TeamManagerDto {
-  @ApiProperty({ description: 'Person ID of the team manager' })
+export class MemberTeamManagerDto {
+  @ApiProperty({ description: 'Person ID' })
   @IsNotEmpty()
-  @IsDecimal()
+  @IsNumber()
   personId: number;
 
-  @ApiProperty({ description: 'Appointed date of the team manager', required: false })
+  @ApiProperty({ description: 'Appointed date', required: false })
   @IsOptional()
   @IsDate()
-  @Type(() => Date)
   appointedDate?: Date;
 
   @ApiProperty({ description: 'Emergency contact name', required: false })
@@ -29,7 +27,7 @@ export class TeamManagerDto {
   @IsString()
   status: string;
 
-  @ApiProperty({ description: 'Bio of the team manager', required: false })
+  @ApiProperty({ description: 'Biography', required: false })
   @IsOptional()
   @IsString()
   bio?: string;
@@ -39,8 +37,8 @@ export class TeamManagerDto {
   @IsNumber()
   ord: number;
 
-  @ApiProperty({ description: 'Base64 encoded avatar image', required: false })
+  @ApiProperty({ description: 'Base64 of the sport logo', required: false })
   @IsOptional()
   @IsString()
-  base64?: string | null;
+  base64?: string;
 }

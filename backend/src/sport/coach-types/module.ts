@@ -3,11 +3,11 @@ import { PrismaModule } from '../../prisma/prisma.module';
 import { CoachTypeService } from './service';
 import { AdminCoachTypeController } from './ctrl.admin';
 import { HomeCoachTypeController } from './ctrl.home';
-import { CoachTypeDto } from './dto';
+import { SportCoachTypeDto } from './dto';
 
 @Module({
   controllers: [AdminCoachTypeController, HomeCoachTypeController],
-  providers: [CoachTypeService, CoachTypeDto],
+  providers: [CoachTypeService, SportCoachTypeDto],
   imports: [PrismaModule],
   exports: [CoachTypeService]
 })

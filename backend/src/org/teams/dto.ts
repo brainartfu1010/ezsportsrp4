@@ -1,51 +1,80 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsString, IsOptional, IsBoolean, IsInt, IsUUID } from 'class-validator';
+import { IsNotEmpty, IsNumber, IsOptional, IsString } from 'class-validator';
 
-export class CreateTeamDto {
-  @ApiProperty({ description: 'The name of the team', example: 'Manchester United' })
+export class OrgTeamDto {
+  @ApiProperty({ description: 'Name of the team' })
+  @IsNotEmpty()
   @IsString()
   name: string;
 
-  @ApiProperty({ description: 'The abbreviation of the team', required: false, example: 'MUN' })
-  @IsString()
+  @ApiProperty({ description: 'Abbreviation of the team', required: false })
   @IsOptional()
+  @IsString()
   abbr?: string;
 
-  @ApiProperty({ description: 'The club ID of the team', required: true, example: 'uuid-of-club' })
-  @IsUUID()
-  clubId: string;
-
-  @ApiProperty({ description: 'The sport ID of the team', required: true, example: 'uuid-of-sport' })
-  @IsUUID()
-  sportId: string;
-
-  @ApiProperty({ description: 'The color associated with the team', required: false, example: '#FF0000' })
-  @IsString()
+  @ApiProperty({ description: 'Note for the team', required: false })
   @IsOptional()
-  color?: string;
-
-  @ApiProperty({ description: 'Additional notes about the team', required: false, example: 'Premier League team' })
   @IsString()
-  @IsOptional()
   note?: string;
 
-  @ApiProperty({ description: 'The active status of the team', required: false, example: true })
-  @IsBoolean()
+  @ApiProperty({ description: 'Club ID', required: false })
   @IsOptional()
-  isActive?: boolean = true;
+  @IsNumber()
+  clubId?: number;
 
-  @ApiProperty({ description: 'The order of the team', required: false, example: 0 })
-  @IsInt()
+  @ApiProperty({ description: 'Sport ID', required: false })
   @IsOptional()
-  ord?: number = 0;
+  @IsNumber()
+  sportId?: number;
 
-  @ApiProperty({ description: 'The base64 of the team logo', required: false, example: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGQAAABkCAYAAABw4pVUAAABIElEQVR4nO3RMQoAIAxF0QYhuiSEsLJ4iVUQAh6fUfQFTdP08ZJEOZ6CKMiK7pOc4HkeMeEkXZI6IWZACBAChAAhQAgQAoQAIUAIEAKEACHQIpAqA1pEomUkmUDSAAAAAElFTkSuQmCC' })
+  @ApiProperty({ description: 'League ID', required: false })
+  @IsOptional()
+  @IsNumber()
+  leagueId?: number;
+
+  @ApiProperty({ description: 'Age group of the team', required: false })
+  @IsOptional()
   @IsString()
+  ageGroup?: string;
+
+  @ApiProperty({ description: 'Gender of the team', required: false })
   @IsOptional()
+  @IsNumber()
+  gender?: number;
+
+  @ApiProperty({ description: 'Skill level of the team', required: false })
+  @IsOptional()
+  @IsString()
+  skillLevel?: string;
+
+  @ApiProperty({ description: 'Primary team color', required: false })
+  @IsOptional()
+  @IsString()
+  color1?: string;
+
+  @ApiProperty({ description: 'Secondary team color', required: false })
+  @IsOptional()
+  @IsString()
+  color2?: string;
+
+  @ApiProperty({ description: 'Maximum number of players', required: false })
+  @IsOptional()
+  @IsNumber()
+  maxPlayers?: number;
+
+  @ApiProperty({ description: 'Status of the team' })
+  @IsNotEmpty()
+  @IsNumber()
+  status: number;
+
+  @ApiProperty({ description: 'Order of the team', required: false })
+  @IsOptional()
+  @IsNumber()
+  ord?: number;
+
+  @ApiProperty({ description: 'Base64 of the sport logo', required: false })
+  @IsOptional()
+  @IsString()
   base64?: string;
 }
-
-export class UpdateTeamDto extends CreateTeamDto {
-  // Inherits all properties from CreateTeamDto
-  // Can add additional validation or properties specific to update if needed
-}
+ 

@@ -1,5 +1,5 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
-import { FieldDto } from './dto';
+import { BaseFieldDto } from './dto';
 import { PrismaService } from '../../prisma/prisma.service';
 import { Prisma } from '@prisma/client';
 import { AvatarUtils } from 'src/utils/avatar.utils';
@@ -8,11 +8,14 @@ import { AvatarUtils } from 'src/utils/avatar.utils';
 export class FieldsService {
   constructor(private prisma: PrismaService) { }
 
-  async create(fieldDto: FieldDto) {
-    const { base64, ...createData } = fieldDto;
+  async create(data: BaseFieldDto) {
+    const { base64, ...rest } = data;
 
     const result = await this.prisma.baseField.create({
-      data: createData
+      data: {
+        ...rest,
+        isActive: rest.isActive === 1
+      }
     });
 
     AvatarUtils.saveBase64(base64, 'fields', result.id);
@@ -67,13 +70,16 @@ export class FieldsService {
     };
   }
 
-  async update(id: number, fieldDto: FieldDto) {
+  async update(id: number, data: BaseFieldDto) {
     try {
-      const { base64, ...updateData } = fieldDto;
+      const { base64, ...rest } = data;
 
       const result = await this.prisma.baseField.update({
         where: { id: Number(id) },
-        data: updateData
+        data: {
+          ...rest,
+          isActive: rest.isActive === 1
+        }
       });
 
       AvatarUtils.saveBase64(base64, 'fields', id);

@@ -1,52 +1,49 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsString, IsOptional, IsDate, IsInt, IsDecimal } from 'class-validator';
+import { IsNotEmpty, IsNumber, IsOptional, IsString, IsDate } from 'class-validator';
 
-export class TrainingDto {
-  @ApiProperty({ description: 'Team ID', required: false, example: '1' })
-  @IsDecimal()
+export class PlanTrainingDto {
+  @ApiProperty({ description: 'Team ID', required: false })
   @IsOptional()
-  teamId?: string;
+  @IsNumber()
+  teamId?: number;
 
-  @ApiProperty({ description: 'Start datetime', required: true, example: '2023-01-01T10:00:00Z' })
+  @ApiProperty({ description: 'Start datetime' })
+  @IsNotEmpty()
   @IsDate()
   startDatetime: Date;
 
-  @ApiProperty({ description: 'End datetime', required: true, example: '2023-01-01T12:00:00Z' })
+  @ApiProperty({ description: 'End datetime' })
+  @IsNotEmpty()
   @IsDate()
   endDatetime: Date;
 
-  @ApiProperty({ description: 'Training content', required: false, example: 'Strength and conditioning' })
-  @IsString()
+  @ApiProperty({ description: 'Training content', required: false })
   @IsOptional()
+  @IsString()
   trainingContent?: string;
 
-  @ApiProperty({ description: 'Is training for all members', required: false, example: 0 })
-  @IsInt()
-  @IsOptional()
-  isAllMembers?: number = 0;
+  @ApiProperty({ description: 'Is all members' })
+  @IsNotEmpty()
+  @IsNumber()
+  isAllMembers: number;
 
-  @ApiProperty({ description: 'Location ID', required: false, example: '1' })
-  @IsDecimal()
+  @ApiProperty({ description: 'Location ID', required: false })
   @IsOptional()
-  locationId?: string;
+  @IsNumber()
+  locationId?: number;
 
-  @ApiProperty({ description: 'Recurring type', required: false, example: 1 })
-  @IsInt()
-  @IsOptional()
-  recurringType?: number = 1;
+  @ApiProperty({ description: 'Recurring type' })
+  @IsNotEmpty()
+  @IsNumber()
+  recurringType: number;
 
-  @ApiProperty({ description: 'Status of the training', required: false, example: 'scheduled' })
+  @ApiProperty({ description: 'Status' })
+  @IsNotEmpty()
   @IsString()
-  @IsOptional()
-  status?: string = 'scheduled';
+  status: string;
 
-  @ApiProperty({ description: 'Created by user ID', required: false, example: '1' })
-  @IsDecimal()
+  @ApiProperty({ description: 'Created by', required: false })
   @IsOptional()
-  createdBy?: string;
-
-  @ApiProperty({ description: 'Base64 of training-related image', required: false })
-  @IsString()
-  @IsOptional()
-  base64?: string;
+  @IsNumber()
+  createdBy?: number;
 }

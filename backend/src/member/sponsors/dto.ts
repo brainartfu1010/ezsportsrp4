@@ -1,9 +1,8 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { IsNotEmpty, IsNumber, IsOptional, IsString, IsDate, IsDecimal } from 'class-validator';
-import { Type } from 'class-transformer';
 
-export class SponsorDto {
-  @ApiProperty({ description: 'Company name of the sponsor' })
+export class MemberSponsorDto {
+  @ApiProperty({ description: 'Company name' })
   @IsNotEmpty()
   @IsString()
   companyName: string;
@@ -13,17 +12,17 @@ export class SponsorDto {
   @IsString()
   contactPerson?: string;
 
-  @ApiProperty({ description: 'Email of the sponsor', required: false })
+  @ApiProperty({ description: 'Email', required: false })
   @IsOptional()
   @IsString()
   email?: string;
 
-  @ApiProperty({ description: 'Phone number of the sponsor', required: false })
+  @ApiProperty({ description: 'Phone', required: false })
   @IsOptional()
   @IsString()
   phone?: string;
 
-  @ApiProperty({ description: 'Website of the sponsor', required: false })
+  @ApiProperty({ description: 'Website', required: false })
   @IsOptional()
   @IsString()
   website?: string;
@@ -41,26 +40,29 @@ export class SponsorDto {
   @ApiProperty({ description: 'Contract start date', required: false })
   @IsOptional()
   @IsDate()
-  @Type(() => Date)
   contractStart?: Date;
 
   @ApiProperty({ description: 'Contract end date', required: false })
   @IsOptional()
   @IsDate()
-  @Type(() => Date)
   contractEnd?: Date;
 
-  @ApiProperty({ description: 'Benefits of the sponsorship', required: false })
+  @ApiProperty({ description: 'Benefits', required: false })
   @IsOptional()
   @IsString()
   benefits?: string;
+
+  @ApiProperty({ description: 'Logo path', required: false })
+  @IsOptional()
+  @IsString()
+  logoPath?: string;
 
   @ApiProperty({ description: 'Status of the sponsor' })
   @IsNotEmpty()
   @IsString()
   status: string;
 
-  @ApiProperty({ description: 'Notes about the sponsor', required: false })
+  @ApiProperty({ description: 'Notes', required: false })
   @IsOptional()
   @IsString()
   notes?: string;
@@ -70,8 +72,8 @@ export class SponsorDto {
   @IsNumber()
   ord: number;
 
-  @ApiProperty({ description: 'Base64 encoded logo image', required: false })
+  @ApiProperty({ description: 'Base64 of the sport logo', required: false })
   @IsOptional()
   @IsString()
-  base64?: string | null;
+  base64?: string;
 }

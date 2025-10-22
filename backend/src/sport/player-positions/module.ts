@@ -3,11 +3,11 @@ import { PrismaModule } from '../../prisma/prisma.module';
 import { PlayerPositionService } from './service';
 import { AdminPlayerPositionController } from './ctrl.admin';
 import { HomePlayerPositionController } from './ctrl.home';
-import { PlayerPositionDto } from './dto';
+import { SportPlayerPositionDto } from './dto';
 
 @Module({
   controllers: [AdminPlayerPositionController, HomePlayerPositionController],
-  providers: [PlayerPositionService, PlayerPositionDto],
+  providers: [PlayerPositionService, SportPlayerPositionDto],
   imports: [PrismaModule],
   exports: [PlayerPositionService]
 })

@@ -1,13 +1,13 @@
 import { Controller, Get, Post, Body, Patch, Param, Delete, Query } from '@nestjs/common';
 import { ClubsService } from './service';
-import { ClubDto } from './dto';
+import { OrgClubDto } from './dto';
 
 @Controller('admin/clubs')
 export class AdminClubsController {
   constructor(private readonly clubsService: ClubsService) { }
 
   @Post()
-  create(@Body() clubDto: ClubDto) {
+  create(@Body() clubDto: OrgClubDto) {
     return this.clubsService.create(clubDto);
   }
 
@@ -31,7 +31,7 @@ export class AdminClubsController {
   @Patch(':id')
   update(
     @Param('id') id: string,
-    @Body() clubDto: ClubDto
+    @Body() clubDto: OrgClubDto
   ) {
     return this.clubsService.update(id, clubDto);
   }

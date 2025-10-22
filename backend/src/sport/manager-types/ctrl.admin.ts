@@ -1,6 +1,6 @@
 import { Controller, Get, Post, Body, Patch, Param, Delete, Query } from '@nestjs/common';
 import { ManagerTypeService } from './service';
-import { ManagerTypeDto } from './dto';
+import { SportManagerTypeDto } from './dto';
 import { ApiOperation, ApiQuery, ApiResponse } from '@nestjs/swagger';
 
 @Controller('admin/manager-types')
@@ -8,7 +8,7 @@ export class AdminManagerTypeController {
   constructor(private readonly managerTypeService: ManagerTypeService) { }
 
   @Post()
-  create(@Body() createManagerTypeDto: ManagerTypeDto) {
+  create(@Body() createManagerTypeDto: SportManagerTypeDto) {
     return this.managerTypeService.create(createManagerTypeDto);
   }
 
@@ -28,7 +28,7 @@ export class AdminManagerTypeController {
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateManagerTypeDto: ManagerTypeDto) {
+  update(@Param('id') id: string, @Body() updateManagerTypeDto: SportManagerTypeDto) {
     return this.managerTypeService.update(id, updateManagerTypeDto);
   }
 

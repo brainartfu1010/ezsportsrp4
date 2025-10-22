@@ -1,24 +1,19 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
-import { MeetingDto } from './dto';
+import { PlanMeetingDto } from './dto';
 import { PrismaService } from '../../prisma/prisma.service';
-import { AvatarUtils } from '../../utils/avatar.utils';
 import { Prisma } from '@prisma/client';
 
 @Injectable()
 export class PlanMeetingsService {
   constructor(private prisma: PrismaService) {}
 
-  async create(meetingDto: MeetingDto) {
-    const { base64, ...meetingData } = meetingDto;
-
+  async create(meetingDto: PlanMeetingDto) {
     const meeting = await (this.prisma as any).planMeeting.create({
       data: {
-        ...meetingData,
+        ...meetingDto,
         status: meetingDto.status ?? 1
       }
     });
-
-    AvatarUtils.saveBase64(base64, 'meetings', meeting.id);
 
     return meeting;
   }
@@ -41,7 +36,6 @@ export class PlanMeetingsService {
 
     return Promise.all(meetings.map(async meeting => ({
       ...meeting,
-      base64: await AvatarUtils.getBase64('meetings', meeting.id) || undefined
     })));
   }
 
@@ -54,21 +48,14 @@ export class PlanMeetingsService {
       throw new NotFoundException(`Meeting with ID ${id} not found`);
     }
 
-    return {
-      ...meeting,
-      base64: await AvatarUtils.getBase64('meetings', meeting.id) || undefined
-    };
+    return meeting;
   }
 
-  async update(id: string, meetingDto: MeetingDto) {
+  async update(id: string, data: PlanMeetingDto) {
     try {
-      const { base64, ...meetingData } = meetingDto;
-
-      AvatarUtils.saveBase64(base64, 'meetings', id);
-
       const meeting = await (this.prisma as any).planMeeting.update({
         where: { id },
-        data: meetingDto
+        data: data
       });
 
       return meeting;
@@ -87,24 +74,16 @@ export class PlanMeetingsService {
         throw new NotFoundException(`Meeting with ID ${id} not found`);
       }
 
-      // Delete avatar if exists
-      AvatarUtils.deleteBase64('meetings', id);
-
-      // Perform delete
       return await (this.prisma as any).planMeeting.delete({ 
         where: { id } 
       });
     } catch (error) {
-      // Log the original error for debugging
       console.error('Delete meeting error:', error);
       throw new NotFoundException(`Meeting with ID ${id} not found`);
     }
   }
 
   async removeMany(ids: string[]) {
-    // Delete avatars for all meetings being deleted
-    ids.forEach(id => AvatarUtils.deleteBase64('meetings', id));
-
     return await (this.prisma as any).planMeeting.deleteMany({
       where: { id: { in: ids } }
     });
@@ -112,7 +91,7 @@ export class PlanMeetingsService {
 
   async reorder(orders: { [key: string]: number }[]) {
     const updatePromises = orders.map(async (item) => {
-      const [id, ord] = Object.entries(item)[0]; // Extract the only key-value pair
+      const [id, ord] = Object.entries(item)[0];
       return (this.prisma as any).planMeeting.update({
         where: { id },
         data: { ord },

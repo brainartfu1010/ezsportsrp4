@@ -1,10 +1,10 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsNotEmpty, IsNumber, IsOptional, IsString, IsDecimal } from 'class-validator';
+import { IsNotEmpty, IsNumber, IsOptional, IsString } from 'class-validator';
 
-export class ParentDto {
-  @ApiProperty({ description: 'Person ID of the parent' })
+export class MemberParentDto {
+  @ApiProperty({ description: 'Person ID' })
   @IsNotEmpty()
-  @IsDecimal()
+  @IsNumber()
   personId: number;
 
   @ApiProperty({ description: 'Status of the parent' })
@@ -12,7 +12,7 @@ export class ParentDto {
   @IsString()
   status: string;
 
-  @ApiProperty({ description: 'Notes about the parent', required: false })
+  @ApiProperty({ description: 'Notes', required: false })
   @IsOptional()
   @IsString()
   notes?: string;
@@ -22,8 +22,8 @@ export class ParentDto {
   @IsNumber()
   ord: number;
 
-  @ApiProperty({ description: 'Base64 encoded avatar image', required: false })
+  @ApiProperty({ description: 'Base64 of the sport logo', required: false })
   @IsOptional()
   @IsString()
-  base64?: string | null;
+  base64?: string;
 }

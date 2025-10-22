@@ -1,6 +1,6 @@
 import { Controller, Get, Post, Body, Patch, Param, Delete, Query } from '@nestjs/common';
 import { CoachTypeService } from './service';
-import { CoachTypeDto } from './dto';
+import { SportCoachTypeDto } from './dto';
 import { ApiOperation, ApiQuery, ApiResponse } from '@nestjs/swagger';
 
 @Controller('admin/coach-types')
@@ -8,7 +8,7 @@ export class AdminCoachTypeController {
   constructor(private readonly coachTypeService: CoachTypeService) { }
 
   @Post()
-  create(@Body() createCoachTypeDto: CoachTypeDto) {
+  create(@Body() createCoachTypeDto: SportCoachTypeDto) {
     return this.coachTypeService.create(createCoachTypeDto);
   }
 
@@ -23,7 +23,7 @@ export class AdminCoachTypeController {
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateCoachTypeDto: CoachTypeDto) {
+  update(@Param('id') id: string, @Body() updateCoachTypeDto: SportCoachTypeDto) {
     return this.coachTypeService.update(id, updateCoachTypeDto);
   }
 

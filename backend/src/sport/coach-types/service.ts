@@ -1,5 +1,5 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
-import { CoachTypeDto } from './dto';
+import { SportCoachTypeDto } from './dto';
 import { PrismaService } from '../../prisma/prisma.service';
 import { AvatarUtils } from '../../utils/avatar.utils';
 
@@ -7,7 +7,7 @@ import { AvatarUtils } from '../../utils/avatar.utils';
 export class CoachTypeService {
   constructor(private prisma: PrismaService) { }
 
-  async create(coachTypeDto: CoachTypeDto) {
+  async create(coachTypeDto: SportCoachTypeDto) {
     const { base64, ...createData } = coachTypeDto;
 
     const coachType = await (this.prisma as any).sportCoachType.create({
@@ -57,7 +57,7 @@ export class CoachTypeService {
     };
   }
 
-  async update(id: string, updateCoachTypeDto: CoachTypeDto) {
+  async update(id: string, updateCoachTypeDto: SportCoachTypeDto) {
     try {
       const { base64, ...updateData } = updateCoachTypeDto;
 

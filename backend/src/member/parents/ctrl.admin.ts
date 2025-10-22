@@ -1,6 +1,6 @@
 import { Controller, Get, Post, Body, Patch, Param, Delete, Query } from '@nestjs/common';
 import { ParentService } from './service';
-import { ParentDto } from './dto';
+import { MemberParentDto } from './dto';
 import { ApiOperation, ApiQuery, ApiResponse } from '@nestjs/swagger';
 
 @Controller('admin/parents')
@@ -8,7 +8,7 @@ export class AdminParentController {
   constructor(private readonly parentService: ParentService) { }
 
   @Post()
-  create(@Body() createParentDto: ParentDto) {
+  create(@Body() createParentDto: MemberParentDto) {
     return this.parentService.create(createParentDto);
   }
 
@@ -24,7 +24,7 @@ export class AdminParentController {
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateParentDto: ParentDto) {
+  update(@Param('id') id: string, @Body() updateParentDto: MemberParentDto) {
     return this.parentService.update(id, updateParentDto);
   }
 

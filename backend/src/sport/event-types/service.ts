@@ -1,12 +1,12 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
-import { EventTypeDto } from './dto';
+import { SportEventTypeDto } from './dto';
 import { PrismaService } from '../../prisma/prisma.service';
 
 @Injectable()
 export class EventTypeService {
   constructor(private prisma: PrismaService) { }
 
-  async create(eventTypeDto: EventTypeDto) {
+  async create(eventTypeDto: SportEventTypeDto) {
     const eventType = await (this.prisma as any).sportEventType.create({
       data: {
         ...eventTypeDto,
@@ -41,7 +41,7 @@ export class EventTypeService {
     return eventType;
   }
 
-  async update(id: string, updateEventTypeDto: EventTypeDto) {
+  async update(id: string, updateEventTypeDto: SportEventTypeDto) {
     try {
       const eventType = await (this.prisma as any).sportEventType.update({
         where: { id },

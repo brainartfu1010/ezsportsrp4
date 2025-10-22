@@ -1,32 +1,32 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { IsString, IsOptional, IsDate, IsInt, IsDecimal } from 'class-validator';
 
-export class GameDto {
-  @ApiProperty({ description: 'League ID', required: false, example: '1' })
+export class PlanGameDto {
+  @ApiProperty({ description: 'League ID', required: false, example: 1 })
   @IsDecimal()
   @IsOptional()
-  leagueId?: string;
+  leagueId?: number;
 
   @ApiProperty({ description: 'Game name', required: false, example: 'Friendly Match' })
   @IsString()
   @IsOptional()
   gameName?: string;
 
-  @ApiProperty({ description: 'Home Team ID', required: false, example: '1' })
+  @ApiProperty({ description: 'Home Team ID', required: false, example: 1 })
   @IsDecimal()
   @IsOptional()
-  homeTeamId?: string;
+  homeTeamId?: number;
 
-  @ApiProperty({ description: 'Away Team ID', required: false, example: '2' })
+  @ApiProperty({ description: 'Away Team ID', required: false, example: 2 })
   @IsDecimal()
   @IsOptional()
-  awayTeamId?: string;
+  awayTeamId?: number;
 
-  @ApiProperty({ description: 'Start datetime', required: true, example: '2023-01-01T10:00:00Z' })
+  @ApiProperty({ description: 'Start datetime', required: true, example: '2023-01-01T15:00:00Z' })
   @IsDate()
   startDatetime: Date;
 
-  @ApiProperty({ description: 'End datetime', required: true, example: '2023-01-01T12:00:00Z' })
+  @ApiProperty({ description: 'End datetime', required: true, example: '2023-01-01T17:00:00Z' })
   @IsDate()
   endDatetime: Date;
 
@@ -35,15 +35,15 @@ export class GameDto {
   @IsOptional()
   duration?: number;
 
-  @ApiProperty({ description: 'Uniform details', required: false, example: 'Home team white, Away team blue' })
+  @ApiProperty({ description: 'Uniform details', required: false, example: 'Home team uniform' })
   @IsString()
   @IsOptional()
   uniform?: string;
 
-  @ApiProperty({ description: 'Location ID', required: false, example: '1' })
+  @ApiProperty({ description: 'Location ID', required: false, example: 1 })
   @IsDecimal()
   @IsOptional()
-  locationId?: string;
+  locationId?: number;
 
   @ApiProperty({ description: 'Is this a scrimmage', required: false, example: 0 })
   @IsInt()
@@ -55,12 +55,22 @@ export class GameDto {
   @IsOptional()
   status?: string = 'scheduled';
 
-  @ApiProperty({ description: 'Created by user ID', required: false, example: '1' })
+  @ApiProperty({ description: 'Created by user ID', required: false, example: 1 })
   @IsDecimal()
   @IsOptional()
-  createdBy?: string;
+  createdBy?: number;
 
-  @ApiProperty({ description: 'Base64 of game-related image', required: false })
+  @ApiProperty({ description: 'Created at timestamp', required: false })
+  @IsDate()
+  @IsOptional()
+  createdAt?: Date;
+
+  @ApiProperty({ description: 'Updated at timestamp', required: false })
+  @IsDate()
+  @IsOptional()
+  updatedAt?: Date;
+
+  @ApiProperty({ description: 'Base64 of the game logo', required: false })
   @IsString()
   @IsOptional()
   base64?: string;

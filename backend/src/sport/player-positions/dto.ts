@@ -1,7 +1,12 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsNotEmpty, IsNumber, IsOptional, IsString } from 'class-validator';
+import { IsNotEmpty, IsNumber, IsOptional, IsString, IsDate } from 'class-validator';
 
-export class PlayerPositionDto {
+export class SportPlayerPositionDto {
+  @ApiProperty({ description: 'Unique identifier', required: false })
+  @IsOptional()
+  @IsNumber()
+  id?: number;
+
   @ApiProperty({ description: 'Name of the player position' })
   @IsNotEmpty()
   @IsString()
@@ -25,5 +30,10 @@ export class PlayerPositionDto {
   @ApiProperty({ description: 'Order of the player position', required: false })
   @IsOptional()
   @IsNumber()
-  ord?: number;
+  ord?: number; 
+
+  @ApiProperty({ description: 'Base64 of the sport logo', required: false })
+  @IsOptional()
+  @IsString()
+  base64?: string;
 }

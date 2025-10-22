@@ -3,11 +3,11 @@ import { PrismaModule } from '../../prisma/prisma.module';
 import { RefereeService } from './service';
 import { AdminRefereeController } from './ctrl.admin';
 import { HomeRefereeController } from './ctrl.home';
-import { RefereeDto } from './dto';
+import { MemberRefereeDto } from './dto';
 
 @Module({
   controllers: [AdminRefereeController, HomeRefereeController],
-  providers: [RefereeService, RefereeDto],
+  providers: [RefereeService, MemberRefereeDto],
   imports: [PrismaModule],
   exports: [RefereeService]
 })

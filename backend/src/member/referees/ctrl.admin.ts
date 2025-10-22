@@ -1,6 +1,6 @@
 import { Controller, Get, Post, Body, Patch, Param, Delete, Query } from '@nestjs/common';
 import { RefereeService } from './service';
-import { RefereeDto } from './dto';
+import { MemberRefereeDto } from './dto';
 import { ApiOperation, ApiQuery, ApiResponse } from '@nestjs/swagger';
 
 @Controller('admin/referees')
@@ -8,7 +8,7 @@ export class AdminRefereeController {
   constructor(private readonly refereeService: RefereeService) { }
 
   @Post()
-  create(@Body() createRefereeDto: RefereeDto) {
+  create(@Body() createRefereeDto: MemberRefereeDto) {
     return this.refereeService.create(createRefereeDto);
   }
 
@@ -28,7 +28,7 @@ export class AdminRefereeController {
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateRefereeDto: RefereeDto) {
+  update(@Param('id') id: string, @Body() updateRefereeDto: MemberRefereeDto) {
     return this.refereeService.update(id, updateRefereeDto);
   }
 

@@ -1,6 +1,6 @@
 import { Controller, Get, Post, Body, Patch, Param, Delete, Query } from '@nestjs/common';
 import { TeamManagerService } from './service';
-import { TeamManagerDto } from './dto';
+import { MemberTeamManagerDto } from './dto';
 import { ApiOperation, ApiQuery, ApiResponse } from '@nestjs/swagger';
 
 @Controller('admin/team-managers')
@@ -8,7 +8,7 @@ export class AdminTeamManagerController {
   constructor(private readonly teamManagerService: TeamManagerService) { }
 
   @Post()
-  create(@Body() createTeamManagerDto: TeamManagerDto) {
+  create(@Body() createTeamManagerDto: MemberTeamManagerDto) {
     return this.teamManagerService.create(createTeamManagerDto);
   }
 
@@ -24,7 +24,7 @@ export class AdminTeamManagerController {
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateTeamManagerDto: TeamManagerDto) {
+  update(@Param('id') id: string, @Body() updateTeamManagerDto: MemberTeamManagerDto) {
     return this.teamManagerService.update(id, updateTeamManagerDto);
   }
 

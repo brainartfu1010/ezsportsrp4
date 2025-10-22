@@ -3,11 +3,11 @@ import { PrismaModule } from '../../prisma/prisma.module';
 import { ClubAdminService } from './service';
 import { AdminClubAdminController } from './ctrl.admin';
 import { HomeClubAdminController } from './ctrl.home';
-import { ClubAdminDto } from './dto';
+import { MemberClubAdminDto } from './dto';
 
 @Module({
   controllers: [AdminClubAdminController, HomeClubAdminController],
-  providers: [ClubAdminService, ClubAdminDto],
+  providers: [ClubAdminService, MemberClubAdminDto],
   imports: [PrismaModule],
   exports: [ClubAdminService]
 })

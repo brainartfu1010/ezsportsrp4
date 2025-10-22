@@ -1,88 +1,85 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsString, IsOptional, IsDate, IsInt, IsDecimal } from 'class-validator';
+import { IsNotEmpty, IsNumber, IsOptional, IsString, IsDate, IsDecimal } from 'class-validator';
 
-export class CreateLeagueDto {
-  @ApiProperty({ description: 'The name of the league', example: 'Premier League' })
+export class OrgLeagueDto {
+  @ApiProperty({ description: 'Name of the league' })
+  @IsNotEmpty()
   @IsString()
   name: string;
 
-  @ApiProperty({ description: 'The abbreviation of the league', required: false, example: 'PL' })
-  @IsString()
+  @ApiProperty({ description: 'Abbreviation of the league', required: false })
   @IsOptional()
+  @IsString()
   abbr?: string;
 
-  @ApiProperty({ description: 'Description of the league', required: false, example: 'Top-tier football league in England' })
-  @IsString()
+  @ApiProperty({ description: 'Note for the league', required: false })
   @IsOptional()
+  @IsString()
   note?: string;
 
-  @ApiProperty({ description: 'Game mode ID', required: false, example: '1' })
-  @IsDecimal()
+  @ApiProperty({ description: 'Game Mode ID', required: false })
   @IsOptional()
-  gameModeId?: string;
+  @IsNumber()
+  gameModeId?: number;
 
-  @ApiProperty({ description: 'Group level ID', required: false, example: '1' })
-  @IsDecimal()
+  @ApiProperty({ description: 'Group Level ID', required: false })
   @IsOptional()
-  groupLevelId?: string;
+  @IsNumber()
+  groupLevelId?: number;
 
-  @ApiProperty({ description: 'Season of the league', required: false, example: '2023-2024' })
+  @ApiProperty({ description: 'Season of the league', required: false })
+  @IsOptional()
   @IsString()
-  @IsOptional()
   season?: string;
 
-  @ApiProperty({ description: 'Start date of the league', required: false, example: '2023-08-01' })
-  @IsDate()
+  @ApiProperty({ description: 'Start date of the league', required: false })
   @IsOptional()
+  @IsDate()
   startDate?: Date;
 
-  @ApiProperty({ description: 'End date of the league', required: false, example: '2024-05-31' })
-  @IsDate()
+  @ApiProperty({ description: 'End date of the league', required: false })
   @IsOptional()
+  @IsDate()
   endDate?: Date;
 
-  @ApiProperty({ description: 'Registration deadline', required: false, example: '2023-07-15' })
-  @IsDate()
+  @ApiProperty({ description: 'Registration deadline', required: false })
   @IsOptional()
+  @IsDate()
   registrationDeadline?: Date;
 
-  @ApiProperty({ description: 'Maximum number of teams', required: false, example: 20 })
-  @IsInt()
+  @ApiProperty({ description: 'Maximum number of teams', required: false })
   @IsOptional()
+  @IsNumber()
   maxTeams?: number;
 
-  @ApiProperty({ description: 'Entry fee for the league', required: false, example: 500.00 })
+  @ApiProperty({ description: 'Entry fee for the league', required: false })
+  @IsOptional()
   @IsDecimal()
-  @IsOptional()
-  entryFee?: string;
+  entryFee?: number;
 
-  @ApiProperty({ description: 'Subscribe email for the league', required: false, example: 'league@example.com' })
-  @IsString()
+  @ApiProperty({ description: 'Subscribe email', required: false })
   @IsOptional()
+  @IsString()
   subscribeEmail?: string;
 
-  @ApiProperty({ description: 'League rules', required: false, example: 'Standard football league rules' })
-  @IsString()
+  @ApiProperty({ description: 'League rules', required: false })
   @IsOptional()
+  @IsString()
   rules?: string;
 
-  @ApiProperty({ description: 'Status of the league', required: false, example: 'active' })
+  @ApiProperty({ description: 'Status of the league' })
+  @IsNotEmpty()
   @IsString()
-  @IsOptional()
-  status?: string = 'active';
+  status: string;
 
-  @ApiProperty({ description: 'Order of the league', required: false, example: 0 })
-  @IsInt()
+  @ApiProperty({ description: 'Order of the league', required: false })
   @IsOptional()
-  ord?: number = 0;
+  @IsNumber()
+  ord?: number;
 
-  @ApiProperty({ description: 'The base64 of the league logo', required: false, example: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGQAAABkCAYAAABw4pVUAAABIElEQVR4nO3RMQoAIAxF0QYhuiSEsLJ4iVUQAh6fUfQFTdP08ZJEOZ6CKMiK7pOc4HkeMeEkXZI6IWZACBAChAAhQAgQAoQAIUAIEAKEACHQIpAqA1pEomUkmUDSAAAAAElFTkSuQmCC' })
+  @ApiProperty({ description: 'Base64 of the sport logo', required: false })
+  @IsOptional()
   @IsString()
-  @IsOptional()
   base64?: string;
 }
-
-export class UpdateLeagueDto extends CreateLeagueDto {
-  // Inherits all properties from CreateLeagueDto
-  // Can add additional validation or properties specific to update if needed
-}
+ 

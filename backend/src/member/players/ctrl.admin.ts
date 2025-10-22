@@ -1,6 +1,6 @@
 import { Controller, Get, Post, Body, Patch, Param, Delete, Query } from '@nestjs/common';
 import { PlayerService } from './service';
-import { PlayerDto } from './dto';
+import { MemberPlayerDto } from './dto';
 import { ApiOperation, ApiQuery, ApiResponse } from '@nestjs/swagger';
 
 @Controller('admin/players')
@@ -8,7 +8,7 @@ export class AdminPlayerController {
   constructor(private readonly playerService: PlayerService) { }
 
   @Post()
-  create(@Body() createPlayerDto: PlayerDto) {
+  create(@Body() createPlayerDto: MemberPlayerDto) {
     return this.playerService.create(createPlayerDto);
   }
 
@@ -24,7 +24,7 @@ export class AdminPlayerController {
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updatePlayerDto: PlayerDto) {
+  update(@Param('id') id: string, @Body() updatePlayerDto: MemberPlayerDto) {
     return this.playerService.update(id, updatePlayerDto);
   }
 

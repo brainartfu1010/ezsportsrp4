@@ -1,13 +1,13 @@
 import { Controller, Get, Post, Body, Patch, Param, Delete, Query } from '@nestjs/common';
 import { FieldsService } from './service';
-import { FieldDto } from './dto';
+import { BaseFieldDto } from './dto';
 
 @Controller('admin/fields')
 export class AdminFieldsController {
   constructor(private readonly fieldsService: FieldsService) {}
 
   @Post()
-  create(@Body() fieldDto: FieldDto) {
+  create(@Body() fieldDto: BaseFieldDto) {
     return this.fieldsService.create(fieldDto);
   }
 
@@ -25,7 +25,7 @@ export class AdminFieldsController {
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() fieldDto: FieldDto) {
+  update(@Param('id') id: string, @Body() fieldDto: BaseFieldDto) {
     return this.fieldsService.update(+id, fieldDto);
   }
 

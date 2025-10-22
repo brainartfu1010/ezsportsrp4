@@ -1,52 +1,49 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsString, IsOptional, IsDate, IsInt, IsDecimal } from 'class-validator';
+import { IsNotEmpty, IsNumber, IsOptional, IsString, IsDate } from 'class-validator';
 
-export class MeetingDto {
-  @ApiProperty({ description: 'Meeting category', required: false, example: 1 })
-  @IsInt()
+export class PlanMeetingDto {
+  @ApiProperty({ description: 'Meeting category', required: false })
   @IsOptional()
+  @IsNumber()
   meetingCategory?: number;
 
-  @ApiProperty({ description: 'Team ID', required: false, example: '1' })
-  @IsDecimal()
+  @ApiProperty({ description: 'Team ID', required: false })
   @IsOptional()
-  teamId?: string;
+  @IsNumber()
+  teamId?: number;
 
-  @ApiProperty({ description: 'Start datetime', required: true, example: '2023-01-01T10:00:00Z' })
+  @ApiProperty({ description: 'Start datetime' })
+  @IsNotEmpty()
   @IsDate()
   startDatetime: Date;
 
-  @ApiProperty({ description: 'End datetime', required: true, example: '2023-01-01T12:00:00Z' })
+  @ApiProperty({ description: 'End datetime' })
+  @IsNotEmpty()
   @IsDate()
   endDatetime: Date;
 
-  @ApiProperty({ description: 'Meeting title', required: false, example: 'Team Strategy Meeting' })
-  @IsString()
+  @ApiProperty({ description: 'Title', required: false })
   @IsOptional()
+  @IsString()
   title?: string;
 
-  @ApiProperty({ description: 'Meeting content/description', required: false, example: 'Discuss upcoming tournament strategy' })
-  @IsString()
+  @ApiProperty({ description: 'Content', required: false })
   @IsOptional()
+  @IsString()
   content?: string;
 
-  @ApiProperty({ description: 'Location ID', required: false, example: '1' })
-  @IsDecimal()
+  @ApiProperty({ description: 'Location ID', required: false })
   @IsOptional()
-  locationId?: string;
+  @IsNumber()
+  locationId?: number;
 
-  @ApiProperty({ description: 'Status of the meeting', required: false, example: 1 })
-  @IsInt()
+  @ApiProperty({ description: 'Status', required: false })
   @IsOptional()
-  status?: number = 1;
+  @IsNumber()
+  status?: number;
 
-  @ApiProperty({ description: 'Created by user ID', required: false, example: '1' })
-  @IsDecimal()
+  @ApiProperty({ description: 'Created by', required: false })
   @IsOptional()
-  createdBy?: string;
-
-  @ApiProperty({ description: 'Base64 of meeting-related image', required: false })
-  @IsString()
-  @IsOptional()
-  base64?: string;
+  @IsNumber()
+  createdBy?: number;
 }

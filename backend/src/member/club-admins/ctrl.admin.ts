@@ -1,6 +1,6 @@
 import { Controller, Get, Post, Body, Patch, Param, Delete, Query } from '@nestjs/common';
 import { ClubAdminService } from './service';
-import { ClubAdminDto } from './dto';
+import { MemberClubAdminDto } from './dto';
 import { ApiOperation, ApiQuery, ApiResponse } from '@nestjs/swagger';
 
 @Controller('admin/club-admins')
@@ -8,7 +8,7 @@ export class AdminClubAdminController {
   constructor(private readonly clubAdminService: ClubAdminService) { }
 
   @Post()
-  create(@Body() createClubAdminDto: ClubAdminDto) {
+  create(@Body() createClubAdminDto: MemberClubAdminDto) {
     return this.clubAdminService.create(createClubAdminDto);
   }
 
@@ -24,7 +24,7 @@ export class AdminClubAdminController {
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateClubAdminDto: ClubAdminDto) {
+  update(@Param('id') id: string, @Body() updateClubAdminDto: MemberClubAdminDto) {
     return this.clubAdminService.update(id, updateClubAdminDto);
   }
 

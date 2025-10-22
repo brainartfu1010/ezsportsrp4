@@ -1,5 +1,5 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
-import { CountryDto } from './dto';
+import { BaseCountryDto } from './dto';
 import { PrismaService } from '../../prisma/prisma.service';
 import { Prisma } from '@prisma/client';
 import { AvatarUtils } from 'src/utils/avatar.utils';
@@ -8,14 +8,15 @@ import { AvatarUtils } from 'src/utils/avatar.utils';
 export class CountriesService {
   constructor(private prisma: PrismaService) { }
 
-  async create(countryDto: CountryDto) {
+  async create(data: BaseCountryDto) {
 
-    const { base64, ...countryData } = countryDto;
+    const { base64, ...rest } = data;
 
     const result = await this.prisma.baseCountry.create({
       data: {
-        ...countryData,
-        code: countryData.code || ''
+        ...rest,
+        code: rest.code || '',
+        isActive: rest.isActive === 1
       }
     });
 
@@ -64,13 +65,17 @@ export class CountriesService {
     };
   }
 
-  async update(id: number, countryDto: CountryDto) {
+  async update(id: number, data: BaseCountryDto) {
     try {
-      const { base64, ...countryData } = countryDto;
+      const { base64, ...rest } = data;
 
       const result = await this.prisma.baseCountry.update({
         where: { id: Number(id) },
-        data: countryData
+        data: {
+          ...rest,
+          code: rest.code || '',
+          isActive: rest.isActive === 1
+        }
       });
 
       AvatarUtils.saveBase64(base64, 'countries', id);

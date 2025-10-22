@@ -1,24 +1,23 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsNotEmpty, IsNumber, IsOptional, IsString, IsDecimal, IsDate, IsEmail } from 'class-validator';
-import { Type } from 'class-transformer';
+import { IsNotEmpty, IsNumber, IsOptional, IsString, IsDate } from 'class-validator';
 
-export class PersonDto {
-  @ApiProperty({ description: 'First name of the person' })
+export class MemberPersonDto {
+  @ApiProperty({ description: 'First name' })
   @IsNotEmpty()
   @IsString()
   firstName: string;
 
-  @ApiProperty({ description: 'Last name of the person' })
+  @ApiProperty({ description: 'Last name' })
   @IsNotEmpty()
   @IsString()
   lastName: string;
 
-  @ApiProperty({ description: 'Email of the person', required: false })
+  @ApiProperty({ description: 'Email', required: false })
   @IsOptional()
-  @IsEmail()
+  @IsString()
   email?: string;
 
-  @ApiProperty({ description: 'Phone number of the person', required: false })
+  @ApiProperty({ description: 'Phone', required: false })
   @IsOptional()
   @IsString()
   phone?: string;
@@ -26,7 +25,6 @@ export class PersonDto {
   @ApiProperty({ description: 'Date of birth', required: false })
   @IsOptional()
   @IsDate()
-  @Type(() => Date)
   dob?: Date;
 
   @ApiProperty({ description: 'Gender', required: false })
@@ -49,23 +47,28 @@ export class PersonDto {
   @IsString()
   state?: string;
 
-  @ApiProperty({ description: 'Zip Code', required: false })
+  @ApiProperty({ description: 'Zip code', required: false })
   @IsOptional()
   @IsString()
   zipCode?: string;
 
   @ApiProperty({ description: 'Country ID', required: false })
   @IsOptional()
-  @IsDecimal()
+  @IsNumber()
   countryId?: number;
 
-  @ApiProperty({ description: 'Status of the person' })
+  @ApiProperty({ description: 'Photo path', required: false })
+  @IsOptional()
+  @IsString()
+  photoPath?: string;
+
+  @ApiProperty({ description: 'Status' })
   @IsNotEmpty()
   @IsString()
   status: string;
 
-  @ApiProperty({ description: 'Base64 encoded avatar image', required: false })
+  @ApiProperty({ description: 'Base64 of the sport logo', required: false })
   @IsOptional()
   @IsString()
-  base64?: string | null;
+  base64?: string;
 }

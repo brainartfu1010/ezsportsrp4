@@ -3,11 +3,11 @@ import { PrismaModule } from '../../prisma/prisma.module';
 import { GamePeriodService } from './service';
 import { AdminGamePeriodController } from './ctrl.admin';
 import { HomeGamePeriodController } from './ctrl.home';
-import { GamePeriodDto } from './dto';
+import { SportGamePeriodDto } from './dto';
 
 @Module({
   controllers: [AdminGamePeriodController, HomeGamePeriodController],
-  providers: [GamePeriodService, GamePeriodDto],
+  providers: [GamePeriodService, SportGamePeriodDto],
   imports: [PrismaModule],
   exports: [GamePeriodService]
 })

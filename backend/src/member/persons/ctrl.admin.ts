@@ -1,6 +1,6 @@
 import { Controller, Get, Post, Body, Patch, Param, Delete, Query } from '@nestjs/common';
 import { PersonService } from './service';
-import { PersonDto } from './dto';
+import { MemberPersonDto } from './dto';
 import { ApiOperation, ApiQuery, ApiResponse } from '@nestjs/swagger';
 
 @Controller('admin/persons')
@@ -8,8 +8,8 @@ export class AdminPersonController {
   constructor(private readonly personService: PersonService) { }
 
   @Post()
-  create(@Body() createPersonDto: PersonDto) {
-    return this.personService.create(createPersonDto);
+  create(@Body() memberPersonDto: MemberPersonDto) {
+    return this.personService.create(memberPersonDto);
   }
 
   @Get()
@@ -24,19 +24,17 @@ export class AdminPersonController {
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updatePersonDto: PersonDto) {
-    return this.personService.update(id, updatePersonDto);
+  update(@Param('id') id: string, @Body() memberPersonDto: MemberPersonDto) {
+    return this.personService.update(id, memberPersonDto);
   }
 
   @Delete('bulk')
-  removeBulk(@Body() ids: string[]) {
-    console.log("Remove Bulk:", ids);
+  removeMany(@Body() ids: string[]) {
     return this.personService.removeMany(ids);
   }
 
   @Delete(':id')
   remove(@Param('id') id: string) {
-    console.log("Remove:", id);
     return this.personService.remove(id);
   }
 }

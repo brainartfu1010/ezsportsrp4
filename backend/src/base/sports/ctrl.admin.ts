@@ -1,17 +1,14 @@
 import { Controller, Get, Post, Body, Patch, Param, Delete, Query } from '@nestjs/common';
 import { SportsService } from './service';
-import { CreateSportDto } from './dto';
-import { UpdateSportDto } from './dto';
-import { ApiOperation, ApiQuery, ApiResponse } from '@nestjs/swagger';
-
+import { BaseSportDto } from './dto';
 
 @Controller('admin/sports')
 export class AdminSportsController {
   constructor(private readonly sportsService: SportsService) { }
 
   @Post()
-  create(@Body() createSportDto: CreateSportDto) {
-    return this.sportsService.create(createSportDto);
+  create(@Body() baseSportDto: BaseSportDto) {
+    return this.sportsService.create(baseSportDto);
   }
 
   @Get()
@@ -25,19 +22,17 @@ export class AdminSportsController {
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateSportDto: UpdateSportDto) {
-    return this.sportsService.update(+id, updateSportDto);
+  update(@Param('id') id: string, @Body() baseSportDto: BaseSportDto) {
+    return this.sportsService.update(+id, baseSportDto);
   }
 
   @Delete('bulk')
   removeBulk(@Body() ids: number[]) {
-    console.log("Remove Bulk:", ids);
     return this.sportsService.removeMany(ids);
   }
 
   @Delete(':id')
   remove(@Param('id') id: string) {
-    console.log("Remove:", id);
     return this.sportsService.remove(+id);
   }
 

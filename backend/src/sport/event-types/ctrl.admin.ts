@@ -1,6 +1,6 @@
 import { Controller, Get, Post, Body, Patch, Param, Delete, Query } from '@nestjs/common';
 import { EventTypeService } from './service';
-import { EventTypeDto } from './dto';
+import { SportEventTypeDto } from './dto';
 import { ApiOperation, ApiQuery, ApiResponse } from '@nestjs/swagger';
 
 @Controller('admin/event-types')
@@ -8,7 +8,7 @@ export class AdminEventTypeController {
   constructor(private readonly eventTypeService: EventTypeService) { }
 
   @Post()
-  create(@Body() createEventTypeDto: EventTypeDto) {
+  create(@Body() createEventTypeDto: SportEventTypeDto) {
     return this.eventTypeService.create(createEventTypeDto);
   }
 
@@ -28,7 +28,7 @@ export class AdminEventTypeController {
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateEventTypeDto: EventTypeDto) {
+  update(@Param('id') id: string, @Body() updateEventTypeDto: SportEventTypeDto) {
     return this.eventTypeService.update(id, updateEventTypeDto);
   }
 

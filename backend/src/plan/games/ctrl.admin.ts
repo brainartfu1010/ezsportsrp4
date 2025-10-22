@@ -1,13 +1,13 @@
 import { Controller, Get, Post, Body, Patch, Param, Delete, Query } from '@nestjs/common';
 import { PlanGamesService } from './service';
-import { GameDto } from './dto';
+import { PlanGameDto } from './dto';
 
 @Controller('admin/plan-games')
 export class AdminPlanGamesController {
   constructor(private readonly planGamesService: PlanGamesService) {}
 
   @Post()
-  create(@Body() gameDto: GameDto) {
+  create(@Body() gameDto: PlanGameDto) {
     return this.planGamesService.create(gameDto);
   }
 
@@ -36,7 +36,7 @@ export class AdminPlanGamesController {
   @Patch(':id')
   update(
     @Param('id') id: string, 
-    @Body() gameDto: GameDto
+    @Body() gameDto: PlanGameDto
   ) {
     return this.planGamesService.update(id, gameDto);
   }

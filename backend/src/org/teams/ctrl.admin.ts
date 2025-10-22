@@ -1,6 +1,6 @@
 import { Controller, Get, Post, Body, Patch, Param, Delete, Query } from '@nestjs/common';
 import { TeamsService } from './service';
-import { CreateTeamDto } from './dto';
+import { OrgTeamDto as CreateTeamDto } from './dto';
 
 @Controller('admin/teams')
 export class AdminTeamsController {

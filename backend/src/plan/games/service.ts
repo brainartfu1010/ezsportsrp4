@@ -1,16 +1,13 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
-import { GameDto } from './dto';
+import { PlanGameDto } from './dto';
 import { PrismaService } from '../../prisma/prisma.service';
-import { AvatarUtils } from '../../utils/avatar.utils';
 import { Prisma } from '@prisma/client';
 
 @Injectable()
 export class PlanGamesService {
   constructor(private prisma: PrismaService) { }
 
-  async create(gameDto: GameDto) {
-    const { base64, ...createData } = gameDto;
-
+  async create(gameDto: PlanGameDto) {
     const game = await (this.prisma as any).planGame.create({
       data: {
         ...gameDto,
@@ -18,8 +15,6 @@ export class PlanGamesService {
         isScrimmage: gameDto.isScrimmage ?? 0
       }
     });
-
-    AvatarUtils.saveBase64(base64, 'games', game.id);
 
     return game;
   }
@@ -42,7 +37,6 @@ export class PlanGamesService {
 
     return Promise.all(games.map(async game => ({
       ...game,
-      base64: await AvatarUtils.getBase64('games', game.id) || undefined
     })));
   }
 
@@ -55,18 +49,11 @@ export class PlanGamesService {
       throw new NotFoundException(`Game with ID ${id} not found`);
     }
 
-    return {
-      ...game,
-      base64: await AvatarUtils.getBase64('games', game.id) || undefined
-    };
+    return game;
   }
 
-  async update(id: string, gameDto: GameDto) {
+  async update(id: string, gameDto: PlanGameDto) {
     try {
-      const { base64, ...gameData } = gameDto;
-
-      AvatarUtils.saveBase64(base64, 'games', id);
-
       const game = await (this.prisma as any).planGame.update({
         where: { id },
         data: gameDto
@@ -80,12 +67,6 @@ export class PlanGamesService {
 
   async remove(id: string) {
     try {
-      // Validate id
-      if (id === undefined || id === null) {
-        throw new NotFoundException('Invalid ID provided for deletion');
-      }
-
-      // Ensure id exists
       const game = await (this.prisma as any).planGame.findUnique({
         where: { id }
       });
@@ -94,23 +75,16 @@ export class PlanGamesService {
         throw new NotFoundException(`Game with ID ${id} not found`);
       }
 
-      // Delete avatar if exists
-      AvatarUtils.deleteBase64('games', id);
-
-      // Perform delete
       return await (this.prisma as any).planGame.delete({
         where: { id }
       });
     } catch (error) {
-      // Log the original error for debugging
       console.error('Delete game error:', error);
       throw new NotFoundException(`Game with ID ${id} not found`);
     }
   }
 
   async removeMany(ids: string[]) {
-    ids.forEach(id => AvatarUtils.deleteBase64('games', id));
-
     return await (this.prisma as any).planGame.deleteMany({
       where: { id: { in: ids } }
     });

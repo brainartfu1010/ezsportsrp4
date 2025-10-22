@@ -3,11 +3,11 @@ import { PrismaModule } from '../../prisma/prisma.module';
 import { EventTypeService } from './service';
 import { AdminEventTypeController } from './ctrl.admin';
 import { HomeEventTypeController } from './ctrl.home';
-import { EventTypeDto } from './dto';
+import { SportEventTypeDto } from './dto';
 
 @Module({
   controllers: [AdminEventTypeController, HomeEventTypeController],
-  providers: [EventTypeService, EventTypeDto],
+  providers: [EventTypeService, SportEventTypeDto],
   imports: [PrismaModule],
   exports: [EventTypeService]
 })

@@ -1,5 +1,5 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
-import { GroupLevelDto } from './dto';
+import { BaseGroupLevelDto } from './dto';
 import { PrismaService } from '../../prisma/prisma.service';
 import { Prisma } from '@prisma/client';
 
@@ -7,16 +7,8 @@ import { Prisma } from '@prisma/client';
 export class GroupLevelsService {
   constructor(private prisma: PrismaService) {}
 
-  async create(groupLevelDto: GroupLevelDto) {
-    const groupLevel = await (this.prisma as any).baseGroupLevel.create({
-      data: {
-        ...groupLevelDto,
-        status: groupLevelDto.status ?? 'active',
-        isActive: groupLevelDto.isActive ?? true
-      }
-    });
-
-    return groupLevel;
+  async create(data: BaseGroupLevelDto) {
+    return await (this.prisma as any).baseGroupLevel.create(data);
   }
 
   async findAll(params: {
@@ -48,11 +40,11 @@ export class GroupLevelsService {
     return groupLevel;
   }
 
-  async update(id: string, groupLevelDto: GroupLevelDto) {
+  async update(id: string, data: BaseGroupLevelDto) {
     try {
       const groupLevel = await (this.prisma as any).baseGroupLevel.update({
         where: { id },
-        data: groupLevelDto
+        data: data
       });
 
       return groupLevel;

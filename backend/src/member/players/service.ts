@@ -1,5 +1,5 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
-import { PlayerDto } from './dto';
+import { MemberPlayerDto } from './dto';
 import { PrismaService } from '../../prisma/prisma.service';
 import { AvatarUtils } from '../../utils/avatar.utils';
 import { PrismaClient } from '@prisma/client';
@@ -8,7 +8,7 @@ import { PrismaClient } from '@prisma/client';
 export class PlayerService {
   constructor(private prisma: PrismaService) { }
 
-  async create(playerDto: PlayerDto) {
+  async create(playerDto: MemberPlayerDto) {
     const { base64, ...createData } = playerDto;
 
     const player = await (this.prisma as any).memberPlayer.create({
@@ -52,7 +52,7 @@ export class PlayerService {
     };
   }
 
-  async update(id: string, updatePlayerDto: PlayerDto) {
+  async update(id: string, updatePlayerDto: MemberPlayerDto) {
     try {
       const { base64, ...updateData } = updatePlayerDto;
 

@@ -1,5 +1,5 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
-import { GamePeriodDto } from './dto';
+import { SportGamePeriodDto } from './dto';
 import { PrismaService } from '../../prisma/prisma.service';
 import { PrismaClient } from '@prisma/client';
 
@@ -7,7 +7,7 @@ import { PrismaClient } from '@prisma/client';
 export class GamePeriodService {
   constructor(private prisma: PrismaService) { }
 
-  async create(gamePeriodDto: GamePeriodDto) {
+  async create(gamePeriodDto: SportGamePeriodDto) {
     const gamePeriod = await (this.prisma as any).sportGamePeriod.create({
       data: gamePeriodDto
     });
@@ -36,7 +36,7 @@ export class GamePeriodService {
     return gamePeriod;
   }
 
-  async update(id: string, updateGamePeriodDto: GamePeriodDto) {
+  async update(id: string, updateGamePeriodDto: SportGamePeriodDto) {
     try {
       const gamePeriod = await (this.prisma as any).sportGamePeriod.update({
         where: { id },

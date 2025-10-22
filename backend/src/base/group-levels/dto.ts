@@ -1,33 +1,44 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsString, IsOptional, IsInt, IsBoolean } from 'class-validator';
+import { IsNotEmpty, IsNumber, IsOptional, IsString } from 'class-validator';
 
-export class GroupLevelDto {
-  @ApiProperty({ description: 'Name of the group level', example: 'Professional' })
+export class BaseGroupLevelDto {
+  @ApiProperty({ description: 'Name of the group level' })
+  @IsNotEmpty()
   @IsString()
   name: string;
 
-  @ApiProperty({ description: 'Abbreviation of the group level', required: false, example: 'PRO' })
-  @IsString()
+  @ApiProperty({ description: 'Abbreviation', required: false })
   @IsOptional()
+  @IsString()
   abbr?: string;
 
-  @ApiProperty({ description: 'Description or note about the group level', required: false, example: 'Highest competitive level' })
-  @IsString()
+  @ApiProperty({ description: 'Note', required: false })
   @IsOptional()
+  @IsString()
   note?: string;
 
-  @ApiProperty({ description: 'Status of the group level', required: false, example: 'active' })
+  @ApiProperty({ description: 'Minimum age', required: false })
+  @IsOptional()
+  @IsNumber()
+  minAge?: number;
+
+  @ApiProperty({ description: 'Maximum age', required: false })
+  @IsOptional()
+  @IsNumber()
+  maxAge?: number;
+
+  @ApiProperty({ description: 'Skill level', required: false })
+  @IsOptional()
   @IsString()
-  @IsOptional()
-  status?: string = 'active';
+  skillLevel?: string;
 
-  @ApiProperty({ description: 'Order of the group level', required: false, example: 0 })
-  @IsInt()
+  @ApiProperty({ description: 'Order', required: false })
   @IsOptional()
-  ord?: number = 0;
+  @IsNumber()
+  ord?: number;
 
-  @ApiProperty({ description: 'Whether the group level is active', required: false, example: true })
-  @IsBoolean()
+  @ApiProperty({ description: 'Base64 of the sport logo', required: false })
   @IsOptional()
-  isActive?: boolean = true;
+  @IsString()
+  base64?: string;
 }

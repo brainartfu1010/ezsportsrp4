@@ -1,7 +1,7 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsBoolean, IsNotEmpty, IsNumber, IsOptional, IsString } from 'class-validator';
+import { IsNotEmpty, IsNumber, IsOptional, IsString } from 'class-validator';
 
-export class EventTypeDto {
+export class SportEventTypeDto {
   @ApiProperty({ description: 'Name of the event type' })
   @IsNotEmpty()
   @IsString()
@@ -12,17 +12,12 @@ export class EventTypeDto {
   @IsString()
   abbr?: string;
 
-  @ApiProperty({ description: 'Sport ID of the event type', required: false })
-  @IsOptional()
-  @IsNumber()
-  sportId?: number;
-
   @ApiProperty({ description: 'Category of the event type', required: false })
   @IsOptional()
   @IsNumber()
   category?: number;
 
-  @ApiProperty({ description: 'Evaluation metric of the event type', required: false })
+  @ApiProperty({ description: 'Evaluation metric', required: false })
   @IsOptional()
   @IsNumber()
   evaluationMetric?: number;
@@ -32,10 +27,15 @@ export class EventTypeDto {
   @IsString()
   code?: string;
 
-  @ApiProperty({ description: 'Whether the event type is visible' })
+  @ApiProperty({ description: 'Sport ID of the event type', required: false })
+  @IsOptional()
+  @IsNumber()
+  sportId?: number;
+
+  @ApiProperty({ description: 'Visibility of the event type' })
   @IsNotEmpty()
-  @IsBoolean()
-  isVisible: boolean;
+  @IsNumber()
+  isVisible: number;
 
   @ApiProperty({ description: 'Note for the event type', required: false })
   @IsOptional()
@@ -56,4 +56,9 @@ export class EventTypeDto {
   @IsNotEmpty()
   @IsNumber()
   slot: number;
+
+  @ApiProperty({ description: 'Base64 of the sport logo', required: false })
+  @IsOptional()
+  @IsString()
+  base64?: string;
 }

@@ -3,11 +3,11 @@ import { PrismaModule } from '../../prisma/prisma.module';
 import { PlayerService } from './service';
 import { AdminPlayerController } from './ctrl.admin';
 import { HomePlayerController } from './ctrl.home';
-import { PlayerDto } from './dto';
+import { MemberPlayerDto } from './dto';
 
 @Module({
   controllers: [AdminPlayerController, HomePlayerController],
-  providers: [PlayerService, PlayerDto],
+  providers: [PlayerService, MemberPlayerDto],
   imports: [PrismaModule],
   exports: [PlayerService]
 })

@@ -1,6 +1,6 @@
 import { Controller, Get, Post, Body, Patch, Param, Delete, Query } from '@nestjs/common';
 import { GamePeriodService } from './service';
-import { GamePeriodDto } from './dto';
+import { SportGamePeriodDto } from './dto';
 import { ApiOperation, ApiQuery, ApiResponse } from '@nestjs/swagger';
 
 @Controller('admin/game-periods')
@@ -8,7 +8,7 @@ export class AdminGamePeriodController {
   constructor(private readonly gamePeriodService: GamePeriodService) { }
 
   @Post()
-  create(@Body() createGamePeriodDto: GamePeriodDto) {
+  create(@Body() createGamePeriodDto: SportGamePeriodDto) {
     return this.gamePeriodService.create(createGamePeriodDto);
   }
 
@@ -24,7 +24,7 @@ export class AdminGamePeriodController {
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateGamePeriodDto: GamePeriodDto) {
+  update(@Param('id') id: string, @Body() updateGamePeriodDto: SportGamePeriodDto) {
     return this.gamePeriodService.update(id, updateGamePeriodDto);
   }
 

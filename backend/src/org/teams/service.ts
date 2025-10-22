@@ -1,5 +1,5 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
-import { CreateTeamDto, UpdateTeamDto } from './dto';
+import { OrgTeamDto   } from './dto';
 import { PrismaService } from '../../prisma/prisma.service';
 import { AvatarUtils } from '../../utils/avatar.utils';
 import { Prisma } from '@prisma/client';
@@ -8,22 +8,17 @@ import { Prisma } from '@prisma/client';
 export class TeamsService {
   constructor(private prisma: PrismaService) {}
 
-  async create(createTeamDto: CreateTeamDto) {
-    const { base64, ...createData } = createTeamDto;
+  async create(data: OrgTeamDto) {
+    const { base64, ...rest } = data;
 
     const team = await (this.prisma as any).orgTeam.create({
       data: {
-        ...createData,
-        status: 1, // Hardcoded default status
-        isActive: createData.isActive ?? true
+        ...rest,
+        status: rest.status ?? 1,
       }
     });
 
-    if (base64) {
-      AvatarUtils.saveBase64(base64, 'teams', team.id);
-    } else if (base64 === null) {
-      AvatarUtils.deleteBase64('teams', team.id);
-    }
+    AvatarUtils.saveBase64(base64, 'teams', team.id);
 
     return team;
   }
@@ -65,22 +60,21 @@ export class TeamsService {
     };
   }
 
-  async update(id: string, updateTeamDto: UpdateTeamDto) {
+  async update(id: string, data: OrgTeamDto) {
     try {
-      const { base64, ...updateData } = updateTeamDto;
+      const { base64, ...rest } = data;
 
-      if (base64) {
-        AvatarUtils.saveBase64(base64, 'teams', id);
-      } else if (base64 === null) {
-        AvatarUtils.deleteBase64('teams', id);
-      }
+      AvatarUtils.saveBase64(base64, 'teams', id);
 
-      const team = await (this.prisma as any).orgTeam.update({
+      const result = await (this.prisma as any).orgTeam.update({
         where: { id },
-        data: updateData
+        data: {
+          ...rest,
+          status: rest.status ?? 1,
+        }
       });
 
-      return team;
+      return result;
     } catch (error) {
       throw new NotFoundException(`Team with ID ${id} not found`);
     }

@@ -1,6 +1,6 @@
 import { Controller, Get, Post, Body, Patch, Param, Delete, Query } from '@nestjs/common';
 import { PlayerPositionService } from './service';
-import { PlayerPositionDto } from './dto';
+import { SportPlayerPositionDto } from './dto';
 import { ApiOperation, ApiQuery, ApiResponse } from '@nestjs/swagger';
 
 @Controller('admin/player-positions')
@@ -8,7 +8,7 @@ export class AdminPlayerPositionController {
   constructor(private readonly playerPositionService: PlayerPositionService) { }
 
   @Post()
-  create(@Body() createPlayerPositionDto: PlayerPositionDto) {
+  create(@Body() createPlayerPositionDto: SportPlayerPositionDto) {
     return this.playerPositionService.create(createPlayerPositionDto);
   }
 
@@ -24,7 +24,7 @@ export class AdminPlayerPositionController {
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updatePlayerPositionDto: PlayerPositionDto) {
+  update(@Param('id') id: string, @Body() updatePlayerPositionDto: SportPlayerPositionDto) {
     return this.playerPositionService.update(id, updatePlayerPositionDto);
   }
 

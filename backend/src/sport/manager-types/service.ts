@@ -1,12 +1,12 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
-import { ManagerTypeDto } from './dto';
+import { SportManagerTypeDto } from './dto';
 import { PrismaService } from '../../prisma/prisma.service';
 
 @Injectable()
 export class ManagerTypeService {
   constructor(private prisma: PrismaService) { }
 
-  async create(managerTypeDto: ManagerTypeDto) {
+  async create(managerTypeDto: SportManagerTypeDto) {
     const managerType = await (this.prisma as any).sportManagerType.create({
       data: {
         ...managerTypeDto,
@@ -41,7 +41,7 @@ export class ManagerTypeService {
     return managerType;
   }
 
-  async update(id: string, updateManagerTypeDto: ManagerTypeDto) {
+  async update(id: string, updateManagerTypeDto: SportManagerTypeDto) {
     try {
       const managerType = await (this.prisma as any).sportManagerType.update({
         where: { id },
