@@ -180,7 +180,7 @@ export default function Home() {
   return (
     <main className="container mx-auto px-4 py-8 space-y-8">
       <section className="text-center">
-        <h1 className="text-4xl font-bold mb-6">EZSports RP</h1>
+        <h1 className="text-4xl font-bold mb-6">EZSportsRP</h1>
         <p className="text-muted-foreground">Comprehensive UI Component Showcase</p>
       </section>
 

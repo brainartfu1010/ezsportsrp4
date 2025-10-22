@@ -14,15 +14,15 @@ export function NavbarHome() {
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 justify-center flex">
       <div className="container max-w-7xl flex h-16 items-center justify-between">
         {/* Logo */}
-        <Link href="/" className="flex items-center">
+        <Link href="/" className="flex items-center ">
           <Image 
-            src="/logo-big.png" 
-            alt="EZSports RP Logo" 
+            src="/logo-180.png" 
+            alt="EZSportsRP Logo" 
             width={80} 
             height={80} 
-            className="mr-2"
+            className="w-12 h-12"
           /> 
-          <span className="font-bold text-2xl">EZSports RP</span>
+          <span className="font-bold text-3xl text-primary hover:text-primary/90 transition-colors duration-200 italic">EZSportsRP</span>
         </Link>
 
         {/* Navigation Menu */}
@@ -32,7 +32,7 @@ export function NavbarHome() {
             <NavigationMenuItem>
               <Link 
                 href="/features" 
-                className="text-base font-bold text-muted-foreground hover:text-primary transition-colors duration-200"
+                className="text-lg text-muted-foreground hover:text-primary transition-colors duration-200"
               >
                 Features
               </Link>
@@ -42,7 +42,7 @@ export function NavbarHome() {
             <NavigationMenuItem>
               <Link 
                 href="/pricing" 
-                className="text-base font-bold text-muted-foreground hover:text-primary transition-colors duration-200"
+                className="text-lg text-muted-foreground hover:text-primary transition-colors duration-200"
               >
                 Pricing
               </Link>
@@ -52,7 +52,7 @@ export function NavbarHome() {
             <NavigationMenuItem>
               <Link 
                 href="/about" 
-                className="text-base font-bold text-muted-foreground hover:text-primary transition-colors duration-200"
+                className="text-lg text-muted-foreground hover:text-primary transition-colors duration-200"
               >
                 About
               </Link>
@@ -62,7 +62,7 @@ export function NavbarHome() {
             <NavigationMenuItem>
               <Link 
                 href="/contact" 
-                className="text-base font-bold text-muted-foreground hover:text-primary transition-colors duration-200"
+                className="text-lg text-muted-foreground hover:text-primary transition-colors duration-200"
               >
                 Contact
               </Link>
@@ -72,7 +72,7 @@ export function NavbarHome() {
             <NavigationMenuItem>
               <Link 
                 href="/app/dashboard" 
-                className="text-base font-bold text-muted-foreground hover:text-primary transition-colors duration-200"
+                className="text-lg font-medium text-muted-foreground hover:text-primary transition-colors duration-200"
               >
                 App Demo
               </Link>
@@ -82,11 +82,11 @@ export function NavbarHome() {
 
         {/* User Actions */}
         <div className="flex items-center space-x-2">
-          <Button variant="outline" size="sm" asChild>
+          <Button variant="outline" size="lg" asChild>
             <Link href="/login">Log In</Link>
           </Button>
-          <Button size="sm" asChild>
-            <Link href="/signup">Get Started</Link>
+          <Button size="lg" asChild>
+            <Link href="/register">Get Started</Link>
           </Button>
         </div>
       </div>
