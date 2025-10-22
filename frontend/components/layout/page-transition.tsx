@@ -11,22 +11,22 @@ export default function PageTransition({
   const pathname = usePathname();
   const [isVisible, setIsVisible] = useState(true);
 
-  useEffect(() => {
-    console.log('Pathname changed:', pathname);
+  // useEffect(() => {
+  //   // console.log('Pathname changed:', pathname);
     
-    // Force a reflow by setting visibility to false first
-    setIsVisible(false);
+  //   // Force a reflow by setting visibility to false first
+  //   setIsVisible(false);
     
-    // Use setTimeout to ensure DOM has updated
-    const timer = setTimeout(() => {
-      console.log('Setting visibility to true');
-      setIsVisible(true);
-    }, 50);
+  //   // Use setTimeout to ensure DOM has updated
+  //   const timer = setTimeout(() => {
+  //     // console.log('Setting visibility to true');
+  //     setIsVisible(true);
+  //   }, 200);
 
-    return () => clearTimeout(timer);
-  }, [pathname]);
+  //   return () => clearTimeout(timer);
+  // }, [pathname]);
 
-  console.log('Rendering PageTransition, isVisible:', isVisible);
+  // console.log('Rendering PageTransition, isVisible:', isVisible);
 
   return (
     <div 

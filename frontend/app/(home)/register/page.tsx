@@ -416,7 +416,7 @@ export default function RegisterPage() {
               onSubmit={handleFinalSubmit}
             />
 
-            <div className="flex items-center justify-between mt-8">
+            <div className="flex items-center justify-between mt-4 border-t pt-4">
               <Button 
                 variant="outline"
                 onClick={prevStep}
@@ -497,7 +497,7 @@ export default function RegisterPage() {
 
             {/* Navigation Buttons */}
             {(currentStep as string) !== "review" && (
-              <div className="flex items-center justify-between mt-8">
+              <div className="flex items-center justify-between mt-4 border-t pt-4">
                 <Button 
                   variant="outline"
                   onClick={prevStep}
@@ -505,7 +505,7 @@ export default function RegisterPage() {
                   className="px-6"
                 >
                   <ArrowLeftIcon className="w-5 h-5" />
-                  Previous
+                  Back
                 </Button>
 
                 {/* Message area for Role Setup */}
@@ -532,7 +532,7 @@ export default function RegisterPage() {
                     ${currentStep === "account-info" ? "ml-auto" : ""}
                   `}
                 >
-                  Next
+                  Forward
                   <ArrowRightIcon className="w-5 h-5" />
                 </Button>
               </div>

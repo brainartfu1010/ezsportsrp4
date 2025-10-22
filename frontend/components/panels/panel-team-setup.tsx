@@ -1,25 +1,26 @@
 "use client";
 
 import React, { useState } from "react";
-import { Button } from "@/components/controls/button";
+import { Button, Buttons } from "@/components/controls/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { PlusIcon } from "lucide-react";
+import { PlusIcon, TrashIcon } from "lucide-react";
+import Table from "../controls/table";
 
 interface TeamSetupPanelProps {
   initialPlayers?: any[];
   onPlayersUpdate: (players: any[]) => void;
 }
 
-export default function PanelTeamSetup({ 
-  initialPlayers = [], 
-  onPlayersUpdate 
+export default function PanelTeamSetup({
+  initialPlayers = [],
+  onPlayersUpdate,
 }: TeamSetupPanelProps) {
   const [players, setPlayers] = useState(initialPlayers);
   const [newPlayer, setNewPlayer] = useState({
-    name: '',
-    position: '',
-    age: ''
+    name: "",
+    position: "",
+    age: "",
   });
 
   const addPlayer = () => {
@@ -27,7 +28,7 @@ export default function PanelTeamSetup({
       const updatedPlayers = [...players, newPlayer];
       setPlayers(updatedPlayers);
       onPlayersUpdate(updatedPlayers);
-      setNewPlayer({ name: '', position: '', age: '' });
+      setNewPlayer({ name: "", position: "", age: "" });
     }
   };
 
@@ -42,67 +43,200 @@ export default function PanelTeamSetup({
     onPlayersUpdate(updatedPlayers);
   };
 
+  const cols = [
+    { accessor: "name", header: "Name" },
+    { accessor: "position", header: "Position" },
+    { accessor: "jersey", header: "Jersey" },
+    { accessor: "email", header: "Email" },
+    { accessor: "gender", header: "Gender" },
+    { accessor: "phone", header: "Phone" },
+    {
+      accessor: "actions",
+      header: "Actions",
+      cell: (row) => (
+        <Buttons.DeleteConfirm
+          onYes={() => deletePlayer(row.id)}
+          children=" "
+          size="sm"
+          variant="link"
+          className="cursor-pointer text-red-500 hover:text-red-700"
+        />
+      ),
+    },
+  ];
+  const rows = [
+    {
+      id: 1,
+      name: "John Doe",
+      position: "Forward",
+      jersey: 10,
+      gender: "Male",
+      email: "john.doe@example.com",
+      phone: "1234567890",
+    },
+    {
+      id: 2,
+      name: "Jane Doe",
+      position: "Defense",
+      jersey: 11,
+      gender: "Female",
+      email: "jane.doe@example.com",
+      phone: "1234567890",
+    },
+    {
+      id: 3,
+      name: "Jim Beam",
+      position: "Midfielder",
+      jersey: 12,
+      gender: "Male",
+      email: "jim.beam@example.com",
+      phone: "1234567890",
+    },
+    {
+      id: 4,
+      name: "Jill Johnson",
+      position: "Forward",
+      jersey: 13,
+      gender: "Female",
+      email: "jill.johnson@example.com",
+      phone: "1234567890",
+    },
+    {
+      id: 5,
+      name: "Jack Smith",
+      position: "Defense",
+      jersey: 14,
+      gender: "Male",
+      email: "jack.smith@example.com",
+      phone: "1234567890",
+    },
+    {
+      id: 6,
+      name: "Jill Johnson",
+      position: "Midfielder",
+      jersey: 15,
+      gender: "Female",
+      email: "jill.johnson@example.com",
+      phone: "1234567890",
+    },
+    {
+      id: 7,
+      name: "Jack Smith",
+      position: "Forward",
+      jersey: 16,
+      gender: "Male",
+      email: "jack.smith@example.com",
+      phone: "1234567890",
+    },
+    {
+      id: 8,
+      name: "Jill Johnson",
+      position: "Defense",
+      jersey: 17,
+      gender: "Female",
+      email: "jill.johnson@example.com",
+      phone: "1234567890",
+    },
+    {
+      id: 9,
+      name: "Jack Smith",
+      position: "Midfielder",
+      jersey: 18,
+      gender: "Male",
+      email: "jack.smith@example.com",
+      phone: "1234567890",
+    },
+    {
+      id: 10,
+      name: "Jill Johnson",
+      position: "Forward",
+      jersey: 19,
+      gender: "Female",
+      email: "jill.johnson@example.com",
+      phone: "1234567890",
+    },
+    {
+      id: 11,
+      name: "Jack Smith",
+      position: "Defense",
+      jersey: 20,
+      gender: "Male",
+      email: "jack.smith@example.com",
+      phone: "1234567890",
+    },
+    {
+      id: 12,
+      name: "Jill Johnson",
+      position: "Midfielder",
+      jersey: 21,
+      gender: "Female",
+      email: "jill.johnson@example.com",
+      phone: "1234567890",
+    },
+    {
+      id: 13,
+      name: "Jack Smith",
+      position: "Forward",
+      jersey: 22,
+      gender: "Male",
+      email: "jack.smith@example.com",
+      phone: "1234567890",
+    },
+    {
+      id: 14,
+      name: "Jill Johnson",
+      position: "Defense",
+      jersey: 23,
+      gender: "Female",
+      email: "jill.johnson@example.com",
+      phone: "1234567890",
+    },
+    {
+      id: 15,
+      name: "Jack Smith",
+      position: "Midfielder",
+      jersey: 24,
+      gender: "Male",
+      email: "jack.smith@example.com",
+      phone: "1234567890",
+    },
+    {
+      id: 16,
+      name: "Jill Johnson",
+      position: "Forward",
+      jersey: 25,
+      gender: "Female",
+      email: "jill.johnson@example.com",
+      phone: "1234567890",
+    },
+  ];
   return (
     <div className="space-y-6">
       <div className="text-center mb-8">
-        <h3 className="text-3xl font-bold text-primary mb-4">
-          Team Setup
-        </h3>
+        <h3 className="text-3xl font-bold text-primary mb-4">Team Setup</h3>
         <p className="text-muted-foreground max-w-xl mx-auto">
           Add players to your team roster
         </p>
       </div>
 
       <div className="bg-white shadow rounded-lg">
-        <div className="flex justify-between items-center p-4 border-b">
+        <div className="flex justify-between items-center p-4">
           <h4 className="text-lg font-semibold">Team Roster</h4>
-          <Button 
-            variant="outline" 
+          <Button
+            variant="outline"
             className="flex items-center"
-            onClick={() => {/* Open add player modal */}}
+            onClick={() => {
+              /* Open add player modal */
+            }}
           >
-            <PlusIcon className="mr-2 w-4 h-4" /> Add Player
+            <PlusIcon className="w-4 h-4" />Add Player
           </Button>
         </div>
 
-        <table className="w-full">
-          <thead>
-            <tr className="bg-gray-100 text-left">
-              <th className="p-3">Name</th>
-              <th className="p-3">Position</th>
-              <th className="p-3">Age</th>
-              <th className="p-3">Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            {players.map((player, index) => (
-              <tr key={index} className="border-b">
-                <td className="p-3">{player.name}</td>
-                <td className="p-3">{player.position}</td>
-                <td className="p-3">{player.age}</td>
-                <td className="p-3">
-                  <Button variant="ghost" size="sm">Edit</Button>
-                  <Button 
-                    variant="ghost" 
-                    size="sm" 
-                    className="text-red-500"
-                    onClick={() => deletePlayer(index)}
-                  >
-                    Delete
-                  </Button>
-                </td>
-              </tr>
-            ))}
-            {players.length === 0 && (
-              <tr>
-                <td colSpan={4} className="text-center p-6 text-muted-foreground">
-                  No players added yet
-                </td>
-              </tr>
-            )}
-          </tbody>
-        </table>
-      </div> 
+        <div className="p-4 pt-0">
+          <Table cols={cols} data={rows} draggable={false} />
+        </div>
+      </div>
     </div>
   );
 }
