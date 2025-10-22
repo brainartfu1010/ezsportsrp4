@@ -139,7 +139,7 @@ export default function RegisterPage() {
     ];
 
     const currentStepIndex = stepOrder.indexOf(currentStep);
-    
+
     if (currentStepIndex > 0) {
       let prevStep: RegistrationStep = "account-info"; // Default to first step
 

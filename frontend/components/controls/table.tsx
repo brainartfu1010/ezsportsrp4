@@ -40,7 +40,7 @@ import {
   PaginationItem,
 } from "@/components/ui/pagination";
 import { PopoverConfirm } from "../popovers/popover-confirm";
-import { TypeReorder } from "@/lib/types";
+import { TypeReorder } from "@/types/types";
 
 // Define core types
 export type TableRowData = {
@@ -560,12 +560,12 @@ export default function Table<T extends TableRowData>({
                   })}
                   {onRowActionEdit || onRowActionDelete ? (
                     <TableCell className="text-center" data-column="actions">
-                      <div className="flex justify-center space-x-2">
+                      <div className="flex justify-center ">
                         {onRowActionEdit && (
                           <Button
                             variant="link"
                             size="sm"
-                            className="cursor-pointer"
+                            className="cursor-pointer text-primary/50 hover:text-primary"
                             onClick={(e) => {
                               e.stopPropagation();
                               onRowActionEdit?.(row.id);
@@ -582,7 +582,7 @@ export default function Table<T extends TableRowData>({
                             <Button
                               variant="link"
                               size="sm"
-                              className="cursor-pointer text-red-500 hover:text-red-700"
+                              className="cursor-pointer text-red-500/50 hover:text-red-500"
                             >
                               <Trash2Icon className="h-4 w-4" />
                             </Button>

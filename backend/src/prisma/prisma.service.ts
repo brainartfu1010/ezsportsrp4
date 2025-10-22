@@ -4,9 +4,10 @@ import { PrismaClient } from '@prisma/client';
 @Injectable()
 export class PrismaService extends PrismaClient implements OnModuleInit, OnModuleDestroy {
   constructor() {
-    super({
-      log: ['query', 'info', 'warn', 'error'],
-    });
+    // super({
+    //   log: ['query', 'info', 'warn', 'error'],
+    // });
+    super()
   }
 
   async onModuleInit() {
@@ -18,7 +19,5 @@ export class PrismaService extends PrismaClient implements OnModuleInit, OnModul
   }
 
   // Explicitly type the models to help TypeScript
-  // baseSport = this.baseSport;
-  // baseCountry = this.baseCountry;
-  // baseField = this.baseField;
+  // Remove the problematic model assignments
 }

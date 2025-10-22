@@ -1,187 +1,253 @@
-"use client"
+"use client";
 
-import * as React from "react"
-import * as SelectPrimitive from "@radix-ui/react-select"
-import { CheckIcon, ChevronDownIcon, ChevronUpIcon } from "lucide-react"
+import React from 'react';
+import ReactSelect, { 
+  Props as ReactSelectProps, 
+  MultiValue, 
+  SingleValue, 
+  StylesConfig, 
+  GroupBase 
+} from 'react-select';
+import { cn } from '@/lib/utils';
+import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 
-import { cn } from "@/lib/utils"
+type ValueType = "id" | "item";
+type ReturnType = "id" | "item";
 
-function Select({
-  ...props
-}: React.ComponentProps<typeof SelectPrimitive.Root>) {
-  return <SelectPrimitive.Root data-slot="select" {...props} />
+export interface BaseItem {
+  id: string | number;
+  name: string;
+  base64?: string | null;
+  [key: string]: any;
 }
 
-function SelectGroup({
-  ...props
-}: React.ComponentProps<typeof SelectPrimitive.Group>) {
-  return <SelectPrimitive.Group data-slot="select-group" {...props} />
+export interface SelectProps<
+  Option extends BaseItem = BaseItem
+> extends Omit<ReactSelectProps<Option, boolean>, 'onChange' | 'value'> {
+  value?: string[] | string | number[] | number | Option[] | Option | null;
+  onChange?: (value: string[] | Option[]) => void;
+  placeholder?: string;
+  disabled?: boolean;
+  multiple?: boolean;
+  data: Option[];
+  loading?: boolean;
+  error?: string;
+  allowClear?: boolean;
+  allowFilter?: boolean;
+  avatarField?: string;
+  valueType?: ValueType;
+  returnType?: ReturnType;
+  renderItem?: (item: Option) => React.ReactNode;
 }
 
-function SelectValue({
+export function Select<
+  Option extends BaseItem = BaseItem
+>({
+  value,
+  onChange,
+  placeholder = "Select items",
+  disabled = false,
+  multiple = false,
+  data,
+  loading = false,
+  error,
+  allowClear = false,
+  allowFilter = false,
+  avatarField = "base64",
+  valueType = "id",
+  returnType = "id",
+  renderItem,
   ...props
-}: React.ComponentProps<typeof SelectPrimitive.Value>) {
-  return <SelectPrimitive.Value data-slot="select-value" {...props} />
-}
+}: SelectProps<Option>) {
+  // Convert data to react-select format
+  const selectOptions = (data || []).map(option => ({
+    ...option,
+    value: String(option.id),
+    label: option.name
+  }));
 
-function SelectTrigger({
-  className,
-  size = "default",
-  children,
-  ...props
-}: React.ComponentProps<typeof SelectPrimitive.Trigger> & {
-  size?: "sm" | "default"
-}) {
-  return (
-    <SelectPrimitive.Trigger
-      data-slot="select-trigger"
-      data-size={size}
-      className={cn(
-        "border-input data-[placeholder]:text-muted-foreground [&_svg:not([class*='text-'])]:text-muted-foreground focus-visible:border-ring focus-visible:ring-ring/50 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive dark:bg-input/30 dark:hover:bg-input/50 flex w-fit items-center justify-between gap-2 rounded-md border bg-transparent px-3 py-2 text-sm whitespace-nowrap shadow-xs transition-[color,box-shadow] outline-none focus-visible:ring-[3px] disabled:cursor-not-allowed disabled:opacity-50 data-[size=default]:h-9 data-[size=sm]:h-8 *:data-[slot=select-value]:line-clamp-1 *:data-[slot=select-value]:flex *:data-[slot=select-value]:items-center *:data-[slot=select-value]:gap-2 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
-        className
-      )}
-      {...props}
-    >
-      {children}
-      <SelectPrimitive.Icon asChild>
-        <ChevronDownIcon className="size-4 opacity-50" />
-      </SelectPrimitive.Icon>
-    </SelectPrimitive.Trigger>
-  )
-}
+  // Convert value to react-select value format
+  const selectedValue = React.useMemo(() => {
+    if (!value) return multiple ? [] : null;
 
-function SelectContent({
-  className,
-  children,
-  position = "popper",
-  align = "center",
-  ...props
-}: React.ComponentProps<typeof SelectPrimitive.Content>) {
-  return (
-    <SelectPrimitive.Portal>
-      <SelectPrimitive.Content
-        data-slot="select-content"
-        className={cn(
-          "bg-popover text-popover-foreground data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2 relative z-50 max-h-(--radix-select-content-available-height) min-w-[8rem] origin-(--radix-select-content-transform-origin) overflow-x-hidden overflow-y-auto rounded-md border shadow-md",
-          position === "popper" &&
-            "data-[side=bottom]:translate-y-1 data-[side=left]:-translate-x-1 data-[side=right]:translate-x-1 data-[side=top]:-translate-y-1",
-          className
+    // If value is an array
+    if (Array.isArray(value)) {
+      if (valueType === "id") {
+        return multiple 
+          ? selectOptions.filter(option => 
+              value.map(String).includes(String(option.value))
+            )
+          : selectOptions.find(option => 
+              String(option.value) === String(value[0])
+            ) || null;
+      } else {
+        // Ensure all items are BaseItem when valueType is "item"
+        const filteredItems = value.filter(
+          (v) => typeof v === "object" && "id" in v
+        );
+        return multiple 
+          ? selectOptions.filter(option => 
+              filteredItems.some(item => String(item.id) === String(option.value))
+            )
+          : selectOptions.find(option => 
+              filteredItems.some(item => String(item.id) === String(option.value))
+            ) || null;
+      }
+    }
+
+    // If value is a single item
+    if (valueType === "id") {
+      return selectOptions.find(option => 
+        String(option.value) === String(value)
+      ) || null;
+    } else {
+      // Ensure the single item is a BaseItem when valueType is "item"
+      return typeof value === "object" && "id" in value 
+        ? selectOptions.find(option => 
+            String(option.value) === String(value.id)
+          ) || null
+        : null;
+    }
+  }, [value, valueType, selectOptions, multiple]);
+
+  // Handle value change
+  const handleChange = (selectedOption: MultiValue<Option> | SingleValue<Option>) => {
+    if (!onChange) return;
+
+    if (multiple) {
+      const selectedItems = selectedOption as Option[];
+      const finalValue = returnType === 'id'
+        ? selectedItems.map(item => String(item.id))
+        : selectedItems;
+      onChange(finalValue);
+    } else {
+      const selectedItem = selectedOption as Option | null;
+      if (selectedItem) {
+        const finalValue = returnType === 'id'
+          ? String(selectedItem.id)
+          : selectedItem;
+        onChange(finalValue);
+      } else {
+        onChange(null);
+      }
+    }
+  };
+
+  // Custom option renderer
+  const formatOptionLabel = (option: Option) => {
+    if (renderItem) {
+      return renderItem(option);
+    }
+
+    return (
+      <div className="flex items-center space-x-2">
+        {option[avatarField] && (
+          <Avatar className="h-6 w-6 shrink-0">
+            <AvatarImage
+              src={option[avatarField]}
+              alt={option.name}
+              className="object-cover size-6"
+            />
+            <AvatarFallback className="bg-muted text-foreground">
+              {option.name.charAt(0).toUpperCase()}
+            </AvatarFallback>
+          </Avatar>
         )}
-        position={position}
-        align={align}
-        {...props}
-      >
-        <SelectScrollUpButton />
-        <SelectPrimitive.Viewport
-          className={cn(
-            "p-1",
-            position === "popper" &&
-              "h-[var(--radix-select-trigger-height)] w-full min-w-[var(--radix-select-trigger-width)] scroll-my-1"
-          )}
-        >
-          {children}
-        </SelectPrimitive.Viewport>
-        <SelectScrollDownButton />
-      </SelectPrimitive.Content>
-    </SelectPrimitive.Portal>
-  )
-}
+        <span className="truncate">{option.name}</span>
+      </div>
+    );
+  };
 
-function SelectLabel({
-  className,
-  ...props
-}: React.ComponentProps<typeof SelectPrimitive.Label>) {
   return (
-    <SelectPrimitive.Label
-      data-slot="select-label"
-      className={cn("text-muted-foreground px-2 py-1.5 text-xs", className)}
+    <ReactSelect
       {...props}
+      isMulti={multiple}
+      options={selectOptions}
+      value={selectedValue}
+      onChange={handleChange}
+      formatOptionLabel={formatOptionLabel}
+      placeholder={loading ? "Loading..." : placeholder}
+      isDisabled={disabled || loading}
+      isLoading={loading}
+      isSearchable={allowFilter}
+      isClearable={allowClear}
+      closeMenuOnSelect={!multiple}
+      noOptionsMessage={() => error || "No options available"}
+      className={cn(props.className, "w-full")}
+      classNames={{
+        control: (state) => cn(
+          "!min-h-[36px] !cursor-pointer !border-primary/40 !hover:border-primary/80",
+          "!border !rounded-md !bg-background !shadow-sm",
+          state.isDisabled && "!cursor-not-allowed !opacity-50",
+          error && "!border-destructive",
+          "focus-within:!ring-2",
+          "focus-within:!ring-ring",
+          "focus-within:!border-ring/80"
+        ),
+        valueContainer: () => "!pt-0",
+        input: () => "!m-0 !p-0",
+        placeholder: () => "!text-muted-foreground !text-sm",
+        singleValue: () => "!ml-1 !text-sm",
+        multiValue: () => "!text-accent-foreground !rounded-sm  !ml-1 !bg-primary/10",
+        multiValueLabel: () => "!px-1 !py-0.5",
+        multiValueRemove: () => "!px-1 !hover:bg-destructive !hover:text-destructive-foreground",
+        menu: () => "!z-500 !rounded-md !border !shadow-md !text-sm !font-base",
+        option: (state) => cn(
+          "!px-2 !py-1.5",
+          "!cursor-pointer",
+          state.isSelected && "!bg-primary/10 !text-primary",
+          state.isFocused && "!bg-primary/10",
+          "hover:!bg-primary/20",
+          "!transition-colors !text-sm"
+        ),
+      }}
+      styles={{
+        menuPortal: (base) => ({
+          ...base,
+          zIndex: 9999,
+        }),
+        dropdownIndicator: (base, state) => ({
+          ...base,
+          color: state.isDisabled ? 'hsl(var(--muted-foreground))' : 'hsl(var(--muted-foreground))',
+          ':hover': {
+            color: 'hsl(var(--foreground))',
+          },
+          padding: '0 2px',
+        }),
+        clearIndicator: (base) => ({
+          ...base,
+          color: 'hsl(var(--muted-foreground))',
+          ':hover': {
+            color: 'hsl(var(--destructive))',
+          },
+        }),
+      }}
+      menuPortalTarget={document.body}
     />
-  )
+  );
 }
 
-function SelectItem({
-  className,
-  children,
-  ...props
-}: React.ComponentProps<typeof SelectPrimitive.Item>) {
-  return (
-    <SelectPrimitive.Item
-      data-slot="select-item"
-      className={cn(
-        "focus:bg-accent focus:text-accent-foreground [&_svg:not([class*='text-'])]:text-muted-foreground relative flex w-full cursor-default items-center gap-2 rounded-sm py-1.5 pr-8 pl-2 text-sm outline-hidden select-none data-[disabled]:pointer-events-none data-[disabled]:opacity-50 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4 *:[span]:last:flex *:[span]:last:items-center *:[span]:last:gap-2",
-        className
-      )}
-      {...props}
-    >
-      <span className="absolute right-2 flex size-3.5 items-center justify-center">
-        <SelectPrimitive.ItemIndicator>
-          <CheckIcon className="size-4" />
-        </SelectPrimitive.ItemIndicator>
-      </span>
-      <SelectPrimitive.ItemText>{children}</SelectPrimitive.ItemText>
-    </SelectPrimitive.Item>
-  )
+// Placeholder components for compatibility
+export function SelectTrigger() {
+  return null;
 }
 
-function SelectSeparator({
-  className,
-  ...props
-}: React.ComponentProps<typeof SelectPrimitive.Separator>) {
-  return (
-    <SelectPrimitive.Separator
-      data-slot="select-separator"
-      className={cn("bg-border pointer-events-none -mx-1 my-1 h-px", className)}
-      {...props}
-    />
-  )
+export function SelectValue() {
+  return null;
 }
 
-function SelectScrollUpButton({
-  className,
-  ...props
-}: React.ComponentProps<typeof SelectPrimitive.ScrollUpButton>) {
-  return (
-    <SelectPrimitive.ScrollUpButton
-      data-slot="select-scroll-up-button"
-      className={cn(
-        "flex cursor-default items-center justify-center py-1",
-        className
-      )}
-      {...props}
-    >
-      <ChevronUpIcon className="size-4" />
-    </SelectPrimitive.ScrollUpButton>
-  )
+export function SelectContent() {
+  return null;
 }
 
-function SelectScrollDownButton({
-  className,
-  ...props
-}: React.ComponentProps<typeof SelectPrimitive.ScrollDownButton>) {
-  return (
-    <SelectPrimitive.ScrollDownButton
-      data-slot="select-scroll-down-button"
-      className={cn(
-        "flex cursor-default items-center justify-center py-1",
-        className
-      )}
-      {...props}
-    >
-      <ChevronDownIcon className="size-4" />
-    </SelectPrimitive.ScrollDownButton>
-  )
+export function SelectItem() {
+  return null;
 }
 
-export {
-  Select,
-  SelectContent,
-  SelectGroup,
-  SelectItem,
-  SelectLabel,
-  SelectScrollDownButton,
-  SelectScrollUpButton,
-  SelectSeparator,
-  SelectTrigger,
-  SelectValue,
+export function SelectGroup() {
+  return null;
+}
+
+export function SelectLabel() {
+  return null;
 }

@@ -145,14 +145,11 @@ export default function FieldsPage() {
 
         return country ? (
           <div className="flex items-center space-x-2">
-            {country.flag && (
-              <img
-                src={country.flag}
-                alt={`${country.name} flag`}
-                className="w-6 h-4 rounded-sm object-cover"
-              />
-            )}
-            <span>{country.name}</span>
+            <Avatar className="size-4 mr-1">
+              <AvatarImage src={country.base64} />
+              <AvatarFallback>{country.code}</AvatarFallback>
+            </Avatar>
+            <span>{country.abbr}</span>
           </div>
         ) : (
           "-"
@@ -167,7 +164,15 @@ export default function FieldsPage() {
 
         const fieldSports = sports
           .filter((sport) => row.sportIds?.includes(sport.id))
-          .map((sport) => sport.name);
+          .map((sport) => (
+            <div className="flex items-center space-x-2">
+              <Avatar className="size-4 mr-1">
+                <AvatarImage src={sport.base64} />
+                <AvatarFallback>{sport.abbr}</AvatarFallback>
+              </Avatar>
+              {sport.abbr}
+            </div>
+          ));
 
         return (
           <div className="flex flex-wrap gap-1">

@@ -22,7 +22,7 @@ export function NavbarHome() {
             height={80} 
             className="w-12 h-12"
           /> 
-          <span className="font-bold text-3xl text-primary hover:text-primary/90 transition-colors duration-200 italic">EZSportsRP</span>
+          <span className="font-bold text-2xl hover:text-primary/90 transition-colors duration-200">EZSportsRP</span>
         </Link>
 
         {/* Navigation Menu */}
@@ -32,7 +32,7 @@ export function NavbarHome() {
             <NavigationMenuItem>
               <Link 
                 href="/features" 
-                className="text-lg text-muted-foreground hover:text-primary transition-colors duration-200"
+                className="text-lg hover:text-primary transition-colors duration-200"
               >
                 Features
               </Link>
@@ -42,7 +42,7 @@ export function NavbarHome() {
             <NavigationMenuItem>
               <Link 
                 href="/pricing" 
-                className="text-lg text-muted-foreground hover:text-primary transition-colors duration-200"
+                className="text-lg hover:text-primary transition-colors duration-200"
               >
                 Pricing
               </Link>
@@ -52,7 +52,7 @@ export function NavbarHome() {
             <NavigationMenuItem>
               <Link 
                 href="/about" 
-                className="text-lg text-muted-foreground hover:text-primary transition-colors duration-200"
+                className="text-lg hover:text-primary transition-colors duration-200"
               >
                 About
               </Link>
@@ -62,7 +62,7 @@ export function NavbarHome() {
             <NavigationMenuItem>
               <Link 
                 href="/contact" 
-                className="text-lg text-muted-foreground hover:text-primary transition-colors duration-200"
+                className="text-lg hover:text-primary transition-colors duration-200"
               >
                 Contact
               </Link>
@@ -72,7 +72,7 @@ export function NavbarHome() {
             <NavigationMenuItem>
               <Link 
                 href="/app/dashboard" 
-                className="text-lg font-medium text-muted-foreground hover:text-primary transition-colors duration-200"
+                className="text-lg font-medium hover:text-primary transition-colors duration-200"
               >
                 App Demo
               </Link>

@@ -1,0 +1,14 @@
+import { Module } from '@nestjs/common';
+import { PrismaModule } from '../../prisma/prisma.module';
+import { CoachService } from './service';
+import { AdminCoachController } from './ctrl.admin';
+import { HomeCoachController } from './ctrl.home';
+import { CoachDto } from './dto';
+
+@Module({
+  controllers: [AdminCoachController, HomeCoachController],
+  providers: [CoachService, CoachDto],
+  imports: [PrismaModule],
+  exports: [CoachService]
+})
+export class CoachModule { }

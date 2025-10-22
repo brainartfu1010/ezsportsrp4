@@ -138,7 +138,7 @@ export const Form = forwardRef<HTMLFormElement, FormProps>(
                       <FormLabel className="gap-1">
                         {itemConfig.label}
                         {itemConfig.required && (
-                          <span className="text-red-700 mt-1">*</span>
+                          <span className="text-red-700">*</span>
                         )}
                       </FormLabel>
                     )}

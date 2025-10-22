@@ -8,7 +8,7 @@ export async function seedSports(prisma: PrismaClient) {
       abbr: 'SCR',
       note: 'Association football',
       isActive: true,
-      ord: 1
+      order: 1
     },
     { 
       id: 2,
@@ -16,7 +16,7 @@ export async function seedSports(prisma: PrismaClient) {
       abbr: 'BSK',
       note: 'Indoor basketball',
       isActive: true,
-      ord: 2
+      order: 2
     },
     { 
       id: 3,
@@ -24,7 +24,7 @@ export async function seedSports(prisma: PrismaClient) {
       abbr: 'FTB',
       note: 'Gridiron football',
       isActive: true,
-      ord: 3
+      order: 3
     },
     { 
       id: 4,
@@ -32,7 +32,7 @@ export async function seedSports(prisma: PrismaClient) {
       abbr: 'HCK',
       note: 'Ice hockey or field hockey',
       isActive: true,
-      ord: 4
+      order: 4
     },
     { 
       id: 5,
@@ -40,7 +40,7 @@ export async function seedSports(prisma: PrismaClient) {
       abbr: 'BSB',
       note: 'North American baseball',
       isActive: true,
-      ord: 5
+      order: 5
     }
   ]
 
@@ -57,7 +57,7 @@ export async function seedSports(prisma: PrismaClient) {
         data: sport
       })
     } else {
-      // If not exists, create with specified ID
+      // If not exists, create 
       await prisma.baseSport.create({
         data: sport
       })

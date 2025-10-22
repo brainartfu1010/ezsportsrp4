@@ -6,6 +6,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Form, FormItem } from "@/components/controls/form";
 import { ComboSports } from "@/components/combos/combo-sports";
+import { ComboCoachTypes } from "../combos/combo-coach-types";
 
 // Coach information form configuration
 const coachFormConfig = {
@@ -18,7 +19,7 @@ const coachFormConfig = {
   coach_type: {
     label: "Coach Type",
     schema: z.string().min(1, "Coach type is required"),
-    control: <Input placeholder="Enter coach type" />,
+    control: <ComboCoachTypes />,
     required: true
   },
   years_of_experience: {

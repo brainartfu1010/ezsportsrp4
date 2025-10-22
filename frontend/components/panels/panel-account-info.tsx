@@ -41,7 +41,7 @@ const formConfig = {
     label: "Last Name",
     schema: z.string().min(1, "Last name is required"),
     control: <Input type="text" />,
-    required: true
+    // required: true
   },
   password: {
     label: "Password",

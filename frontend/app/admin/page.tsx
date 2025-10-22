@@ -1,10 +1,6 @@
-"use client"
-
-
-export default function AdminPage() {
+import React from 'react'; 
+export default function AdminDashboard() {
   return (
-    <div>
-      <h1>Admin Page</h1>
-    </div>
-  )
+      <div>Admin Dashboard</div>
+  );
 }

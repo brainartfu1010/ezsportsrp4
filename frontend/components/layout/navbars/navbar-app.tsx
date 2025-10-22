@@ -28,13 +28,13 @@ export function NavbarApp() {
         {/* Logo */}
         <Link href="/dashboard" className="flex items-center">
           <Image 
-            src="/logo-big.png" 
+            src="/logo-180.png" 
             alt="EZSportsRP Logo" 
             width={50} 
             height={50} 
             className="mr-2"
           /> 
-          <span className="font-bold text-xl">EZSportsRP</span>
+          <span className="font-bold text-2xl hover:text-primary/90 transition-colors duration-200">EZSportsRP</span>
         </Link>
 
         {/* Search Bar */}
