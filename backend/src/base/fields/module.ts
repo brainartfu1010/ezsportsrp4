@@ -10,4 +10,4 @@ import { HomeFieldsController } from './ctrl.home';
   imports: [PrismaModule],
   exports: [FieldsService]
 })
-export class FieldsModule {}
+export class BaseFieldsModule {}

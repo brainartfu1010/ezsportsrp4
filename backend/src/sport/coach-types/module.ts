@@ -11,4 +11,4 @@ import { SportCoachTypeDto } from './dto';
   imports: [PrismaModule],
   exports: [CoachTypeService]
 })
-export class CoachTypeModule { }
+export class SportCoachTypeModule { }

@@ -2,56 +2,60 @@ import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { PrismaModule } from './prisma/prisma.module';
-import { CountriesModule } from './base/countries/module';
-import { SportsModule } from './base/sports/module';
-import { FieldsModule } from './base/fields/module';
-import { TeamsModule } from './org/teams/module';
-import { EventTypeModule } from './sport/event-types/module';
-import { ManagerTypeModule } from './sport/manager-types/module';
-import { PlayerPositionModule } from './sport/player-positions/module';
-import { GamePeriodModule } from './sport/game-periods/module';
-import { ClubAdminModule } from './member/club-admins/module';
-import { CoachModule } from './member/coaches/module';
-import { ParentModule } from './member/parents/module';
-import { TeamManagerModule } from './member/team-managers/module';
-import { PersonModule } from './member/persons/module';
-import { PlayerModule } from './member/players/module';
-import { RefereeModule } from './member/referees/module';
-import { SponsorModule } from './member/sponsors/module';
-import { ClubsModule } from './org/clubs/module';
-import { LeaguesModule } from './org/leagues/module';
-import { GroupLevelsModule } from './base/group-levels/module';
+import { BaseCompetitionsModule } from './base/competitions/module';
+import { BaseCountriesModule } from './base/countries/module';
+import { BaseSportsModule } from './base/sports/module';
+import { BaseFieldsModule } from './base/fields/module';
+import { OrgTeamsModule } from './org/teams/module';
+import { SportEventTypeModule } from './sport/event-types/module';
+import { SportManagerTypeModule } from './sport/manager-types/module';
+import { SportPlayerPositionModule } from './sport/player-positions/module';
+import { SportGamePeriodModule } from './sport/game-periods/module';
+import { MemberClubAdminModule } from './member/club-admins/module';
+import { MemberCoachModule } from './member/coaches/module';
+import { MemberParentModule } from './member/parents/module';
+import { MemberTeamManagerModule } from './member/team-managers/module';
+import { MemberPersonModule } from './member/persons/module';
+import { MemberPlayerModule } from './member/players/module';
+import { MemberRefereeModule } from './member/referees/module';
+import { MemberSponsorModule } from './member/sponsors/module';
+import { OrgClubsModule } from './org/clubs/module';
+import { OrgLeaguesModule } from './org/leagues/module';
+import { BaseGroupLevelsModule } from './base/group-levels/module';
 import { PlanGamesModule } from './plan/games/module';
 import { PlanMeetingsModule } from './plan/meetings/module';
 import { PlanTrainingsModule } from './plan/trainings/module';
+import { SportCoachTypeModule } from './sport/coach-types/module';
 
 @Module({
   imports: [
     PrismaModule,
-    SportsModule,
-    CountriesModule,
-    FieldsModule,
-    TeamsModule,
-    EventTypeModule,
-    ManagerTypeModule,
-    PlayerPositionModule,
-    GamePeriodModule,
-    ClubAdminModule,
-    CoachModule,
-    ParentModule,
-    TeamManagerModule,
-    PersonModule,
-    PlayerModule,
-    RefereeModule,
-    SponsorModule,
-    ClubsModule,
-    LeaguesModule,
-    GroupLevelsModule,
+    BaseCompetitionsModule,
+    BaseSportsModule,
+    BaseCountriesModule,
+    BaseFieldsModule,
+    BaseGroupLevelsModule,
+    MemberPersonModule,
+    MemberClubAdminModule,
+    MemberCoachModule,
+    MemberParentModule,
+    MemberTeamManagerModule,
+    MemberPlayerModule,
+    MemberRefereeModule,
+    MemberSponsorModule,
+    OrgClubsModule,
+    OrgLeaguesModule,
+    OrgTeamsModule,
     PlanGamesModule,
     PlanMeetingsModule,
-    PlanTrainingsModule
+    PlanTrainingsModule,
+    SportCoachTypeModule,
+    SportEventTypeModule,
+    SportGamePeriodModule,
+    SportManagerTypeModule,
+    SportPlayerPositionModule,
   ],
   controllers: [AppController],
   providers: [AppService],
 })
-export class AppModule {}
+export class AppModule { }

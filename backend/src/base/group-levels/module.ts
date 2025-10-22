@@ -10,4 +10,5 @@ import { PrismaModule } from '../../prisma/prisma.module';
   providers: [GroupLevelsService],
   exports: [GroupLevelsService]
 })
-export class GroupLevelsModule {}
+
+export class BaseGroupLevelsModule { }

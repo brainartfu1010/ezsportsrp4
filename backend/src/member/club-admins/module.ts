@@ -11,4 +11,4 @@ import { MemberClubAdminDto } from './dto';
   imports: [PrismaModule],
   exports: [ClubAdminService]
 })
-export class ClubAdminModule { }
+export class MemberClubAdminModule { }

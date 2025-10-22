@@ -11,4 +11,4 @@ import { MemberCoachDto } from './dto';
   imports: [PrismaModule],
   exports: [CoachService]
 })
-export class CoachModule { }
+export class MemberCoachModule { }

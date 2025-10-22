@@ -11,4 +11,4 @@ import { MemberRefereeDto } from './dto';
   imports: [PrismaModule],
   exports: [RefereeService]
 })
-export class RefereeModule { }
+export class MemberRefereeModule { }

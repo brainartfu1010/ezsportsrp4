@@ -11,4 +11,4 @@ import { SportPlayerPositionDto } from './dto';
   imports: [PrismaModule],
   exports: [PlayerPositionService]
 })
-export class PlayerPositionModule { }
+export class SportPlayerPositionModule { }

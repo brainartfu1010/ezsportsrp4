@@ -11,4 +11,4 @@ import { MemberParentDto } from './dto';
   imports: [PrismaModule],
   exports: [ParentService]
 })
-export class ParentModule { }
+export class MemberParentModule { }

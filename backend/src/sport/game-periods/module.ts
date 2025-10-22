@@ -11,4 +11,4 @@ import { SportGamePeriodDto } from './dto';
   imports: [PrismaModule],
   exports: [GamePeriodService]
 })
-export class GamePeriodModule { }
+export class SportGamePeriodModule { }

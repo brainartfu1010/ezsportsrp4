@@ -11,4 +11,4 @@ import { MemberSponsorDto } from './dto';
   imports: [PrismaModule],
   exports: [SponsorService]
 })
-export class SponsorModule { }
+export class MemberSponsorModule { }

@@ -11,4 +11,4 @@ import { MemberPlayerDto } from './dto';
   imports: [PrismaModule],
   exports: [PlayerService]
 })
-export class PlayerModule { }
+export class MemberPlayerModule { }

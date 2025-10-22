@@ -11,4 +11,4 @@ import { MemberPersonDto } from './dto';
   imports: [PrismaModule],
   exports: [PersonService]
 })
-export class PersonModule { }
+export class MemberPersonModule { }

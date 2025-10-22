@@ -11,4 +11,4 @@ import { SportEventTypeDto } from './dto';
   imports: [PrismaModule],
   exports: [EventTypeService]
 })
-export class EventTypeModule { }
+export class SportEventTypeModule { }

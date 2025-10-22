@@ -10,4 +10,4 @@ import { PrismaModule } from '../../prisma/prisma.module';
   providers: [TeamsService],
   exports: [TeamsService]
 })
-export class TeamsModule {}
+export class OrgTeamsModule {}
