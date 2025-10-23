@@ -61,7 +61,7 @@ export class AvatarUtils {
    * @param entityId Unique identifier of the entity
    * @returns Base64 encoded image string or null if file not found
    */
-  static getBase64(entityName: string, entityId: string | number): string | null {
+  static getBase64(entityName: string, entityId: string | number | null | undefined): string | null {
     const filePath = path.join(process.cwd(), 'uploads', 'avatars', entityName, `${entityId}.png`);
 
     try {

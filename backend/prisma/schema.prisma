@@ -1,8 +1,8 @@
 generator client {
   provider        = "prisma-client-js"
-  output          = "./generated/prisma"
-  previewFeatures = ["fullTextSearchPostgres", "metrics"]
-  binaryTargets   = ["native", "windows"]
+//  output          = "./generated/prisma"
+//  previewFeatures = ["fullTextSearchPostgres", "metrics"]
+//  binaryTargets   = ["native", "windows"]
 }
 
 datasource db {
@@ -21,7 +21,7 @@ model BaseCompetition {
   endDate     DateTime? @db.Date
   ord         Int?
   createdAt   DateTime? @db.Timestamp(6)
-  updatedAt   DateTime? @db.Timestamp(6)
+  updatedAt   DateTime? @updatedAt
 
   @@index([sportId], map: "base_competitions_sport_id_foreign")
 }
@@ -35,7 +35,7 @@ model BaseCountry {
   isActive  Boolean  @default(true)
   ord       Int      @default(0)
   createdAt DateTime @default(now())
-  updatedAt DateTime
+  updatedAt DateTime @updatedAt
 }
 
 model BaseField {
@@ -48,7 +48,7 @@ model BaseField {
   countryId Int?
   ord       Int      @default(0)
   createdAt DateTime @default(now())
-  updatedAt DateTime
+  updatedAt DateTime @updatedAt
 }
 
 model BaseGroupLevel {
@@ -61,7 +61,7 @@ model BaseGroupLevel {
   skillLevel String?   @db.VarChar(100)
   ord        Int?
   createdAt  DateTime? @db.Timestamp(6)
-  updatedAt  DateTime? @db.Timestamp(6)
+  updatedAt  DateTime? @updatedAt @db.Timestamp(6)
 }
 
 model BaseSport {
@@ -72,7 +72,7 @@ model BaseSport {
   isActive  Boolean  @default(true)
   ord       Int      @default(0)
   createdAt DateTime @default(now())
-  updatedAt DateTime
+  updatedAt DateTime @updatedAt @db.Timestamp(6)
 }
 
 model GameEvent {
@@ -83,7 +83,7 @@ model GameEvent {
   venue         String?   @db.VarChar(100)
   status        String    @db.VarChar(255)
   createdAt     DateTime? @db.Timestamp(6)
-  updatedAt     DateTime? @db.Timestamp(6)
+  updatedAt     DateTime? @updatedAt @db.Timestamp(6)
 
   @@index([competitionId], map: "game_events_competition_id_foreign")
   @@index([sportId], map: "game_events_sport_id_foreign")
@@ -98,7 +98,7 @@ model GameMatche {
   awayTeamScore Int?
   status        String    @db.VarChar(255)
   createdAt     DateTime? @db.Timestamp(6)
-  updatedAt     DateTime? @db.Timestamp(6)
+  updatedAt     DateTime? @updatedAt @db.Timestamp(6)
 
   @@index([awayTeamId], map: "game_matches_away_team_id_foreign")
   @@index([eventId], map: "game_matches_event_id_foreign")

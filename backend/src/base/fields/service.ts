@@ -14,7 +14,8 @@ export class FieldsService {
     const result = await this.prisma.baseField.create({
       data: {
         ...rest,
-        isActive: rest.isActive === 1
+        isActive: rest.isActive === 1,
+        updatedAt: new Date()
       }
     });
 
@@ -78,7 +79,8 @@ export class FieldsService {
         where: { id: Number(id) },
         data: {
           ...rest,
-          isActive: rest.isActive === 1
+          isActive: rest.isActive === 1,
+          updatedAt: new Date()
         }
       });
 

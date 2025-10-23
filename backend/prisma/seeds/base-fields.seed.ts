@@ -56,7 +56,7 @@ export async function seedFields(prisma: PrismaClient) {
       })
     } else {
       await prisma.baseField.create({
-        data: field,
+        data: {...field, updatedAt: new Date()},
       })
     }
   }

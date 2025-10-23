@@ -61,13 +61,12 @@ const SportEditModal: React.FC<SportEditModalProps> = ({
         .max(500, "Description cannot exceed 500 characters")
         .optional(),
       control: <Textarea rows={3} />,
-      description: "Optional description of the sport",
+      // description: "Optional description of the sport",
     },
     isActive: {
       label: "Active",
       schema: z.boolean(),
-      control: <Switch checked={sport?.isActive ?? false} />,
-      description: "Toggle sport's active status",
+      control: <Switch onChange={value => console.log(value)} />,
     },
   };
 
@@ -136,9 +135,11 @@ const SportEditModal: React.FC<SportEditModalProps> = ({
         <Separator orientation="vertical" />
         <div className="space-y-4 w-full">
           <FormItem key="name" />
-          <FormItem key="abbr" />
+          <div className="grid grid-cols-2 gap-4">
+            <FormItem key="abbr" />
+            <FormItem key="isActive" />
+          </div>
           <FormItem key="note" />
-          <FormItem key="isActive" />
         </div>
       </Form>
 

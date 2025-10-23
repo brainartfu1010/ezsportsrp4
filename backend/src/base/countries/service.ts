@@ -16,7 +16,8 @@ export class CountriesService {
       data: {
         ...rest,
         code: rest.code || '',
-        isActive: rest.isActive === 1
+        isActive: rest.isActive === 1,
+        updatedAt: new Date()
       }
     });
 
@@ -45,7 +46,7 @@ export class CountriesService {
     // Attach avatars
     return Promise.all(countries.map(async country => ({
       ...country,
-      base64: await AvatarUtils.getBase64('countries', country.id)
+      base64: AvatarUtils.getBase64('countries', country.id)
     })));
   }
 

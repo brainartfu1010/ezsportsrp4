@@ -1,8 +1,8 @@
 generator client {
-  provider        = "prisma-client-js"
-  output          = "./generated/prisma"
-  previewFeatures = ["fullTextSearchPostgres", "metrics"]
-  binaryTargets   = ["native", "windows"]
+  provider      = "prisma-client-js"
+  output        = "./generated/prisma"
+  //  previewFeatures = ["fullTextSearchPostgres", "metrics"]
+  binaryTargets = ["native", "windows"]
 }
 
 datasource db {

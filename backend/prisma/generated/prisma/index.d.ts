@@ -373,17 +373,6 @@ export class PrismaClient<
   $transaction<R>(fn: (prisma: Omit<PrismaClient, runtime.ITXClientDenyList>) => $Utils.JsPromise<R>, options?: { maxWait?: number, timeout?: number, isolationLevel?: Prisma.TransactionIsolationLevel }): $Utils.JsPromise<R>
 
 
-  /**
-   * Gives access to the client metrics in json or prometheus format.
-   * 
-   * @example
-   * ```
-   * const metrics = await prisma.$metrics.json()
-   * // or
-   * const metrics = await prisma.$metrics.prometheus()
-   * ```
-   */
-  readonly $metrics: runtime.MetricsClient
   $extends: $Extensions.ExtendsHook<"extends", Prisma.TypeMapCb<ClientOptions>, ExtArgs, $Utils.Call<Prisma.TypeMapCb<ClientOptions>, {
     extArgs: ExtArgs
   }>>
@@ -935,8 +924,8 @@ export namespace Prisma {
   export import Exact = $Public.Exact
 
   /**
-   * Prisma Client JS version: 6.17.1
-   * Query Engine version: 272a37d34178c2894197e17273bf937f25acdeac
+   * Prisma Client JS version: 6.18.0
+   * Query Engine version: 34b5a692b7bd79939a9a2c3ef97d816e749cda2f
    */
   export type PrismaVersion = {
     client: string
@@ -949,6 +938,7 @@ export namespace Prisma {
    */
 
 
+  export import Bytes = runtime.Bytes
   export import JsonObject = runtime.JsonObject
   export import JsonArray = runtime.JsonArray
   export import JsonValue = runtime.JsonValue
@@ -62229,497 +62219,6 @@ export namespace Prisma {
   export type NullsOrder = (typeof NullsOrder)[keyof typeof NullsOrder]
 
 
-  export const BaseCompetitionOrderByRelevanceFieldEnum: {
-    name: 'name',
-    abbr: 'abbr',
-    note: 'note',
-    status: 'status'
-  };
-
-  export type BaseCompetitionOrderByRelevanceFieldEnum = (typeof BaseCompetitionOrderByRelevanceFieldEnum)[keyof typeof BaseCompetitionOrderByRelevanceFieldEnum]
-
-
-  export const BaseCountryOrderByRelevanceFieldEnum: {
-    name: 'name',
-    abbr: 'abbr',
-    code: 'code',
-    note: 'note'
-  };
-
-  export type BaseCountryOrderByRelevanceFieldEnum = (typeof BaseCountryOrderByRelevanceFieldEnum)[keyof typeof BaseCountryOrderByRelevanceFieldEnum]
-
-
-  export const BaseFieldOrderByRelevanceFieldEnum: {
-    name: 'name',
-    abbr: 'abbr',
-    note: 'note'
-  };
-
-  export type BaseFieldOrderByRelevanceFieldEnum = (typeof BaseFieldOrderByRelevanceFieldEnum)[keyof typeof BaseFieldOrderByRelevanceFieldEnum]
-
-
-  export const BaseGroupLevelOrderByRelevanceFieldEnum: {
-    name: 'name',
-    abbr: 'abbr',
-    note: 'note',
-    skillLevel: 'skillLevel'
-  };
-
-  export type BaseGroupLevelOrderByRelevanceFieldEnum = (typeof BaseGroupLevelOrderByRelevanceFieldEnum)[keyof typeof BaseGroupLevelOrderByRelevanceFieldEnum]
-
-
-  export const BaseSportOrderByRelevanceFieldEnum: {
-    name: 'name',
-    abbr: 'abbr',
-    note: 'note'
-  };
-
-  export type BaseSportOrderByRelevanceFieldEnum = (typeof BaseSportOrderByRelevanceFieldEnum)[keyof typeof BaseSportOrderByRelevanceFieldEnum]
-
-
-  export const GameEventOrderByRelevanceFieldEnum: {
-    venue: 'venue',
-    status: 'status'
-  };
-
-  export type GameEventOrderByRelevanceFieldEnum = (typeof GameEventOrderByRelevanceFieldEnum)[keyof typeof GameEventOrderByRelevanceFieldEnum]
-
-
-  export const GameMatcheOrderByRelevanceFieldEnum: {
-    status: 'status'
-  };
-
-  export type GameMatcheOrderByRelevanceFieldEnum = (typeof GameMatcheOrderByRelevanceFieldEnum)[keyof typeof GameMatcheOrderByRelevanceFieldEnum]
-
-
-  export const MatchEventOrderByRelevanceFieldEnum: {
-    eventType: 'eventType',
-    note: 'note',
-    eventData: 'eventData',
-    notes: 'notes'
-  };
-
-  export type MatchEventOrderByRelevanceFieldEnum = (typeof MatchEventOrderByRelevanceFieldEnum)[keyof typeof MatchEventOrderByRelevanceFieldEnum]
-
-
-  export const MatchLineupOrderByRelevanceFieldEnum: {
-    formation: 'formation',
-    lineupData: 'lineupData',
-    notes: 'notes'
-  };
-
-  export type MatchLineupOrderByRelevanceFieldEnum = (typeof MatchLineupOrderByRelevanceFieldEnum)[keyof typeof MatchLineupOrderByRelevanceFieldEnum]
-
-
-  export const MatchMediaOrderByRelevanceFieldEnum: {
-    mediaType: 'mediaType',
-    fileName: 'fileName',
-    filePath: 'filePath',
-    mimeType: 'mimeType',
-    note: 'note',
-    category: 'category',
-    notes: 'notes'
-  };
-
-  export type MatchMediaOrderByRelevanceFieldEnum = (typeof MatchMediaOrderByRelevanceFieldEnum)[keyof typeof MatchMediaOrderByRelevanceFieldEnum]
-
-
-  export const MatchRosterOrderByRelevanceFieldEnum: {
-    position: 'position',
-    jerseyNumber: 'jerseyNumber',
-    substitutionReason: 'substitutionReason',
-    status: 'status',
-    notes: 'notes'
-  };
-
-  export type MatchRosterOrderByRelevanceFieldEnum = (typeof MatchRosterOrderByRelevanceFieldEnum)[keyof typeof MatchRosterOrderByRelevanceFieldEnum]
-
-
-  export const MatchStatisticOrderByRelevanceFieldEnum: {
-    notes: 'notes'
-  };
-
-  export type MatchStatisticOrderByRelevanceFieldEnum = (typeof MatchStatisticOrderByRelevanceFieldEnum)[keyof typeof MatchStatisticOrderByRelevanceFieldEnum]
-
-
-  export const MemberClubAdminOrderByRelevanceFieldEnum: {
-    emergencyContactName: 'emergencyContactName',
-    emergencyContactPhone: 'emergencyContactPhone',
-    status: 'status',
-    bio: 'bio'
-  };
-
-  export type MemberClubAdminOrderByRelevanceFieldEnum = (typeof MemberClubAdminOrderByRelevanceFieldEnum)[keyof typeof MemberClubAdminOrderByRelevanceFieldEnum]
-
-
-  export const MemberCoacheOrderByRelevanceFieldEnum: {
-    licenseNumber: 'licenseNumber',
-    certification: 'certification',
-    specialization: 'specialization',
-    emergencyContactName: 'emergencyContactName',
-    emergencyContactPhone: 'emergencyContactPhone',
-    status: 'status',
-    bio: 'bio'
-  };
-
-  export type MemberCoacheOrderByRelevanceFieldEnum = (typeof MemberCoacheOrderByRelevanceFieldEnum)[keyof typeof MemberCoacheOrderByRelevanceFieldEnum]
-
-
-  export const MemberParentOrderByRelevanceFieldEnum: {
-    status: 'status',
-    notes: 'notes'
-  };
-
-  export type MemberParentOrderByRelevanceFieldEnum = (typeof MemberParentOrderByRelevanceFieldEnum)[keyof typeof MemberParentOrderByRelevanceFieldEnum]
-
-
-  export const MemberPersonOrderByRelevanceFieldEnum: {
-    firstName: 'firstName',
-    lastName: 'lastName',
-    email: 'email',
-    phone: 'phone',
-    gender: 'gender',
-    address: 'address',
-    city: 'city',
-    state: 'state',
-    zipCode: 'zipCode',
-    photoPath: 'photoPath',
-    status: 'status'
-  };
-
-  export type MemberPersonOrderByRelevanceFieldEnum = (typeof MemberPersonOrderByRelevanceFieldEnum)[keyof typeof MemberPersonOrderByRelevanceFieldEnum]
-
-
-  export const MemberPlayerOrderByRelevanceFieldEnum: {
-    preferredFoot: 'preferredFoot',
-    emergencyContactName: 'emergencyContactName',
-    emergencyContactPhone: 'emergencyContactPhone',
-    status: 'status',
-    bio: 'bio'
-  };
-
-  export type MemberPlayerOrderByRelevanceFieldEnum = (typeof MemberPlayerOrderByRelevanceFieldEnum)[keyof typeof MemberPlayerOrderByRelevanceFieldEnum]
-
-
-  export const MemberRefereeOrderByRelevanceFieldEnum: {
-    licenseNumber: 'licenseNumber',
-    licenseLevel: 'licenseLevel',
-    certification: 'certification',
-    refereeType: 'refereeType',
-    specialization: 'specialization',
-    languages: 'languages',
-    emergencyContactName: 'emergencyContactName',
-    emergencyContactPhone: 'emergencyContactPhone',
-    status: 'status',
-    bio: 'bio'
-  };
-
-  export type MemberRefereeOrderByRelevanceFieldEnum = (typeof MemberRefereeOrderByRelevanceFieldEnum)[keyof typeof MemberRefereeOrderByRelevanceFieldEnum]
-
-
-  export const MemberSponsorOrderByRelevanceFieldEnum: {
-    companyName: 'companyName',
-    contactPerson: 'contactPerson',
-    email: 'email',
-    phone: 'phone',
-    website: 'website',
-    sponsorLevel: 'sponsorLevel',
-    benefits: 'benefits',
-    logoPath: 'logoPath',
-    status: 'status',
-    notes: 'notes'
-  };
-
-  export type MemberSponsorOrderByRelevanceFieldEnum = (typeof MemberSponsorOrderByRelevanceFieldEnum)[keyof typeof MemberSponsorOrderByRelevanceFieldEnum]
-
-
-  export const MemberTeamManagerOrderByRelevanceFieldEnum: {
-    emergencyContactName: 'emergencyContactName',
-    emergencyContactPhone: 'emergencyContactPhone',
-    status: 'status',
-    bio: 'bio'
-  };
-
-  export type MemberTeamManagerOrderByRelevanceFieldEnum = (typeof MemberTeamManagerOrderByRelevanceFieldEnum)[keyof typeof MemberTeamManagerOrderByRelevanceFieldEnum]
-
-
-  export const OrgClubOrderByRelevanceFieldEnum: {
-    name: 'name',
-    abbr: 'abbr',
-    note: 'note',
-    address: 'address',
-    contactEmail: 'contactEmail',
-    contactPhone: 'contactPhone',
-    website: 'website',
-    status: 'status'
-  };
-
-  export type OrgClubOrderByRelevanceFieldEnum = (typeof OrgClubOrderByRelevanceFieldEnum)[keyof typeof OrgClubOrderByRelevanceFieldEnum]
-
-
-  export const OrgLeagueOrderByRelevanceFieldEnum: {
-    name: 'name',
-    abbr: 'abbr',
-    note: 'note',
-    season: 'season',
-    subscribeEmail: 'subscribeEmail',
-    rules: 'rules',
-    status: 'status'
-  };
-
-  export type OrgLeagueOrderByRelevanceFieldEnum = (typeof OrgLeagueOrderByRelevanceFieldEnum)[keyof typeof OrgLeagueOrderByRelevanceFieldEnum]
-
-
-  export const OrgTeamOrderByRelevanceFieldEnum: {
-    name: 'name',
-    abbr: 'abbr',
-    note: 'note',
-    ageGroup: 'ageGroup',
-    skillLevel: 'skillLevel',
-    color1: 'color1',
-    color2: 'color2'
-  };
-
-  export type OrgTeamOrderByRelevanceFieldEnum = (typeof OrgTeamOrderByRelevanceFieldEnum)[keyof typeof OrgTeamOrderByRelevanceFieldEnum]
-
-
-  export const PlanGameOrderByRelevanceFieldEnum: {
-    gameName: 'gameName',
-    uniform: 'uniform',
-    status: 'status'
-  };
-
-  export type PlanGameOrderByRelevanceFieldEnum = (typeof PlanGameOrderByRelevanceFieldEnum)[keyof typeof PlanGameOrderByRelevanceFieldEnum]
-
-
-  export const PlanMeetingOrderByRelevanceFieldEnum: {
-    title: 'title',
-    content: 'content'
-  };
-
-  export type PlanMeetingOrderByRelevanceFieldEnum = (typeof PlanMeetingOrderByRelevanceFieldEnum)[keyof typeof PlanMeetingOrderByRelevanceFieldEnum]
-
-
-  export const PlanTrainingOrderByRelevanceFieldEnum: {
-    trainingContent: 'trainingContent',
-    status: 'status'
-  };
-
-  export type PlanTrainingOrderByRelevanceFieldEnum = (typeof PlanTrainingOrderByRelevanceFieldEnum)[keyof typeof PlanTrainingOrderByRelevanceFieldEnum]
-
-
-  export const RelClubClubAdminOrderByRelevanceFieldEnum: {
-    status: 'status',
-    role: 'role',
-    notes: 'notes'
-  };
-
-  export type RelClubClubAdminOrderByRelevanceFieldEnum = (typeof RelClubClubAdminOrderByRelevanceFieldEnum)[keyof typeof RelClubClubAdminOrderByRelevanceFieldEnum]
-
-
-  export const RelCompetitionGroupLevelOrderByRelevanceFieldEnum: {
-    notes: 'notes'
-  };
-
-  export type RelCompetitionGroupLevelOrderByRelevanceFieldEnum = (typeof RelCompetitionGroupLevelOrderByRelevanceFieldEnum)[keyof typeof RelCompetitionGroupLevelOrderByRelevanceFieldEnum]
-
-
-  export const RelFieldSportOrderByRelevanceFieldEnum: {
-    notes: 'notes'
-  };
-
-  export type RelFieldSportOrderByRelevanceFieldEnum = (typeof RelFieldSportOrderByRelevanceFieldEnum)[keyof typeof RelFieldSportOrderByRelevanceFieldEnum]
-
-
-  export const RelMatchRefereeOrderByRelevanceFieldEnum: {
-    status: 'status',
-    notes: 'notes'
-  };
-
-  export type RelMatchRefereeOrderByRelevanceFieldEnum = (typeof RelMatchRefereeOrderByRelevanceFieldEnum)[keyof typeof RelMatchRefereeOrderByRelevanceFieldEnum]
-
-
-  export const RelPlayerParentOrderByRelevanceFieldEnum: {
-    relationship: 'relationship',
-    occupation: 'occupation',
-    employer: 'employer',
-    workPhone: 'workPhone',
-    status: 'status',
-    notes: 'notes'
-  };
-
-  export type RelPlayerParentOrderByRelevanceFieldEnum = (typeof RelPlayerParentOrderByRelevanceFieldEnum)[keyof typeof RelPlayerParentOrderByRelevanceFieldEnum]
-
-
-  export const RelSponsorClubOrderByRelevanceFieldEnum: {
-    status: 'status',
-    benefits: 'benefits',
-    notes: 'notes'
-  };
-
-  export type RelSponsorClubOrderByRelevanceFieldEnum = (typeof RelSponsorClubOrderByRelevanceFieldEnum)[keyof typeof RelSponsorClubOrderByRelevanceFieldEnum]
-
-
-  export const RelSponsorLeagueOrderByRelevanceFieldEnum: {
-    status: 'status',
-    benefits: 'benefits',
-    notes: 'notes'
-  };
-
-  export type RelSponsorLeagueOrderByRelevanceFieldEnum = (typeof RelSponsorLeagueOrderByRelevanceFieldEnum)[keyof typeof RelSponsorLeagueOrderByRelevanceFieldEnum]
-
-
-  export const RelSponsorTeamOrderByRelevanceFieldEnum: {
-    status: 'status',
-    benefits: 'benefits',
-    notes: 'notes'
-  };
-
-  export type RelSponsorTeamOrderByRelevanceFieldEnum = (typeof RelSponsorTeamOrderByRelevanceFieldEnum)[keyof typeof RelSponsorTeamOrderByRelevanceFieldEnum]
-
-
-  export const RelTeamCoachOrderByRelevanceFieldEnum: {
-    status: 'status',
-    responsibilities: 'responsibilities',
-    notes: 'notes'
-  };
-
-  export type RelTeamCoachOrderByRelevanceFieldEnum = (typeof RelTeamCoachOrderByRelevanceFieldEnum)[keyof typeof RelTeamCoachOrderByRelevanceFieldEnum]
-
-
-  export const RelTeamPlayerOrderByRelevanceFieldEnum: {
-    status: 'status',
-    jerseyNumber: 'jerseyNumber',
-    notes: 'notes'
-  };
-
-  export type RelTeamPlayerOrderByRelevanceFieldEnum = (typeof RelTeamPlayerOrderByRelevanceFieldEnum)[keyof typeof RelTeamPlayerOrderByRelevanceFieldEnum]
-
-
-  export const RelTeamTeamManagerOrderByRelevanceFieldEnum: {
-    status: 'status',
-    managerTypeId: 'managerTypeId',
-    responsibilities: 'responsibilities',
-    notes: 'notes'
-  };
-
-  export type RelTeamTeamManagerOrderByRelevanceFieldEnum = (typeof RelTeamTeamManagerOrderByRelevanceFieldEnum)[keyof typeof RelTeamTeamManagerOrderByRelevanceFieldEnum]
-
-
-  export const SportCoachTypeOrderByRelevanceFieldEnum: {
-    name: 'name',
-    abbr: 'abbr',
-    color: 'color',
-    note: 'note'
-  };
-
-  export type SportCoachTypeOrderByRelevanceFieldEnum = (typeof SportCoachTypeOrderByRelevanceFieldEnum)[keyof typeof SportCoachTypeOrderByRelevanceFieldEnum]
-
-
-  export const SportEventTypeOrderByRelevanceFieldEnum: {
-    name: 'name',
-    abbr: 'abbr',
-    code: 'code',
-    note: 'note'
-  };
-
-  export type SportEventTypeOrderByRelevanceFieldEnum = (typeof SportEventTypeOrderByRelevanceFieldEnum)[keyof typeof SportEventTypeOrderByRelevanceFieldEnum]
-
-
-  export const SportGamePeriodOrderByRelevanceFieldEnum: {
-    name: 'name',
-    note: 'note'
-  };
-
-  export type SportGamePeriodOrderByRelevanceFieldEnum = (typeof SportGamePeriodOrderByRelevanceFieldEnum)[keyof typeof SportGamePeriodOrderByRelevanceFieldEnum]
-
-
-  export const SportManagerTypeOrderByRelevanceFieldEnum: {
-    name: 'name',
-    abbr: 'abbr',
-    color: 'color',
-    note: 'note'
-  };
-
-  export type SportManagerTypeOrderByRelevanceFieldEnum = (typeof SportManagerTypeOrderByRelevanceFieldEnum)[keyof typeof SportManagerTypeOrderByRelevanceFieldEnum]
-
-
-  export const SportPlayerPositionOrderByRelevanceFieldEnum: {
-    name: 'name',
-    abbr: 'abbr',
-    note: 'note'
-  };
-
-  export type SportPlayerPositionOrderByRelevanceFieldEnum = (typeof SportPlayerPositionOrderByRelevanceFieldEnum)[keyof typeof SportPlayerPositionOrderByRelevanceFieldEnum]
-
-
-  export const SportRefereeTypeOrderByRelevanceFieldEnum: {
-    name: 'name',
-    abbr: 'abbr',
-    color: 'color',
-    note: 'note'
-  };
-
-  export type SportRefereeTypeOrderByRelevanceFieldEnum = (typeof SportRefereeTypeOrderByRelevanceFieldEnum)[keyof typeof SportRefereeTypeOrderByRelevanceFieldEnum]
-
-
-  export const SubFeatureOrderByRelevanceFieldEnum: {
-    name: 'name',
-    note: 'note',
-    category: 'category',
-    icon: 'icon'
-  };
-
-  export type SubFeatureOrderByRelevanceFieldEnum = (typeof SubFeatureOrderByRelevanceFieldEnum)[keyof typeof SubFeatureOrderByRelevanceFieldEnum]
-
-
-  export const SubForTeamOrderByRelevanceFieldEnum: {
-    status: 'status',
-    paymentMethod: 'paymentMethod',
-    notes: 'notes'
-  };
-
-  export type SubForTeamOrderByRelevanceFieldEnum = (typeof SubForTeamOrderByRelevanceFieldEnum)[keyof typeof SubForTeamOrderByRelevanceFieldEnum]
-
-
-  export const SubForUserOrderByRelevanceFieldEnum: {
-    status: 'status',
-    paymentMethod: 'paymentMethod',
-    notes: 'notes'
-  };
-
-  export type SubForUserOrderByRelevanceFieldEnum = (typeof SubForUserOrderByRelevanceFieldEnum)[keyof typeof SubForUserOrderByRelevanceFieldEnum]
-
-
-  export const SubPlanOrderByRelevanceFieldEnum: {
-    name: 'name',
-    planType: 'planType',
-    note: 'note',
-    features: 'features'
-  };
-
-  export type SubPlanOrderByRelevanceFieldEnum = (typeof SubPlanOrderByRelevanceFieldEnum)[keyof typeof SubPlanOrderByRelevanceFieldEnum]
-
-
-  export const SubPlanFeatureOrderByRelevanceFieldEnum: {
-    notes: 'notes'
-  };
-
-  export type SubPlanFeatureOrderByRelevanceFieldEnum = (typeof SubPlanFeatureOrderByRelevanceFieldEnum)[keyof typeof SubPlanFeatureOrderByRelevanceFieldEnum]
-
-
-  export const SysUserOrderByRelevanceFieldEnum: {
-    firstName: 'firstName',
-    lastName: 'lastName',
-    email: 'email',
-    password: 'password',
-    status: 'status',
-    rememberToken: 'rememberToken'
-  };
-
-  export type SysUserOrderByRelevanceFieldEnum = (typeof SysUserOrderByRelevanceFieldEnum)[keyof typeof SysUserOrderByRelevanceFieldEnum]
-
-
   /**
    * Field references
    */
@@ -62848,7 +62347,6 @@ export namespace Prisma {
     ord?: SortOrderInput | SortOrder
     createdAt?: SortOrderInput | SortOrder
     updatedAt?: SortOrderInput | SortOrder
-    _relevance?: BaseCompetitionOrderByRelevanceInput
   }
 
   export type BaseCompetitionWhereUniqueInput = Prisma.AtLeast<{
@@ -62929,7 +62427,6 @@ export namespace Prisma {
     ord?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
-    _relevance?: BaseCountryOrderByRelevanceInput
   }
 
   export type BaseCountryWhereUniqueInput = Prisma.AtLeast<{
@@ -63006,7 +62503,6 @@ export namespace Prisma {
     ord?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
-    _relevance?: BaseFieldOrderByRelevanceInput
   }
 
   export type BaseFieldWhereUniqueInput = Prisma.AtLeast<{
@@ -63086,7 +62582,6 @@ export namespace Prisma {
     ord?: SortOrderInput | SortOrder
     createdAt?: SortOrderInput | SortOrder
     updatedAt?: SortOrderInput | SortOrder
-    _relevance?: BaseGroupLevelOrderByRelevanceInput
   }
 
   export type BaseGroupLevelWhereUniqueInput = Prisma.AtLeast<{
@@ -63162,7 +62657,6 @@ export namespace Prisma {
     ord?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
-    _relevance?: BaseSportOrderByRelevanceInput
   }
 
   export type BaseSportWhereUniqueInput = Prisma.AtLeast<{
@@ -63232,7 +62726,6 @@ export namespace Prisma {
     status?: SortOrder
     createdAt?: SortOrderInput | SortOrder
     updatedAt?: SortOrderInput | SortOrder
-    _relevance?: GameEventOrderByRelevanceInput
   }
 
   export type GameEventWhereUniqueInput = Prisma.AtLeast<{
@@ -63304,7 +62797,6 @@ export namespace Prisma {
     status?: SortOrder
     createdAt?: SortOrderInput | SortOrder
     updatedAt?: SortOrderInput | SortOrder
-    _relevance?: GameMatcheOrderByRelevanceInput
   }
 
   export type GameMatcheWhereUniqueInput = Prisma.AtLeast<{
@@ -63395,7 +62887,6 @@ export namespace Prisma {
     ord?: SortOrder
     createdAt?: SortOrderInput | SortOrder
     updatedAt?: SortOrderInput | SortOrder
-    _relevance?: MatchEventOrderByRelevanceInput
   }
 
   export type MatchEventWhereUniqueInput = Prisma.AtLeast<{
@@ -63500,7 +62991,6 @@ export namespace Prisma {
     ord?: SortOrder
     createdAt?: SortOrderInput | SortOrder
     updatedAt?: SortOrderInput | SortOrder
-    _relevance?: MatchLineupOrderByRelevanceInput
   }
 
   export type MatchLineupWhereUniqueInput = Prisma.AtLeast<{
@@ -63599,7 +63089,6 @@ export namespace Prisma {
     ord?: SortOrder
     createdAt?: SortOrderInput | SortOrder
     updatedAt?: SortOrderInput | SortOrder
-    _relevance?: MatchMediaOrderByRelevanceInput
   }
 
   export type MatchMediaWhereUniqueInput = Prisma.AtLeast<{
@@ -63711,7 +63200,6 @@ export namespace Prisma {
     ord?: SortOrder
     createdAt?: SortOrderInput | SortOrder
     updatedAt?: SortOrderInput | SortOrder
-    _relevance?: MatchRosterOrderByRelevanceInput
   }
 
   export type MatchRosterWhereUniqueInput = Prisma.AtLeast<{
@@ -63849,7 +63337,6 @@ export namespace Prisma {
     ord?: SortOrder
     createdAt?: SortOrderInput | SortOrder
     updatedAt?: SortOrderInput | SortOrder
-    _relevance?: MatchStatisticOrderByRelevanceInput
   }
 
   export type MatchStatisticWhereUniqueInput = Prisma.AtLeast<{
@@ -63984,7 +63471,6 @@ export namespace Prisma {
     ord?: SortOrder
     createdAt?: SortOrderInput | SortOrder
     updatedAt?: SortOrderInput | SortOrder
-    _relevance?: MemberClubAdminOrderByRelevanceInput
   }
 
   export type MemberClubAdminWhereUniqueInput = Prisma.AtLeast<{
@@ -64068,7 +63554,6 @@ export namespace Prisma {
     ord?: SortOrderInput | SortOrder
     createdAt?: SortOrderInput | SortOrder
     updatedAt?: SortOrderInput | SortOrder
-    _relevance?: MemberCoacheOrderByRelevanceInput
   }
 
   export type MemberCoacheWhereUniqueInput = Prisma.AtLeast<{
@@ -64148,7 +63633,6 @@ export namespace Prisma {
     ord?: SortOrder
     createdAt?: SortOrderInput | SortOrder
     updatedAt?: SortOrderInput | SortOrder
-    _relevance?: MemberParentOrderByRelevanceInput
   }
 
   export type MemberParentWhereUniqueInput = Prisma.AtLeast<{
@@ -64231,7 +63715,6 @@ export namespace Prisma {
     status?: SortOrder
     createdAt?: SortOrderInput | SortOrder
     updatedAt?: SortOrderInput | SortOrder
-    _relevance?: MemberPersonOrderByRelevanceInput
   }
 
   export type MemberPersonWhereUniqueInput = Prisma.AtLeast<{
@@ -64337,7 +63820,6 @@ export namespace Prisma {
     ord?: SortOrder
     createdAt?: SortOrderInput | SortOrder
     updatedAt?: SortOrderInput | SortOrder
-    _relevance?: MemberPlayerOrderByRelevanceInput
   }
 
   export type MemberPlayerWhereUniqueInput = Prisma.AtLeast<{
@@ -64441,7 +63923,6 @@ export namespace Prisma {
     ord?: SortOrder
     createdAt?: SortOrderInput | SortOrder
     updatedAt?: SortOrderInput | SortOrder
-    _relevance?: MemberRefereeOrderByRelevanceInput
   }
 
   export type MemberRefereeWhereUniqueInput = Prisma.AtLeast<{
@@ -64553,7 +64034,6 @@ export namespace Prisma {
     ord?: SortOrder
     createdAt?: SortOrderInput | SortOrder
     updatedAt?: SortOrderInput | SortOrder
-    _relevance?: MemberSponsorOrderByRelevanceInput
   }
 
   export type MemberSponsorWhereUniqueInput = Prisma.AtLeast<{
@@ -64654,7 +64134,6 @@ export namespace Prisma {
     ord?: SortOrder
     createdAt?: SortOrderInput | SortOrder
     updatedAt?: SortOrderInput | SortOrder
-    _relevance?: MemberTeamManagerOrderByRelevanceInput
   }
 
   export type MemberTeamManagerWhereUniqueInput = Prisma.AtLeast<{
@@ -64740,7 +64219,6 @@ export namespace Prisma {
     ord?: SortOrderInput | SortOrder
     createdAt?: SortOrderInput | SortOrder
     updatedAt?: SortOrderInput | SortOrder
-    _relevance?: OrgClubOrderByRelevanceInput
   }
 
   export type OrgClubWhereUniqueInput = Prisma.AtLeast<{
@@ -64845,7 +64323,6 @@ export namespace Prisma {
     ord?: SortOrderInput | SortOrder
     createdAt?: SortOrderInput | SortOrder
     updatedAt?: SortOrderInput | SortOrder
-    _relevance?: OrgLeagueOrderByRelevanceInput
   }
 
   export type OrgLeagueWhereUniqueInput = Prisma.AtLeast<{
@@ -64963,7 +64440,6 @@ export namespace Prisma {
     ord?: SortOrderInput | SortOrder
     createdAt?: SortOrderInput | SortOrder
     updatedAt?: SortOrderInput | SortOrder
-    _relevance?: OrgTeamOrderByRelevanceInput
   }
 
   export type OrgTeamWhereUniqueInput = Prisma.AtLeast<{
@@ -65074,7 +64550,6 @@ export namespace Prisma {
     createdBy?: SortOrderInput | SortOrder
     createdAt?: SortOrderInput | SortOrder
     updatedAt?: SortOrderInput | SortOrder
-    _relevance?: PlanGameOrderByRelevanceInput
   }
 
   export type PlanGameWhereUniqueInput = Prisma.AtLeast<{
@@ -65173,7 +64648,6 @@ export namespace Prisma {
     createdBy?: SortOrderInput | SortOrder
     createdAt?: SortOrderInput | SortOrder
     updatedAt?: SortOrderInput | SortOrder
-    _relevance?: PlanMeetingOrderByRelevanceInput
   }
 
   export type PlanMeetingWhereUniqueInput = Prisma.AtLeast<{
@@ -65263,7 +64737,6 @@ export namespace Prisma {
     createdBy?: SortOrderInput | SortOrder
     createdAt?: SortOrderInput | SortOrder
     updatedAt?: SortOrderInput | SortOrder
-    _relevance?: PlanTrainingOrderByRelevanceInput
   }
 
   export type PlanTrainingWhereUniqueInput = Prisma.AtLeast<{
@@ -65357,7 +64830,6 @@ export namespace Prisma {
     ord?: SortOrder
     createdAt?: SortOrderInput | SortOrder
     updatedAt?: SortOrderInput | SortOrder
-    _relevance?: RelClubClubAdminOrderByRelevanceInput
   }
 
   export type RelClubClubAdminWhereUniqueInput = Prisma.AtLeast<{
@@ -65446,7 +64918,6 @@ export namespace Prisma {
     ord?: SortOrder
     createdAt?: SortOrderInput | SortOrder
     updatedAt?: SortOrderInput | SortOrder
-    _relevance?: RelCompetitionGroupLevelOrderByRelevanceInput
   }
 
   export type RelCompetitionGroupLevelWhereUniqueInput = Prisma.AtLeast<{
@@ -65517,7 +64988,6 @@ export namespace Prisma {
     ord?: SortOrder
     createdAt?: SortOrderInput | SortOrder
     updatedAt?: SortOrderInput | SortOrder
-    _relevance?: RelFieldSportOrderByRelevanceInput
   }
 
   export type RelFieldSportWhereUniqueInput = Prisma.AtLeast<{
@@ -65596,7 +65066,6 @@ export namespace Prisma {
     ord?: SortOrder
     createdAt?: SortOrderInput | SortOrder
     updatedAt?: SortOrderInput | SortOrder
-    _relevance?: RelMatchRefereeOrderByRelevanceInput
   }
 
   export type RelMatchRefereeWhereUniqueInput = Prisma.AtLeast<{
@@ -65697,7 +65166,6 @@ export namespace Prisma {
     ord?: SortOrder
     createdAt?: SortOrderInput | SortOrder
     updatedAt?: SortOrderInput | SortOrder
-    _relevance?: RelPlayerParentOrderByRelevanceInput
   }
 
   export type RelPlayerParentWhereUniqueInput = Prisma.AtLeast<{
@@ -65803,7 +65271,6 @@ export namespace Prisma {
     ord?: SortOrder
     createdAt?: SortOrderInput | SortOrder
     updatedAt?: SortOrderInput | SortOrder
-    _relevance?: RelSponsorClubOrderByRelevanceInput
   }
 
   export type RelSponsorClubWhereUniqueInput = Prisma.AtLeast<{
@@ -65894,7 +65361,6 @@ export namespace Prisma {
     ord?: SortOrder
     createdAt?: SortOrderInput | SortOrder
     updatedAt?: SortOrderInput | SortOrder
-    _relevance?: RelSponsorLeagueOrderByRelevanceInput
   }
 
   export type RelSponsorLeagueWhereUniqueInput = Prisma.AtLeast<{
@@ -65985,7 +65451,6 @@ export namespace Prisma {
     ord?: SortOrder
     createdAt?: SortOrderInput | SortOrder
     updatedAt?: SortOrderInput | SortOrder
-    _relevance?: RelSponsorTeamOrderByRelevanceInput
   }
 
   export type RelSponsorTeamWhereUniqueInput = Prisma.AtLeast<{
@@ -66082,7 +65547,6 @@ export namespace Prisma {
     ord?: SortOrder
     createdAt?: SortOrderInput | SortOrder
     updatedAt?: SortOrderInput | SortOrder
-    _relevance?: RelTeamCoachOrderByRelevanceInput
   }
 
   export type RelTeamCoachWhereUniqueInput = Prisma.AtLeast<{
@@ -66182,7 +65646,6 @@ export namespace Prisma {
     ord?: SortOrder
     createdAt?: SortOrderInput | SortOrder
     updatedAt?: SortOrderInput | SortOrder
-    _relevance?: RelTeamPlayerOrderByRelevanceInput
   }
 
   export type RelTeamPlayerWhereUniqueInput = Prisma.AtLeast<{
@@ -66279,7 +65742,6 @@ export namespace Prisma {
     ord?: SortOrder
     createdAt?: SortOrderInput | SortOrder
     updatedAt?: SortOrderInput | SortOrder
-    _relevance?: RelTeamTeamManagerOrderByRelevanceInput
   }
 
   export type RelTeamTeamManagerWhereUniqueInput = Prisma.AtLeast<{
@@ -66375,7 +65837,6 @@ export namespace Prisma {
     ord?: SortOrder
     createdAt?: SortOrderInput | SortOrder
     updatedAt?: SortOrderInput | SortOrder
-    _relevance?: SportCoachTypeOrderByRelevanceInput
   }
 
   export type SportCoachTypeWhereUniqueInput = Prisma.AtLeast<{
@@ -66464,7 +65925,6 @@ export namespace Prisma {
     slot?: SortOrder
     createdAt?: SortOrderInput | SortOrder
     updatedAt?: SortOrderInput | SortOrder
-    _relevance?: SportEventTypeOrderByRelevanceInput
   }
 
   export type SportEventTypeWhereUniqueInput = Prisma.AtLeast<{
@@ -66552,7 +66012,6 @@ export namespace Prisma {
     note?: SortOrderInput | SortOrder
     createdAt?: SortOrderInput | SortOrder
     updatedAt?: SortOrderInput | SortOrder
-    _relevance?: SportGamePeriodOrderByRelevanceInput
   }
 
   export type SportGamePeriodWhereUniqueInput = Prisma.AtLeast<{
@@ -66626,7 +66085,6 @@ export namespace Prisma {
     ord?: SortOrder
     createdAt?: SortOrderInput | SortOrder
     updatedAt?: SortOrderInput | SortOrder
-    _relevance?: SportManagerTypeOrderByRelevanceInput
   }
 
   export type SportManagerTypeWhereUniqueInput = Prisma.AtLeast<{
@@ -66703,7 +66161,6 @@ export namespace Prisma {
     ord?: SortOrderInput | SortOrder
     createdAt?: SortOrderInput | SortOrder
     updatedAt?: SortOrderInput | SortOrder
-    _relevance?: SportPlayerPositionOrderByRelevanceInput
   }
 
   export type SportPlayerPositionWhereUniqueInput = Prisma.AtLeast<{
@@ -66777,7 +66234,6 @@ export namespace Prisma {
     ord?: SortOrder
     createdAt?: SortOrderInput | SortOrder
     updatedAt?: SortOrderInput | SortOrder
-    _relevance?: SportRefereeTypeOrderByRelevanceInput
   }
 
   export type SportRefereeTypeWhereUniqueInput = Prisma.AtLeast<{
@@ -66856,7 +66312,6 @@ export namespace Prisma {
     ord?: SortOrder
     createdAt?: SortOrderInput | SortOrder
     updatedAt?: SortOrderInput | SortOrder
-    _relevance?: SubFeatureOrderByRelevanceInput
   }
 
   export type SubFeatureWhereUniqueInput = Prisma.AtLeast<{
@@ -66941,7 +66396,6 @@ export namespace Prisma {
     ord?: SortOrder
     createdAt?: SortOrderInput | SortOrder
     updatedAt?: SortOrderInput | SortOrder
-    _relevance?: SubForTeamOrderByRelevanceInput
   }
 
   export type SubForTeamWhereUniqueInput = Prisma.AtLeast<{
@@ -67041,7 +66495,6 @@ export namespace Prisma {
     ord?: SortOrder
     createdAt?: SortOrderInput | SortOrder
     updatedAt?: SortOrderInput | SortOrder
-    _relevance?: SubForUserOrderByRelevanceInput
   }
 
   export type SubForUserWhereUniqueInput = Prisma.AtLeast<{
@@ -67145,7 +66598,6 @@ export namespace Prisma {
     ord?: SortOrder
     createdAt?: SortOrderInput | SortOrder
     updatedAt?: SortOrderInput | SortOrder
-    _relevance?: SubPlanOrderByRelevanceInput
   }
 
   export type SubPlanWhereUniqueInput = Prisma.AtLeast<{
@@ -67239,7 +66691,6 @@ export namespace Prisma {
     ord?: SortOrder
     createdAt?: SortOrderInput | SortOrder
     updatedAt?: SortOrderInput | SortOrder
-    _relevance?: SubPlanFeatureOrderByRelevanceInput
   }
 
   export type SubPlanFeatureWhereUniqueInput = Prisma.AtLeast<{
@@ -67316,7 +66767,6 @@ export namespace Prisma {
     rememberToken?: SortOrderInput | SortOrder
     createdAt?: SortOrderInput | SortOrder
     updatedAt?: SortOrderInput | SortOrder
-    _relevance?: SysUserOrderByRelevanceInput
   }
 
   export type SysUserWhereUniqueInput = Prisma.AtLeast<{
@@ -72705,7 +72155,6 @@ export namespace Prisma {
     contains?: string | StringFieldRefInput<$PrismaModel>
     startsWith?: string | StringFieldRefInput<$PrismaModel>
     endsWith?: string | StringFieldRefInput<$PrismaModel>
-    search?: string
     mode?: QueryMode
     not?: NestedStringFilter<$PrismaModel> | string
   }
@@ -72721,7 +72170,6 @@ export namespace Prisma {
     contains?: string | StringFieldRefInput<$PrismaModel>
     startsWith?: string | StringFieldRefInput<$PrismaModel>
     endsWith?: string | StringFieldRefInput<$PrismaModel>
-    search?: string
     mode?: QueryMode
     not?: NestedStringNullableFilter<$PrismaModel> | string | null
   }
@@ -72762,12 +72210,6 @@ export namespace Prisma {
   export type SortOrderInput = {
     sort: SortOrder
     nulls?: NullsOrder
-  }
-
-  export type BaseCompetitionOrderByRelevanceInput = {
-    fields: BaseCompetitionOrderByRelevanceFieldEnum | BaseCompetitionOrderByRelevanceFieldEnum[]
-    sort: SortOrder
-    search: string
   }
 
   export type BaseCompetitionCountOrderByAggregateInput = {
@@ -72851,7 +72293,6 @@ export namespace Prisma {
     contains?: string | StringFieldRefInput<$PrismaModel>
     startsWith?: string | StringFieldRefInput<$PrismaModel>
     endsWith?: string | StringFieldRefInput<$PrismaModel>
-    search?: string
     mode?: QueryMode
     not?: NestedStringWithAggregatesFilter<$PrismaModel> | string
     _count?: NestedIntFilter<$PrismaModel>
@@ -72870,7 +72311,6 @@ export namespace Prisma {
     contains?: string | StringFieldRefInput<$PrismaModel>
     startsWith?: string | StringFieldRefInput<$PrismaModel>
     endsWith?: string | StringFieldRefInput<$PrismaModel>
-    search?: string
     mode?: QueryMode
     not?: NestedStringNullableWithAggregatesFilter<$PrismaModel> | string | null
     _count?: NestedIntNullableFilter<$PrismaModel>
@@ -72949,12 +72389,6 @@ export namespace Prisma {
     gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     not?: NestedDateTimeFilter<$PrismaModel> | Date | string
-  }
-
-  export type BaseCountryOrderByRelevanceInput = {
-    fields: BaseCountryOrderByRelevanceFieldEnum | BaseCountryOrderByRelevanceFieldEnum[]
-    sort: SortOrder
-    search: string
   }
 
   export type BaseCountryCountOrderByAggregateInput = {
@@ -73049,12 +72483,6 @@ export namespace Prisma {
     isEmpty?: boolean
   }
 
-  export type BaseFieldOrderByRelevanceInput = {
-    fields: BaseFieldOrderByRelevanceFieldEnum | BaseFieldOrderByRelevanceFieldEnum[]
-    sort: SortOrder
-    search: string
-  }
-
   export type BaseFieldCountOrderByAggregateInput = {
     id?: SortOrder
     name?: SortOrder
@@ -73104,12 +72532,6 @@ export namespace Prisma {
     sportIds?: SortOrder
     countryId?: SortOrder
     ord?: SortOrder
-  }
-
-  export type BaseGroupLevelOrderByRelevanceInput = {
-    fields: BaseGroupLevelOrderByRelevanceFieldEnum | BaseGroupLevelOrderByRelevanceFieldEnum[]
-    sort: SortOrder
-    search: string
   }
 
   export type BaseGroupLevelCountOrderByAggregateInput = {
@@ -73165,12 +72587,6 @@ export namespace Prisma {
     ord?: SortOrder
   }
 
-  export type BaseSportOrderByRelevanceInput = {
-    fields: BaseSportOrderByRelevanceFieldEnum | BaseSportOrderByRelevanceFieldEnum[]
-    sort: SortOrder
-    search: string
-  }
-
   export type BaseSportCountOrderByAggregateInput = {
     id?: SortOrder
     name?: SortOrder
@@ -73212,12 +72628,6 @@ export namespace Prisma {
   export type BaseSportSumOrderByAggregateInput = {
     id?: SortOrder
     ord?: SortOrder
-  }
-
-  export type GameEventOrderByRelevanceInput = {
-    fields: GameEventOrderByRelevanceFieldEnum | GameEventOrderByRelevanceFieldEnum[]
-    sort: SortOrder
-    search: string
   }
 
   export type GameEventCountOrderByAggregateInput = {
@@ -73263,12 +72673,6 @@ export namespace Prisma {
     id?: SortOrder
     sportId?: SortOrder
     competitionId?: SortOrder
-  }
-
-  export type GameMatcheOrderByRelevanceInput = {
-    fields: GameMatcheOrderByRelevanceFieldEnum | GameMatcheOrderByRelevanceFieldEnum[]
-    sort: SortOrder
-    search: string
   }
 
   export type GameMatcheCountOrderByAggregateInput = {
@@ -73323,12 +72727,6 @@ export namespace Prisma {
     awayTeamId?: SortOrder
     homeTeamScore?: SortOrder
     awayTeamScore?: SortOrder
-  }
-
-  export type MatchEventOrderByRelevanceInput = {
-    fields: MatchEventOrderByRelevanceFieldEnum | MatchEventOrderByRelevanceFieldEnum[]
-    sort: SortOrder
-    search: string
   }
 
   export type MatchEventCountOrderByAggregateInput = {
@@ -73419,12 +72817,6 @@ export namespace Prisma {
     ord?: SortOrder
   }
 
-  export type MatchLineupOrderByRelevanceInput = {
-    fields: MatchLineupOrderByRelevanceFieldEnum | MatchLineupOrderByRelevanceFieldEnum[]
-    sort: SortOrder
-    search: string
-  }
-
   export type MatchLineupMatchIdTeamIdCompoundUniqueInput = {
     matchId: Decimal | DecimalJsLike | number | string
     teamId: Decimal | DecimalJsLike | number | string
@@ -73502,12 +72894,6 @@ export namespace Prisma {
     gt?: bigint | number | BigIntFieldRefInput<$PrismaModel>
     gte?: bigint | number | BigIntFieldRefInput<$PrismaModel>
     not?: NestedBigIntNullableFilter<$PrismaModel> | bigint | number | null
-  }
-
-  export type MatchMediaOrderByRelevanceInput = {
-    fields: MatchMediaOrderByRelevanceFieldEnum | MatchMediaOrderByRelevanceFieldEnum[]
-    sort: SortOrder
-    search: string
   }
 
   export type MatchMediaCountOrderByAggregateInput = {
@@ -73601,12 +72987,6 @@ export namespace Prisma {
     _max?: NestedBigIntNullableFilter<$PrismaModel>
   }
 
-  export type MatchRosterOrderByRelevanceInput = {
-    fields: MatchRosterOrderByRelevanceFieldEnum | MatchRosterOrderByRelevanceFieldEnum[]
-    sort: SortOrder
-    search: string
-  }
-
   export type MatchRosterMatchIdPlayerIdCompoundUniqueInput = {
     matchId: Decimal | DecimalJsLike | number | string
     playerId: Decimal | DecimalJsLike | number | string
@@ -73696,12 +73076,6 @@ export namespace Prisma {
     substitutionOutMinute?: SortOrder
     minutesPlayed?: SortOrder
     ord?: SortOrder
-  }
-
-  export type MatchStatisticOrderByRelevanceInput = {
-    fields: MatchStatisticOrderByRelevanceFieldEnum | MatchStatisticOrderByRelevanceFieldEnum[]
-    sort: SortOrder
-    search: string
   }
 
   export type MatchStatisticMatchIdPlayerIdCompoundUniqueInput = {
@@ -73858,12 +73232,6 @@ export namespace Prisma {
     ord?: SortOrder
   }
 
-  export type MemberClubAdminOrderByRelevanceInput = {
-    fields: MemberClubAdminOrderByRelevanceFieldEnum | MemberClubAdminOrderByRelevanceFieldEnum[]
-    sort: SortOrder
-    search: string
-  }
-
   export type MemberClubAdminCountOrderByAggregateInput = {
     id?: SortOrder
     personId?: SortOrder
@@ -73915,12 +73283,6 @@ export namespace Prisma {
     personId?: SortOrder
     clubId?: SortOrder
     ord?: SortOrder
-  }
-
-  export type MemberCoacheOrderByRelevanceInput = {
-    fields: MemberCoacheOrderByRelevanceFieldEnum | MemberCoacheOrderByRelevanceFieldEnum[]
-    sort: SortOrder
-    search: string
   }
 
   export type MemberCoacheCountOrderByAggregateInput = {
@@ -73980,12 +73342,6 @@ export namespace Prisma {
     ord?: SortOrder
   }
 
-  export type MemberParentOrderByRelevanceInput = {
-    fields: MemberParentOrderByRelevanceFieldEnum | MemberParentOrderByRelevanceFieldEnum[]
-    sort: SortOrder
-    search: string
-  }
-
   export type MemberParentCountOrderByAggregateInput = {
     id?: SortOrder
     personId?: SortOrder
@@ -74026,12 +73382,6 @@ export namespace Prisma {
     id?: SortOrder
     personId?: SortOrder
     ord?: SortOrder
-  }
-
-  export type MemberPersonOrderByRelevanceInput = {
-    fields: MemberPersonOrderByRelevanceFieldEnum | MemberPersonOrderByRelevanceFieldEnum[]
-    sort: SortOrder
-    search: string
   }
 
   export type MemberPersonCountOrderByAggregateInput = {
@@ -74101,12 +73451,6 @@ export namespace Prisma {
     countryId?: SortOrder
   }
 
-  export type MemberPlayerOrderByRelevanceInput = {
-    fields: MemberPlayerOrderByRelevanceFieldEnum | MemberPlayerOrderByRelevanceFieldEnum[]
-    sort: SortOrder
-    search: string
-  }
-
   export type MemberPlayerCountOrderByAggregateInput = {
     id?: SortOrder
     personId?: SortOrder
@@ -74172,12 +73516,6 @@ export namespace Prisma {
     height?: SortOrder
     weight?: SortOrder
     ord?: SortOrder
-  }
-
-  export type MemberRefereeOrderByRelevanceInput = {
-    fields: MemberRefereeOrderByRelevanceFieldEnum | MemberRefereeOrderByRelevanceFieldEnum[]
-    sort: SortOrder
-    search: string
   }
 
   export type MemberRefereeCountOrderByAggregateInput = {
@@ -74249,12 +73587,6 @@ export namespace Prisma {
     personId?: SortOrder
     matchFee?: SortOrder
     ord?: SortOrder
-  }
-
-  export type MemberSponsorOrderByRelevanceInput = {
-    fields: MemberSponsorOrderByRelevanceFieldEnum | MemberSponsorOrderByRelevanceFieldEnum[]
-    sort: SortOrder
-    search: string
   }
 
   export type MemberSponsorCountOrderByAggregateInput = {
@@ -74329,12 +73661,6 @@ export namespace Prisma {
     ord?: SortOrder
   }
 
-  export type MemberTeamManagerOrderByRelevanceInput = {
-    fields: MemberTeamManagerOrderByRelevanceFieldEnum | MemberTeamManagerOrderByRelevanceFieldEnum[]
-    sort: SortOrder
-    search: string
-  }
-
   export type MemberTeamManagerCountOrderByAggregateInput = {
     id?: SortOrder
     personId?: SortOrder
@@ -74384,12 +73710,6 @@ export namespace Prisma {
     id?: SortOrder
     personId?: SortOrder
     ord?: SortOrder
-  }
-
-  export type OrgClubOrderByRelevanceInput = {
-    fields: OrgClubOrderByRelevanceFieldEnum | OrgClubOrderByRelevanceFieldEnum[]
-    sort: SortOrder
-    search: string
   }
 
   export type OrgClubCountOrderByAggregateInput = {
@@ -74448,12 +73768,6 @@ export namespace Prisma {
   export type OrgClubSumOrderByAggregateInput = {
     id?: SortOrder
     ord?: SortOrder
-  }
-
-  export type OrgLeagueOrderByRelevanceInput = {
-    fields: OrgLeagueOrderByRelevanceFieldEnum | OrgLeagueOrderByRelevanceFieldEnum[]
-    sort: SortOrder
-    search: string
   }
 
   export type OrgLeagueCountOrderByAggregateInput = {
@@ -74535,12 +73849,6 @@ export namespace Prisma {
     maxTeams?: SortOrder
     entryFee?: SortOrder
     ord?: SortOrder
-  }
-
-  export type OrgTeamOrderByRelevanceInput = {
-    fields: OrgTeamOrderByRelevanceFieldEnum | OrgTeamOrderByRelevanceFieldEnum[]
-    sort: SortOrder
-    search: string
   }
 
   export type OrgTeamCountOrderByAggregateInput = {
@@ -74625,12 +73933,6 @@ export namespace Prisma {
     ord?: SortOrder
   }
 
-  export type PlanGameOrderByRelevanceInput = {
-    fields: PlanGameOrderByRelevanceFieldEnum | PlanGameOrderByRelevanceFieldEnum[]
-    sort: SortOrder
-    search: string
-  }
-
   export type PlanGameCountOrderByAggregateInput = {
     id?: SortOrder
     leagueId?: SortOrder
@@ -74707,12 +74009,6 @@ export namespace Prisma {
     createdBy?: SortOrder
   }
 
-  export type PlanMeetingOrderByRelevanceInput = {
-    fields: PlanMeetingOrderByRelevanceFieldEnum | PlanMeetingOrderByRelevanceFieldEnum[]
-    sort: SortOrder
-    search: string
-  }
-
   export type PlanMeetingCountOrderByAggregateInput = {
     id?: SortOrder
     meetingCategory?: SortOrder
@@ -74776,12 +74072,6 @@ export namespace Prisma {
     createdBy?: SortOrder
   }
 
-  export type PlanTrainingOrderByRelevanceInput = {
-    fields: PlanTrainingOrderByRelevanceFieldEnum | PlanTrainingOrderByRelevanceFieldEnum[]
-    sort: SortOrder
-    search: string
-  }
-
   export type PlanTrainingCountOrderByAggregateInput = {
     id?: SortOrder
     teamId?: SortOrder
@@ -74843,12 +74133,6 @@ export namespace Prisma {
     locationId?: SortOrder
     recurringType?: SortOrder
     createdBy?: SortOrder
-  }
-
-  export type RelClubClubAdminOrderByRelevanceInput = {
-    fields: RelClubClubAdminOrderByRelevanceFieldEnum | RelClubClubAdminOrderByRelevanceFieldEnum[]
-    sort: SortOrder
-    search: string
   }
 
   export type RelClubClubAdminClubIdAdminIdCompoundUniqueInput = {
@@ -74923,12 +74207,6 @@ export namespace Prisma {
     ord?: SortOrder
   }
 
-  export type RelCompetitionGroupLevelOrderByRelevanceInput = {
-    fields: RelCompetitionGroupLevelOrderByRelevanceFieldEnum | RelCompetitionGroupLevelOrderByRelevanceFieldEnum[]
-    sort: SortOrder
-    search: string
-  }
-
   export type RelCompetitionGroupLevelCompetitionIdGroupLevelIdCompoundUniqueInput = {
     competitionId: Decimal | DecimalJsLike | number | string
     groupLevelId: Decimal | DecimalJsLike | number | string
@@ -74983,12 +74261,6 @@ export namespace Prisma {
     ord?: SortOrder
   }
 
-  export type RelFieldSportOrderByRelevanceInput = {
-    fields: RelFieldSportOrderByRelevanceFieldEnum | RelFieldSportOrderByRelevanceFieldEnum[]
-    sort: SortOrder
-    search: string
-  }
-
   export type RelFieldSportFieldIdSportIdCompoundUniqueInput = {
     fieldId: Decimal | DecimalJsLike | number | string
     sportId: Decimal | DecimalJsLike | number | string
@@ -75041,12 +74313,6 @@ export namespace Prisma {
     sportId?: SortOrder
     isPrimary?: SortOrder
     ord?: SortOrder
-  }
-
-  export type RelMatchRefereeOrderByRelevanceInput = {
-    fields: RelMatchRefereeOrderByRelevanceFieldEnum | RelMatchRefereeOrderByRelevanceFieldEnum[]
-    sort: SortOrder
-    search: string
   }
 
   export type RelMatchRefereeMatchIdRefereeIdCompoundUniqueInput = {
@@ -75113,12 +74379,6 @@ export namespace Prisma {
     refereeId?: SortOrder
     matchFee?: SortOrder
     ord?: SortOrder
-  }
-
-  export type RelPlayerParentOrderByRelevanceInput = {
-    fields: RelPlayerParentOrderByRelevanceFieldEnum | RelPlayerParentOrderByRelevanceFieldEnum[]
-    sort: SortOrder
-    search: string
   }
 
   export type RelPlayerParentPlayerIdParentIdCompoundUniqueInput = {
@@ -75206,12 +74466,6 @@ export namespace Prisma {
     ord?: SortOrder
   }
 
-  export type RelSponsorClubOrderByRelevanceInput = {
-    fields: RelSponsorClubOrderByRelevanceFieldEnum | RelSponsorClubOrderByRelevanceFieldEnum[]
-    sort: SortOrder
-    search: string
-  }
-
   export type RelSponsorClubSponsorIdClubIdCompoundUniqueInput = {
     sponsorId: Decimal | DecimalJsLike | number | string
     clubId: Decimal | DecimalJsLike | number | string
@@ -75276,12 +74530,6 @@ export namespace Prisma {
     clubId?: SortOrder
     sponsorshipAmount?: SortOrder
     ord?: SortOrder
-  }
-
-  export type RelSponsorLeagueOrderByRelevanceInput = {
-    fields: RelSponsorLeagueOrderByRelevanceFieldEnum | RelSponsorLeagueOrderByRelevanceFieldEnum[]
-    sort: SortOrder
-    search: string
   }
 
   export type RelSponsorLeagueSponsorIdLeagueIdCompoundUniqueInput = {
@@ -75350,12 +74598,6 @@ export namespace Prisma {
     ord?: SortOrder
   }
 
-  export type RelSponsorTeamOrderByRelevanceInput = {
-    fields: RelSponsorTeamOrderByRelevanceFieldEnum | RelSponsorTeamOrderByRelevanceFieldEnum[]
-    sort: SortOrder
-    search: string
-  }
-
   export type RelSponsorTeamSponsorIdTeamIdCompoundUniqueInput = {
     sponsorId: Decimal | DecimalJsLike | number | string
     teamId: Decimal | DecimalJsLike | number | string
@@ -75420,12 +74662,6 @@ export namespace Prisma {
     teamId?: SortOrder
     sponsorshipAmount?: SortOrder
     ord?: SortOrder
-  }
-
-  export type RelTeamCoachOrderByRelevanceInput = {
-    fields: RelTeamCoachOrderByRelevanceFieldEnum | RelTeamCoachOrderByRelevanceFieldEnum[]
-    sort: SortOrder
-    search: string
   }
 
   export type RelTeamCoachTeamIdCoachIdCompoundUniqueInput = {
@@ -75505,12 +74741,6 @@ export namespace Prisma {
     ord?: SortOrder
   }
 
-  export type RelTeamPlayerOrderByRelevanceInput = {
-    fields: RelTeamPlayerOrderByRelevanceFieldEnum | RelTeamPlayerOrderByRelevanceFieldEnum[]
-    sort: SortOrder
-    search: string
-  }
-
   export type RelTeamPlayerTeamIdPlayerIdCompoundUniqueInput = {
     teamId: Decimal | DecimalJsLike | number | string
     playerId: Decimal | DecimalJsLike | number | string
@@ -75575,12 +74805,6 @@ export namespace Prisma {
     playerId?: SortOrder
     positionId?: SortOrder
     ord?: SortOrder
-  }
-
-  export type RelTeamTeamManagerOrderByRelevanceInput = {
-    fields: RelTeamTeamManagerOrderByRelevanceFieldEnum | RelTeamTeamManagerOrderByRelevanceFieldEnum[]
-    sort: SortOrder
-    search: string
   }
 
   export type RelTeamTeamManagerTeamIdManagerIdCompoundUniqueInput = {
@@ -75658,12 +74882,6 @@ export namespace Prisma {
     ord?: SortOrder
   }
 
-  export type SportCoachTypeOrderByRelevanceInput = {
-    fields: SportCoachTypeOrderByRelevanceFieldEnum | SportCoachTypeOrderByRelevanceFieldEnum[]
-    sort: SortOrder
-    search: string
-  }
-
   export type SportCoachTypeSportIdNameCompoundUniqueInput = {
     sportId: Decimal | DecimalJsLike | number | string
     name: string
@@ -75720,12 +74938,6 @@ export namespace Prisma {
     sportId?: SortOrder
     isActive?: SortOrder
     ord?: SortOrder
-  }
-
-  export type SportEventTypeOrderByRelevanceInput = {
-    fields: SportEventTypeOrderByRelevanceFieldEnum | SportEventTypeOrderByRelevanceFieldEnum[]
-    sort: SortOrder
-    search: string
   }
 
   export type SportEventTypeCountOrderByAggregateInput = {
@@ -75801,12 +75013,6 @@ export namespace Prisma {
     slot?: SortOrder
   }
 
-  export type SportGamePeriodOrderByRelevanceInput = {
-    fields: SportGamePeriodOrderByRelevanceFieldEnum | SportGamePeriodOrderByRelevanceFieldEnum[]
-    sort: SortOrder
-    search: string
-  }
-
   export type SportGamePeriodCountOrderByAggregateInput = {
     id?: SortOrder
     sportId?: SortOrder
@@ -75852,12 +75058,6 @@ export namespace Prisma {
     sportId?: SortOrder
     ord?: SortOrder
     duration?: SortOrder
-  }
-
-  export type SportManagerTypeOrderByRelevanceInput = {
-    fields: SportManagerTypeOrderByRelevanceFieldEnum | SportManagerTypeOrderByRelevanceFieldEnum[]
-    sort: SortOrder
-    search: string
   }
 
   export type SportManagerTypeSportIdNameCompoundUniqueInput = {
@@ -75918,12 +75118,6 @@ export namespace Prisma {
     ord?: SortOrder
   }
 
-  export type SportPlayerPositionOrderByRelevanceInput = {
-    fields: SportPlayerPositionOrderByRelevanceFieldEnum | SportPlayerPositionOrderByRelevanceFieldEnum[]
-    sort: SortOrder
-    search: string
-  }
-
   export type SportPlayerPositionCountOrderByAggregateInput = {
     id?: SortOrder
     name?: SortOrder
@@ -75967,12 +75161,6 @@ export namespace Prisma {
     id?: SortOrder
     sportId?: SortOrder
     ord?: SortOrder
-  }
-
-  export type SportRefereeTypeOrderByRelevanceInput = {
-    fields: SportRefereeTypeOrderByRelevanceFieldEnum | SportRefereeTypeOrderByRelevanceFieldEnum[]
-    sort: SortOrder
-    search: string
   }
 
   export type SportRefereeTypeSportIdNameCompoundUniqueInput = {
@@ -76033,12 +75221,6 @@ export namespace Prisma {
     ord?: SortOrder
   }
 
-  export type SubFeatureOrderByRelevanceInput = {
-    fields: SubFeatureOrderByRelevanceFieldEnum | SubFeatureOrderByRelevanceFieldEnum[]
-    sort: SortOrder
-    search: string
-  }
-
   export type SubFeatureCountOrderByAggregateInput = {
     id?: SortOrder
     name?: SortOrder
@@ -76085,12 +75267,6 @@ export namespace Prisma {
     id?: SortOrder
     isActive?: SortOrder
     ord?: SortOrder
-  }
-
-  export type SubForTeamOrderByRelevanceInput = {
-    fields: SubForTeamOrderByRelevanceFieldEnum | SubForTeamOrderByRelevanceFieldEnum[]
-    sort: SortOrder
-    search: string
   }
 
   export type SubForTeamCountOrderByAggregateInput = {
@@ -76160,12 +75336,6 @@ export namespace Prisma {
     ord?: SortOrder
   }
 
-  export type SubForUserOrderByRelevanceInput = {
-    fields: SubForUserOrderByRelevanceFieldEnum | SubForUserOrderByRelevanceFieldEnum[]
-    sort: SortOrder
-    search: string
-  }
-
   export type SubForUserCountOrderByAggregateInput = {
     id?: SortOrder
     userId?: SortOrder
@@ -76231,12 +75401,6 @@ export namespace Prisma {
     planId?: SortOrder
     autoRenew?: SortOrder
     ord?: SortOrder
-  }
-
-  export type SubPlanOrderByRelevanceInput = {
-    fields: SubPlanOrderByRelevanceFieldEnum | SubPlanOrderByRelevanceFieldEnum[]
-    sort: SortOrder
-    search: string
   }
 
   export type SubPlanCountOrderByAggregateInput = {
@@ -76322,12 +75486,6 @@ export namespace Prisma {
     ord?: SortOrder
   }
 
-  export type SubPlanFeatureOrderByRelevanceInput = {
-    fields: SubPlanFeatureOrderByRelevanceFieldEnum | SubPlanFeatureOrderByRelevanceFieldEnum[]
-    sort: SortOrder
-    search: string
-  }
-
   export type SubPlanFeaturePlanIdFeatureIdCompoundUniqueInput = {
     planId: Decimal | DecimalJsLike | number | string
     featureId: Decimal | DecimalJsLike | number | string
@@ -76380,12 +75538,6 @@ export namespace Prisma {
     featureId?: SortOrder
     isIncluded?: SortOrder
     ord?: SortOrder
-  }
-
-  export type SysUserOrderByRelevanceInput = {
-    fields: SysUserOrderByRelevanceFieldEnum | SysUserOrderByRelevanceFieldEnum[]
-    sort: SortOrder
-    search: string
   }
 
   export type SysUserCountOrderByAggregateInput = {
@@ -76531,7 +75683,6 @@ export namespace Prisma {
     contains?: string | StringFieldRefInput<$PrismaModel>
     startsWith?: string | StringFieldRefInput<$PrismaModel>
     endsWith?: string | StringFieldRefInput<$PrismaModel>
-    search?: string
     not?: NestedStringFilter<$PrismaModel> | string
   }
 
@@ -76546,7 +75697,6 @@ export namespace Prisma {
     contains?: string | StringFieldRefInput<$PrismaModel>
     startsWith?: string | StringFieldRefInput<$PrismaModel>
     endsWith?: string | StringFieldRefInput<$PrismaModel>
-    search?: string
     not?: NestedStringNullableFilter<$PrismaModel> | string | null
   }
 
@@ -76621,7 +75771,6 @@ export namespace Prisma {
     contains?: string | StringFieldRefInput<$PrismaModel>
     startsWith?: string | StringFieldRefInput<$PrismaModel>
     endsWith?: string | StringFieldRefInput<$PrismaModel>
-    search?: string
     not?: NestedStringWithAggregatesFilter<$PrismaModel> | string
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedStringFilter<$PrismaModel>
@@ -76639,7 +75788,6 @@ export namespace Prisma {
     contains?: string | StringFieldRefInput<$PrismaModel>
     startsWith?: string | StringFieldRefInput<$PrismaModel>
     endsWith?: string | StringFieldRefInput<$PrismaModel>
-    search?: string
     not?: NestedStringNullableWithAggregatesFilter<$PrismaModel> | string | null
     _count?: NestedIntNullableFilter<$PrismaModel>
     _min?: NestedStringNullableFilter<$PrismaModel>

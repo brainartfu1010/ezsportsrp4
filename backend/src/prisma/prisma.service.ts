@@ -1,23 +1,27 @@
-import { Injectable, OnModuleInit, OnModuleDestroy } from '@nestjs/common';
+import { Injectable, OnModuleInit, OnModuleDestroy, Logger } from '@nestjs/common';
 import { PrismaClient } from '@prisma/client';
 
 @Injectable()
-export class PrismaService extends PrismaClient implements OnModuleInit, OnModuleDestroy {
+export class PrismaService extends PrismaClient {
+  private readonly logger = new Logger(PrismaService.name);
+
   constructor() {
-    // super({
-    //   log: ['query', 'info', 'warn', 'error'],
-    // });
-    super()
+    super({
+       
+    });
+ 
   }
 
   async onModuleInit() {
-    await this.$connect();
+    
   }
 
   async onModuleDestroy() {
-    await this.$disconnect();
+   
   }
 
-  // Explicitly type the models to help TypeScript
-  // Remove the problematic model assignments
+  // Optional: Add a method to test database connection explicitly
+  async testConnection() {
+  
+  }
 }

@@ -36,7 +36,7 @@ export class BaseCompetitionsService {
     // Attach avatars
     return Promise.all(competitions.map(async competition => ({
       ...competition,
-      base64: AvatarUtils.getBase64('competitions', competition.id)
+      base64: AvatarUtils.getBase64('competitions', competition.id.toString())
     })));
   }
 
@@ -51,7 +51,7 @@ export class BaseCompetitionsService {
 
     return {
       ...competition,
-      base64: AvatarUtils.getBase64('competitions', id)
+      base64: AvatarUtils.getBase64('competitions', id.toString())
     };
   }
 
@@ -60,11 +60,15 @@ export class BaseCompetitionsService {
 
     const result = await (this.prisma as any).baseCompetition.update({
       where: { id },
-      data: rest
+      data: {
+        ...rest,
+        status: rest.status ?? 'active',
+        updatedAt: new Date()
+      }
     });
 
     if (base64) {
-      AvatarUtils.saveBase64(base64, 'competitions', id);
+      AvatarUtils.saveBase64(base64, 'competitions', id.toString());
     }
 
     return result;

@@ -14,7 +14,8 @@ export class SportsService {
     const sport = await this.prisma.baseSport.create({
       data: {
         ...rest,
-        isActive: rest.isActive === 1
+        isActive: rest.isActive === 1,
+        updatedAt: new Date()
       }
     });
 
@@ -34,7 +35,7 @@ export class SportsService {
     // Attach avatars
     return Promise.all(sports.map(async sport => ({
       ...sport,
-      base64: await AvatarUtils.getBase64('sports', sport.id) || undefined
+      base64: AvatarUtils.getBase64('sports', sport.id) || undefined
     })));
   }
 
@@ -50,7 +51,7 @@ export class SportsService {
     // Attach avatar
     return {
       ...sport,
-      base64: await AvatarUtils.getBase64('sports', sport.id) || undefined
+      base64: AvatarUtils.getBase64('sports', sport.id) || undefined
     };
   }
 
@@ -64,7 +65,8 @@ export class SportsService {
         where: { id: Number(id) },
         data: {
           ...rest,
-          isActive: rest.isActive === 1
+          isActive: rest.isActive === 1,
+          updatedAt: new Date()
         }
       });
 

@@ -9,7 +9,7 @@ import {
   LogOutIcon,
 } from "lucide-react";
 
-import { Button } from "@/components/ui/button";
+import { Button } from "@/components/controls/button";
 import { Input } from "@/components/ui/input";
 import {
   DropdownMenu,
@@ -37,9 +37,7 @@ export function NavbarAdmin() {
             />
             <span className="font-bold text-2xl hover:text-primary/90 transition-colors duration-200 relative">
               EZSportsRP
-              <span className="text-sm absolute -bottom-3 right-0">
-                Admin
-              </span>
+              <span className="text-sm absolute -bottom-3 right-0">Admin</span>
             </span>
           </Link>
 
@@ -60,9 +58,9 @@ export function NavbarAdmin() {
 
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <Button variant="ghost" className="relative h-8 w-8 rounded-full">
+              <Button variant="ghost" className="relative h-8 w-8 rounded-full cursor-pointer">
                 <Avatar className="h-8 w-8">
-                  <AvatarImage src="/placeholder-avatar.jpg" alt="Admin" />
+                  <AvatarImage src="/logo-180.png" alt="Admin" />
                   <AvatarFallback>
                     <UserIcon className="h-5 w-5" />
                   </AvatarFallback>
