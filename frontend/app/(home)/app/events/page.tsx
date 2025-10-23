@@ -263,7 +263,7 @@ export default function EventsPage() {
         </CardHeader>
         <CardContent>
           <div className="flex justify-end mb-4">
-            <Select value={recordFilter} onValueChange={setRecordFilter}>
+            {/* <Select value={recordFilter} onValueChange={setRecordFilter}>
               <SelectTrigger className="w-[200px] text-sm">
                 <SelectValue placeholder="Select Record Type" />
               </SelectTrigger>
@@ -274,7 +274,7 @@ export default function EventsPage() {
                   </SelectItem>
                 ))}
               </SelectContent>
-            </Select>
+            </Select> */}
           </div>
 
           <Table<GameRecord>

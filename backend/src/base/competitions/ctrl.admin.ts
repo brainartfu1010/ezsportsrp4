@@ -12,7 +12,6 @@ import {
 } from '@nestjs/common';
 import { BaseCompetitionsService } from './service';
 import { BaseCompetitionDto } from './dto';
-import { Prisma } from '@prisma/client';
 
 @Controller('admin/base/competitions')
 export class BaseCompetitionsAdminController {

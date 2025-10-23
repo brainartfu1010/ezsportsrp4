@@ -26,7 +26,7 @@ export class BaseCompetitionsService {
   }
 
   async findAll(active?: boolean) {
-    const competitions = await (this.prisma as any).baseCompetition.findMany({
+    const competitions = await this.prisma.baseCompetition.findMany({
       where: active !== undefined
         ? { status: active ? 'active' : 'inactive' }
         : undefined,
