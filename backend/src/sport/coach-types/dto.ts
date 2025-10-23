@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsNotEmpty, IsNumber, IsOptional, IsString } from 'class-validator';
+import { IsBoolean, IsNotEmpty, IsNumber, IsOptional, IsString } from 'class-validator';
 
 export class SportCoachTypeDto {
   @ApiProperty({ description: 'Sport ID of the coach type' })
@@ -29,8 +29,8 @@ export class SportCoachTypeDto {
 
   @ApiProperty({ description: 'Whether the coach type is active' })
   @IsNotEmpty()
-  @IsNumber()
-  isActive: number;
+  @IsBoolean()
+  isActive: boolean;
 
   @ApiProperty({ description: 'Order of the coach type' })
   @IsNotEmpty()

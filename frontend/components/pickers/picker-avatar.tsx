@@ -137,6 +137,7 @@ export default function AvatarPicker({
   useEffect(() => {
     if (sourceProp) {
       setIsLocalImageUploaded(false);
+      onChange?.(sourceProp);
     }
   }, [sourceProp]);
 

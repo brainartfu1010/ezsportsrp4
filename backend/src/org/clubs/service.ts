@@ -22,19 +22,12 @@ export class ClubsService {
     return club;
   }
 
-  async findAll(params: {
-    skip?: number;
-    take?: number;
-  }) {
-    const { skip, take } = params;
-    const clubs = await (this.prisma as any).orgClub.findMany({
-      skip,
-      take,
-    });
+  async findAll() {
+    const rows = await (this.prisma as any).orgClub.findMany();
 
-    return Promise.all(clubs.map(async club => ({
-      ...club,
-      base64: await AvatarUtils.getBase64('clubs', club.id) || undefined
+    return Promise.all(rows.map(async row => ({
+      ...row,
+      base64: await AvatarUtils.getBase64('clubs', row.id) || undefined
     })));
   }
 

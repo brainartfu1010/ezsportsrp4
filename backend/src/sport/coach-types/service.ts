@@ -128,4 +128,15 @@ export class CoachTypeService {
 
     return Promise.all(updatePromises);
   }
+
+  async findAllBySportId(sportId: string) {
+    const rows = await (this.prisma as any).sportCoachType.findMany({
+      where: { sportId }
+    });
+
+    return Promise.all(rows.map(async row => ({
+      ...row,
+      base64: AvatarUtils.getBase64('coach-types', row.id) || undefined
+    })));
+  }
 }

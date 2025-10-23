@@ -56,6 +56,15 @@ export class ServiceCoachType {
     }
   }
 
+  static async getBySportId(sportId: string | null | undefined): Promise<CoachType[]> {
+    try {
+      return await api.get(`${this.baseUrl}/sport/${sportId}`);
+    } catch (error) {
+      console.error(`Error fetching coach types for sport ${sportId}:`, error);
+      throw error;
+    }
+  }
+
   static async create(coachTypeData: Omit<CoachType, 'id'>): Promise<CoachType> {
     try {
       return await api.post(this.baseUrl, coachTypeData);

@@ -13,9 +13,7 @@ export class HomeClubsController {
   findAll(
     @Query('status') status?: string
   ) {
-    return this.clubsService.findAll({
-        
-    });
+    return this.clubsService.findAll();
   }
 
   @ApiOperation({ summary: 'Get club by ID' })

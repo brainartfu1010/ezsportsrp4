@@ -145,9 +145,11 @@ export const Form = forwardRef<HTMLFormElement, FormProps>(
                     <FormControl>
                       {React.cloneElement(itemConfig.control, {
                         ...field,
-                        ...(itemConfig.control.props || {}),
                         ...(itemConfig.control.type === Switch
-                          ? { checked: field.value }
+                          ? { 
+                              checked: field.value,
+                              onCheckedChange: field.onChange 
+                            }
                           : {}),
                         ...(itemConfig.placeholder
                           ? { placeholder: itemConfig.placeholder }

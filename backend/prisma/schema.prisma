@@ -765,7 +765,7 @@ model SportCoachType {
   abbr      String    @db.VarChar(100)
   color     String    @db.VarChar(20)
   note      String?
-  isActive  Int       @db.SmallInt
+  isActive  Boolean   @db.SmallInt
   ord       Int
   createdAt DateTime? @db.Timestamp(6)
   updatedAt DateTime? @db.Timestamp(6)

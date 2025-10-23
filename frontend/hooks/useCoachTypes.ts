@@ -1,16 +1,15 @@
 import { useState, useEffect } from 'react';
 import { ServiceCoachType, CoachType, CoachTypeQueryParams } from '@/lib/services/service-coach-type';
 
-export function useCoachTypes(initialParams?: CoachTypeQueryParams) {
+export function useCoachTypes(sportId?: string | null) {
   const [coachTypes, setCoachTypes] = useState<CoachType[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const [params, setParams] = useState<CoachTypeQueryParams>(initialParams || {});
 
   const fetchCoachTypes = async () => {
     try {
       setIsLoading(true);
-      const data = await ServiceCoachType.getAll(params);
+      const data = await ServiceCoachType.getBySportId(sportId);
       setCoachTypes(data);
       setError(null);
     } catch (err: any) {
@@ -60,13 +59,15 @@ export function useCoachTypes(initialParams?: CoachTypeQueryParams) {
     }
   };
 
-  const updateParams = (newParams: CoachTypeQueryParams) => {
-    setParams(prevParams => ({ ...prevParams, ...newParams }));
-  };
-
   useEffect(() => {
-    fetchCoachTypes();
-  }, [JSON.stringify(params)]);
+    if (sportId) {
+      fetchCoachTypes();
+    } else {
+      setCoachTypes([]);
+      setError('Sport ID is required');
+      setIsLoading(false);
+    }
+  }, [sportId]);
 
   return {
     coachTypes,
@@ -76,6 +77,5 @@ export function useCoachTypes(initialParams?: CoachTypeQueryParams) {
     createCoachType,
     updateCoachType,
     deleteCoachType,
-    updateParams
   };
 }

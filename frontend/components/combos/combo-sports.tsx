@@ -1,13 +1,13 @@
 "use client";
 
-import React, { useState } from "react";
-import { ComboBase } from "./combo-base";
+import React from "react";
 import { useSports } from "@/hooks/useSports";
 import { Select } from "../ui/select";
 
 type SportComboProps = {
-  value?: string[] | string | number[] | number;
-  onChange?: (value: string[]) => void;
+  value?: string[] | string | number[] | number | null | undefined;
+  onChange?: (value: string[] | null | undefined) => void;
+  onValueChange?: (value: string[]) => void;
   placeholder?: string;
   disabled?: boolean;
   className?: string;
@@ -17,6 +17,7 @@ type SportComboProps = {
 export function ComboSports({
   value,
   onChange,
+  onValueChange,
   placeholder = "Select Sport",
   disabled = false,
   className,
@@ -24,20 +25,22 @@ export function ComboSports({
 }: SportComboProps) {
   const { sports, loading, error } = useSports();
 
+  const handleChange = (value: string[]) => {
+    onChange?.(value);
+    onValueChange?.(value);
+  };
+
   return (
     <Select
       data={sports}
       value={value}
-      onChange={(v) => onChange?.(v as string[])}
+      onChange={handleChange}
       placeholder={placeholder}
-      disabled={disabled}
+      disabled={disabled || loading}
       className={className}
       multiple={multiple}
-      // valueType="item"
-      // returnType="item"
-      // multiple
-      // allowClear
-      // allowFilter
+      loading={loading}
+      error={error}
     />
   );
 }

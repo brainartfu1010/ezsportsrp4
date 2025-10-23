@@ -28,23 +28,22 @@ export interface TeamQueryParams {
 }
 
 export class ServiceTeam {
-  private static baseUrl = '/teams';
+  private static baseUrl = '/admin/teams';
 
-  static async getAll(params?: TeamQueryParams): Promise<Team[]> {
+  static async getAll(clubId?: string, sportId?: string): Promise<Team[]> {
     try {
-      const queryParams = {
-        page: params?.page || 1,
-        limit: params?.limit || 10,
-        ...(params?.clubId && { clubId: params.clubId }),
-        ...(params?.sportId && { sportId: params.sportId }),
-        ...(params?.search && { search: params.search }),
-        ...(params?.sortBy && { sortBy: params.sortBy }),
-        ...(params?.sortOrder && { sortOrder: params.sortOrder }),
-      };
-
-      return await api.get(this.baseUrl, { params: queryParams });
+      return await api.get(this.baseUrl, { params: { clubId, sportId } });
     } catch (error) {
       console.error('Error fetching teams:', error);
+      throw error;
+    }
+  }
+
+  static async getByClubAndSport(clubId?: string, sportId?: string): Promise<Team[]> {
+    try {
+      return await api.get(`${this.baseUrl}`, { params: { clubId, sportId } });
+    } catch (error) {
+      console.error(`Error fetching teams for club ${clubId} and sport ${sportId}:`, error);
       throw error;
     }
   }

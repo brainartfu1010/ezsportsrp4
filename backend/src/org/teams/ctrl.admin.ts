@@ -1,6 +1,7 @@
 import { Controller, Get, Post, Body, Patch, Param, Delete, Query } from '@nestjs/common';
 import { TeamsService } from './service';
 import { OrgTeamDto as CreateTeamDto } from './dto';
+import { ApiQuery } from '@nestjs/swagger';
 
 @Controller('admin/teams')
 export class AdminTeamsController {
@@ -12,17 +13,15 @@ export class AdminTeamsController {
   }
 
   @Get()
+  @ApiQuery({ name: 'clubId', type: String, required: false })
+  @ApiQuery({ name: 'sportId', type: String, required: false })
   findAll(
-    @Query('status') status?: string,
-    @Query('skip') skip?: number,
-    @Query('take') take?: number
+    @Query('clubId') clubId?: string,
+    @Query('sportId') sportId?: string
   ) {
     return this.teamsService.findAll({
-      skip: skip ? Number(skip) : undefined,
-      take: take ? Number(take) : undefined,
-      where: { 
-        status
-      }
+      clubId,
+      sportId
     });
   }
 

@@ -1,12 +1,12 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
-import { OrgTeamDto   } from './dto';
+import { OrgTeamDto } from './dto';
 import { PrismaService } from '../../prisma/prisma.service';
 import { AvatarUtils } from '../../utils/avatar.utils';
 import { Prisma } from '@prisma/client';
 
 @Injectable()
 export class TeamsService {
-  constructor(private prisma: PrismaService) {}
+  constructor(private prisma: PrismaService) { }
 
   async create(data: OrgTeamDto) {
     const { base64, ...rest } = data;
@@ -24,19 +24,15 @@ export class TeamsService {
   }
 
   async findAll(params: {
-    skip?: number;
-    take?: number;
-    cursor?: any;
-    where?: any;
-    orderBy?: any;
+    clubId?: string;
+    sportId?: string;
   }) {
-    const { skip, take, cursor, where, orderBy } = params;
+    const { clubId, sportId } = params;
     const teams = await (this.prisma as any).orgTeam.findMany({
-      skip,
-      take,
-      cursor: cursor ? { id: cursor } : undefined,
-      where,
-      orderBy: orderBy ?? { name: 'asc' }
+      where: {
+        clubId,
+        sportId,
+      }
     });
 
     return Promise.all(teams.map(async team => ({
@@ -46,7 +42,7 @@ export class TeamsService {
   }
 
   async findOne(id: string) {
-    const team = await (this.prisma as any).orgTeam.findUnique({ 
+    const team = await (this.prisma as any).orgTeam.findUnique({
       where: { id }
     });
 
@@ -100,8 +96,8 @@ export class TeamsService {
       AvatarUtils.deleteBase64('teams', id);
 
       // Perform delete
-      return await (this.prisma as any).orgTeam.delete({ 
-        where: { id } 
+      return await (this.prisma as any).orgTeam.delete({
+        where: { id }
       });
     } catch (error) {
       // Log the original error for debugging

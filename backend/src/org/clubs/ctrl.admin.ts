@@ -12,15 +12,8 @@ export class AdminClubsController {
   }
 
   @Get()
-  findAll(
-    @Query('active') active?: boolean,
-    @Query('skip') skip?: number,
-    @Query('take') take?: number
-  ) {
-    return this.clubsService.findAll({
-      skip: skip ? Number(skip) : undefined,
-      take: take ? Number(take) : undefined,
-    });
+  findAll() {
+    return this.clubsService.findAll();
   }
 
   @Get(':id')

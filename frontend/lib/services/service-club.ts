@@ -24,20 +24,11 @@ export interface ClubQueryParams {
 }
 
 export class ServiceClub {
-  private static baseUrl = '/clubs';
+  private static baseUrl = '/admin/clubs';
 
   static async getAll(params?: ClubQueryParams): Promise<Club[]> {
     try {
-      const queryParams = {
-        page: params?.page || 1,
-        limit: params?.limit || 10,
-        ...(params?.sportId && { sportId: params.sportId }),
-        ...(params?.search && { search: params.search }),
-        ...(params?.sortBy && { sortBy: params.sortBy }),
-        ...(params?.sortOrder && { sortOrder: params.sortOrder }),
-      };
-
-      return await api.get(this.baseUrl, { params: queryParams });
+      return await api.get(this.baseUrl);
     } catch (error) {
       console.error('Error fetching clubs:', error);
       throw error;

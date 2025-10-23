@@ -11,6 +11,11 @@ export class HomeCoachTypeController {
     return this.coachTypeService.findAll(active);
   }
 
+  @Get('sport/:sportId')
+  findAllBySportId(@Param('sportId') sportId: string) {
+    return this.coachTypeService.findAllBySportId(sportId);
+  }
+
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.coachTypeService.findOne(id);

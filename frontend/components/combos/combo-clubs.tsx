@@ -1,28 +1,49 @@
-// "use client";
-// import { Select } from "antd";
-// import { useClubs } from "@/hooks/useClubs";
+"use client";
 
-// interface ComboClubsProps {
-//   value?: number;
-//   onChange?: (v: number) => void;
-// }
+import React from "react";
+import { useClubs } from "@/hooks/useClubs";
+import { Select } from "../ui/select";
+import { BaseItem } from "@/types/types";
 
-// export default function ComboClubs({ value, onChange }: ComboClubsProps) {
-//   const { clubs, isLoading } = useClubs();
+type ClubComboProps = {
+  value?: string[] | string | number[] | number | null | undefined;
+  onChange?: (value: string[]) => void;
+  onValueChange?: (value: string[]) => void;
+  placeholder?: string;
+  disabled?: boolean;
+  className?: string;
+  multiple?: boolean;
+  sportId?: string | null;
+};
 
-//   return (
-//     <Select
-//       value={value}
-//       onChange={onChange}
-//       placeholder="Select club"
-//       loading={isLoading}
-//       style={{ width: "100%" }}
-//     >
-//       {clubs.map((c) => (
-//         <Select.Option key={c.id} value={c.id}>
-//           {c.name}
-//         </Select.Option>
-//       ))}
-//     </Select>
-//   );
-// }
+export function ComboClubs({
+  value,
+  onChange,
+  onValueChange,
+  placeholder = "Select Club",
+  disabled = false,
+  className,
+  multiple = false,
+  sportId,
+}: ClubComboProps) {
+  const { clubs, isLoading, error } = useClubs();
+
+  const handleChange = (value: string[]) => {
+    onChange?.(value);
+    onValueChange?.(value);
+  };
+
+  return (
+    <Select
+      data={clubs}
+      value={value === null || value === undefined ? [] : value}
+      onChange={handleChange}
+      placeholder={placeholder}
+      disabled={disabled || isLoading}
+      className={className}
+      multiple={multiple}
+      loading={isLoading}
+      error={error || undefined}
+    />
+  );
+}

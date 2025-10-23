@@ -11,6 +11,7 @@ type CoachTypeComboProps = {
   disabled?: boolean;
   className?: string;
   multiple?: boolean;
+  sportId?: string | null;
 };
 
 export function ComboCoachTypes({
@@ -20,9 +21,10 @@ export function ComboCoachTypes({
   disabled = false,
   className,
   multiple = false,
+  sportId,
 }: CoachTypeComboProps) {
-  const { coachTypes, isLoading, error } = useCoachTypes();
-
+  const { coachTypes, isLoading, error } = useCoachTypes(sportId);
+ 
   return (
     <Select
       data={coachTypes}
@@ -31,7 +33,7 @@ export function ComboCoachTypes({
       placeholder={placeholder}
       disabled={disabled}
       className={className}
-      multiple={multiple}
+      multiple={multiple} 
       // valueType="item"
       // returnType="item"
       // multiple

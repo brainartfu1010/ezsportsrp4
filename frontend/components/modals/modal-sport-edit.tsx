@@ -66,7 +66,7 @@ const SportEditModal: React.FC<SportEditModalProps> = ({
     isActive: {
       label: "Active",
       schema: z.boolean(),
-      control: <Switch onChange={value => console.log(value)} />,
+      control: <Switch onChange={(value) => console.log(value)} />,
     },
   };
 
@@ -87,24 +87,17 @@ const SportEditModal: React.FC<SportEditModalProps> = ({
 
   const handleSubmit = React.useCallback(
     (data: any) => {
-      const sportData: TypeSport = {
-        id: sport?.id || 0,
-        name: data.name?.trim(),
-        abbr: data.abbr?.trim().toUpperCase(),
-        note: data.note?.trim() || undefined,
-        base64: data.base64,
-        isActive: data.isActive,
-      };
-
+      data.ord = sport?.ord || 0;
+      data.isActive = data.isActive ? 1 : 0;
       if (sport?.id) {
-        ServiceSport.updateSport(sport?.id, sportData).then(() => {
-          onSave(sportData);
+        ServiceSport.updateSport(sport?.id, data).then(() => {
+          onSave(data);
           onOpenChange(false);
         });
       } else {
-        ServiceSport.createSport(sportData).then((newSport) => {
-          sportData.id = newSport.id;
-          onSave(sportData);
+        ServiceSport.createSport(data).then((newSport) => {
+          data.id = newSport.id;
+          onSave(data);
           onOpenChange(false);
         });
       }

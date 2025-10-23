@@ -1,4 +1,4 @@
-import { TypeSport } from "@/types/types";
+import { TypeReorder, TypeSport } from "@/types/types";
 import { api } from "./api";
 
 const SportService = {
@@ -37,6 +37,24 @@ const SportService = {
       await api.delete(`/admin/sports/${id}`);
     } catch (error) {
       console.error("Error deleting sport:", error);
+      throw error;
+    }
+  },
+
+  async deleteSports(ids: number[]): Promise<void> {
+    try {
+      await api.delete(`/admin/sports/bulk`, { data: ids });
+    } catch (error) {
+      console.error("Error deleting sports:", error);
+      throw error;
+    }
+  },
+
+  async reorderSports(orders: TypeReorder[]): Promise<void> {
+    try {
+      await api.post(`/admin/sports/reorder`, orders);
+    } catch (error) {
+      console.error("Error reordering sports:", error);
       throw error;
     }
   }

@@ -565,7 +565,7 @@ export default function Table<T extends TableRowData>({
                           <Button
                             variant="link"
                             size="sm"
-                            className="cursor-pointer text-primary/50 hover:text-primary"
+                            className="cursor-pointer text-primary/70 hover:text-primary"
                             onClick={(e) => {
                               e.stopPropagation();
                               onRowActionEdit?.(row.id);
@@ -582,7 +582,7 @@ export default function Table<T extends TableRowData>({
                             <Button
                               variant="link"
                               size="sm"
-                              className="cursor-pointer text-red-500/50 hover:text-red-500"
+                              className="cursor-pointer text-red-500/70 hover:text-red-500"
                             >
                               <Trash2Icon className="h-4 w-4" />
                             </Button>

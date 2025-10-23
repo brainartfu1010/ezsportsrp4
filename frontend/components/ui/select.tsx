@@ -1,14 +1,14 @@
 "use client";
 
-import React from 'react';
-import ReactSelect, { 
-  Props as ReactSelectProps, 
-  MultiValue, 
-  SingleValue, 
-  StylesConfig, 
-  GroupBase 
-} from 'react-select';
-import { cn } from '@/lib/utils';
+import React from "react";
+import ReactSelect, {
+  Props as ReactSelectProps,
+  MultiValue,
+  SingleValue,
+  StylesConfig,
+  GroupBase,
+} from "react-select";
+import { cn } from "@/lib/utils";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 
 type ValueType = "id" | "item";
@@ -21,11 +21,10 @@ export interface BaseItem {
   [key: string]: any;
 }
 
-export interface SelectProps<
-  Option extends BaseItem = BaseItem
-> extends Omit<ReactSelectProps<Option, boolean>, 'onChange' | 'value'> {
+export interface SelectProps<Option extends BaseItem = BaseItem>
+  extends Omit<ReactSelectProps<Option, boolean>, "onChange" | "value"> {
   value?: string[] | string | number[] | number | Option[] | Option | null;
-  onChange?: (value: string[] | Option[]) => void;
+  onChange?: (value: string[] | Option[] | null | undefined) => void | any;
   placeholder?: string;
   disabled?: boolean;
   multiple?: boolean;
@@ -40,9 +39,7 @@ export interface SelectProps<
   renderItem?: (item: Option) => React.ReactNode;
 }
 
-export function Select<
-  Option extends BaseItem = BaseItem
->({
+export function Select<Option extends BaseItem = BaseItem>({
   value,
   onChange,
   placeholder = "Select items",
@@ -60,10 +57,10 @@ export function Select<
   ...props
 }: SelectProps<Option>) {
   // Convert data to react-select format
-  const selectOptions = (data || []).map(option => ({
+  const selectOptions = (data || []).map((option) => ({
     ...option,
     value: String(option.id),
-    label: option.name
+    label: option.name,
   }));
 
   // Convert value to react-select value format
@@ -73,59 +70,67 @@ export function Select<
     // If value is an array
     if (Array.isArray(value)) {
       if (valueType === "id") {
-        return multiple 
-          ? selectOptions.filter(option => 
+        return multiple
+          ? selectOptions.filter((option) =>
               value.map(String).includes(String(option.value))
             )
-          : selectOptions.find(option => 
-              String(option.value) === String(value[0])
+          : selectOptions.find(
+              (option) => String(option.value) === String(value[0])
             ) || null;
       } else {
         // Ensure all items are BaseItem when valueType is "item"
         const filteredItems = value.filter(
           (v) => typeof v === "object" && "id" in v
         );
-        return multiple 
-          ? selectOptions.filter(option => 
-              filteredItems.some(item => String(item.id) === String(option.value))
+        return multiple
+          ? selectOptions.filter((option) =>
+              filteredItems.some(
+                (item) => String(item.id) === String(option.value)
+              )
             )
-          : selectOptions.find(option => 
-              filteredItems.some(item => String(item.id) === String(option.value))
+          : selectOptions.find((option) =>
+              filteredItems.some(
+                (item) => String(item.id) === String(option.value)
+              )
             ) || null;
       }
     }
 
     // If value is a single item
     if (valueType === "id") {
-      return selectOptions.find(option => 
-        String(option.value) === String(value)
-      ) || null;
+      return (
+        selectOptions.find(
+          (option) => String(option.value) === String(value)
+        ) || null
+      );
     } else {
       // Ensure the single item is a BaseItem when valueType is "item"
-      return typeof value === "object" && "id" in value 
-        ? selectOptions.find(option => 
-            String(option.value) === String(value.id)
+      return typeof value === "object" && "id" in value
+        ? selectOptions.find(
+            (option) => String(option.value) === String(value.id)
           ) || null
         : null;
     }
   }, [value, valueType, selectOptions, multiple]);
 
   // Handle value change
-  const handleChange = (selectedOption: MultiValue<Option> | SingleValue<Option>) => {
+  const handleChange = (
+    selectedOption: MultiValue<Option> | SingleValue<Option>
+  ) => {
     if (!onChange) return;
 
     if (multiple) {
       const selectedItems = selectedOption as Option[];
-      const finalValue = returnType === 'id'
-        ? selectedItems.map(item => String(item.id))
-        : selectedItems;
+      const finalValue =
+        returnType === "id"
+          ? selectedItems.map((item) => String(item.id))
+          : selectedItems;
       onChange(finalValue);
     } else {
       const selectedItem = selectedOption as Option | null;
       if (selectedItem) {
-        const finalValue = returnType === 'id'
-          ? String(selectedItem.id)
-          : selectedItem;
+        const finalValue =
+          returnType === "id" ? String(selectedItem.id) : selectedItem;
         onChange(finalValue);
       } else {
         onChange(null);
@@ -175,31 +180,35 @@ export function Select<
       noOptionsMessage={() => error || "No options available"}
       className={cn(props.className, "w-full")}
       classNames={{
-        control: (state) => cn(
-          "!min-h-[36px] !cursor-pointer !border-primary/40 !hover:border-primary/80",
-          "!border !rounded-md !bg-background !shadow-sm",
-          state.isDisabled && "!cursor-not-allowed !opacity-50",
-          error && "!border-destructive",
-          "focus-within:!ring-2",
-          "focus-within:!ring-ring",
-          "focus-within:!border-ring/80"
-        ),
+        control: (state) =>
+          cn(
+            "!min-h-[36px] !cursor-pointer !border-primary/40 !hover:border-primary/80",
+            "!border !rounded-md !bg-background !shadow-sm",
+            state.isDisabled && "!cursor-not-allowed !opacity-50 !bg-background",
+            error && "!border-destructive",
+            "focus-within:!ring-2",
+            "focus-within:!ring-ring",
+            "focus-within:!border-ring/80"
+          ),
         valueContainer: () => "!pt-0",
         input: () => "!m-0 !p-0",
         placeholder: () => "!text-muted-foreground !text-sm",
         singleValue: () => "!ml-1 !text-sm",
-        multiValue: () => "!text-accent-foreground !rounded-sm  !ml-1 !bg-primary/10",
+        multiValue: () =>
+          "!text-accent-foreground !rounded-sm  !ml-1 !bg-primary/10",
         multiValueLabel: () => "!px-1 !py-0.5",
-        multiValueRemove: () => "!px-1 !hover:bg-destructive !hover:text-destructive-foreground",
+        multiValueRemove: () =>
+          "!px-1 !hover:bg-destructive !hover:text-destructive-foreground",
         menu: () => "!z-500 !rounded-md !border !shadow-md !text-sm !font-base",
-        option: (state) => cn(
-          "!px-2 !py-1.5",
-          "!cursor-pointer",
-          state.isSelected && "!bg-primary/10 !text-primary",
-          state.isFocused && "!bg-primary/10",
-          "hover:!bg-primary/20",
-          "!transition-colors !text-sm"
-        ),
+        option: (state) =>
+          cn(
+            "!px-2 !py-1.5",
+            "!cursor-pointer",
+            state.isSelected && "!bg-primary/10 !text-primary",
+            state.isFocused && "!bg-primary/10",
+            "hover:!bg-primary/20",
+            "!transition-colors !text-sm"
+          ),
       }}
       styles={{
         menuPortal: (base) => ({
@@ -208,17 +217,19 @@ export function Select<
         }),
         dropdownIndicator: (base, state) => ({
           ...base,
-          color: state.isDisabled ? 'hsl(var(--muted-foreground))' : 'hsl(var(--muted-foreground))',
-          ':hover': {
-            color: 'hsl(var(--foreground))',
+          color: state.isDisabled
+            ? "hsl(var(--muted-foreground))"
+            : "hsl(var(--muted-foreground))",
+          ":hover": {
+            color: "hsl(var(--foreground))",
           },
-          padding: '0 2px',
+          padding: "0 2px",
         }),
         clearIndicator: (base) => ({
           ...base,
-          color: 'hsl(var(--muted-foreground))',
-          ':hover': {
-            color: 'hsl(var(--destructive))',
+          color: "hsl(var(--muted-foreground))",
+          ":hover": {
+            color: "hsl(var(--destructive))",
           },
         }),
       }}

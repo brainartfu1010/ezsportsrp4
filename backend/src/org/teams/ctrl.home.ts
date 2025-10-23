@@ -4,19 +4,20 @@ import { TeamsService } from './service';
 
 @Controller('home/teams')
 export class HomeTeamsController {
-  constructor(private readonly teamsService: TeamsService) {}
+  constructor(private readonly teamsService: TeamsService) { }
 
   @ApiOperation({ summary: 'Get all teams' })
   @ApiResponse({ status: 200, description: 'List of teams' })
-  @ApiQuery({ name: 'status', type: String, required: false })
   @Get()
   findAll(
-    @Query('status') status?: string
+    params: {
+      clubId?: string;
+      sportId?: string;
+    }
   ) {
     return this.teamsService.findAll({
-      where: { 
-        status
-      }
+      clubId: params.clubId,
+      sportId: params.sportId
     });
   }
 
