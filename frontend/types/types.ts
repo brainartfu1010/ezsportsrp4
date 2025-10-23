@@ -45,3 +45,25 @@ export interface BaseItem {
   name: string;
 }
 
+export interface TypeOrgTeam {
+  id?: number;
+  name: string;
+  clubId?: number;
+  sportId?: number;
+  maxPlayers?: number;
+  note?: string;
+  isActive?: boolean;
+  ord?: number;
+  base64?: string;
+}
+
+export interface TypeOrgPlayer {
+  id?: number;
+  name: string;
+  position: string;
+  age: number;
+  teamId?: number;
+  team?: TypeOrgTeam;
+  createdAt?: Date;
+  updatedAt?: Date;
+}

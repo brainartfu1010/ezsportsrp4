@@ -28,6 +28,8 @@ import PanelRefereeInfo from "@/components/panels/panel-referee-info";
 import PanelTeamSetup from "@/components/panels/panel-team-setup";
 import PanelMembership from "@/components/panels/panel-membership";
 import PanelReview from "@/components/panels/panel-review";
+import { TypeSport, TypeOrgTeam } from "@/types/types";
+import { components } from "@/types/api-types";
 
 // Define types for registration steps and data
 type RegistrationStep =
@@ -42,6 +44,27 @@ type RegistrationStep =
 
 type UserRole = "coach" | "team-manager" | "referee" | "later" | null;
 type MembershipTier = "starter" | "pro" | "enterprise" | null;
+
+// Extend window interface to include triggerAccountInfoSubmit
+declare global {
+  interface Window {
+    triggerAccountInfoSubmit?: () => void;
+  }
+}
+
+// Extend window interface to include triggerAccountInfoSubmit
+declare global {
+  interface Window {
+    triggerAccountInfoSubmit?: () => void;
+  }
+}
+
+// Extend window interface to include triggerAccountInfoSubmit
+declare global {
+  interface Window {
+    triggerAccountInfoSubmit?: () => void;
+  }
+}
 
 export default function RegisterPage() {
   // State management for registration process
@@ -58,13 +81,20 @@ export default function RegisterPage() {
     confirm_password?: string;
   }>({});
   const [selectedRole, setSelectedRole] = useState<UserRole>(null);
-  const [coachInfo, setCoachInfo] = useState({});
+  const [coachInfo, setCoachInfo] = useState<{
+    sport?: components["schemas"]["BaseSportDto"];
+    club?: components["schemas"]["OrgClubDto"];
+    team?: components["schemas"]["OrgTeamDto"];
+    [key: string]: any;
+  }>({});
   const [teamManagerInfo, setTeamManagerInfo] = useState({});
   const [refereeInfo, setRefereeInfo] = useState({});
   const [players, setPlayers] = useState<any[]>([]);
   const [selectedMembership, setSelectedMembership] =
     useState<MembershipTier>(null);
   const [termsAgreed, setTermsAgreed] = useState(false);
+
+console.log(players) 
 
   // Step navigation handlers
   const nextStep = () => {
@@ -86,7 +116,7 @@ export default function RegisterPage() {
       let nextStep: RegistrationStep;
 
       switch (currentStep) {
-        case "account-info":
+        case "account-info":          
           nextStep = "role-setup";
           break;
         case "role-setup":
@@ -183,8 +213,7 @@ export default function RegisterPage() {
     }
   };
 
-  const goToStep = (step: RegistrationStep) => {
-    // Only allow navigation to completed steps or the immediately next step
+  const goToStep = (targetStep: RegistrationStep) => {
     const stepOrder: RegistrationStep[] = [
       "account-info",
       "role-setup",
@@ -195,11 +224,23 @@ export default function RegisterPage() {
       "membership",
       "review",
     ];
-    const currentStepIndex = stepOrder.indexOf(currentStep);
-    const targetStepIndex = stepOrder.indexOf(step);
 
-    if (targetStepIndex <= currentStepIndex || completedSteps.includes(step)) {
-      setCurrentStep(step);
+    const currentStepIndex = stepOrder.indexOf(currentStep);
+    const targetStepIndex = stepOrder.indexOf(targetStep);
+
+    // Only allow navigation to completed or current steps
+    if (
+      targetStepIndex <= currentStepIndex || 
+      completedSteps.includes(targetStep)
+    ) {
+      // Special handling for role-specific steps
+      if (targetStep === "coach-info" && selectedRole !== "coach") return;
+      if (targetStep === "team-manager-info" && selectedRole !== "team-manager") return;
+      if (targetStep === "referee-info" && selectedRole !== "referee") return;
+      if (targetStep === "team-setup" && 
+          (selectedRole !== "coach" && selectedRole !== "team-manager")) return;
+
+      setCurrentStep(targetStep);
     }
   };
 
@@ -347,9 +388,11 @@ export default function RegisterPage() {
       case "account-info":
         return (
           <PanelAccountInfo
+            initialData={accountInfo}
             onSubmit={(data) => {
               setAccountInfo(data);
-              nextStep();
+              setCurrentStep("role-setup");
+              setCompletedSteps((prev) => [...prev, "account-info"]);
             }}
           />
         );
@@ -365,9 +408,12 @@ export default function RegisterPage() {
       case "coach-info":
         return (
           <PanelCoachInfo
+            initialData={coachInfo}
             onSubmit={(data) => {
+              // Store coach info and move to team setup
               setCoachInfo(data);
-              nextStep();
+              setCurrentStep("team-setup");
+              setCompletedSteps((prev) => [...prev, "coach-info"]);
             }}
           />
         );
@@ -392,10 +438,29 @@ export default function RegisterPage() {
       case "team-setup":
         return (
           <PanelTeamSetup
+            sport={coachInfo.sport || { 
+              name: '', 
+              isActive: 1, 
+              ord: 0 
+            }}
+            club={coachInfo.club || { 
+              name: '', 
+              status: 'active',
+              ord: 0
+            }}
+            team={coachInfo.team || { 
+              name: '', 
+              clubId: undefined,
+              sportId: undefined,
+              leagueId: undefined,
+              ageGroup: undefined,
+              status: 1,
+              base64: undefined
+            }}
             initialPlayers={players}
             onPlayersUpdate={(updatedPlayers) => {
               setPlayers(updatedPlayers);
-              nextStep();
+              // nextStep();
             }}
           />
         );
@@ -459,7 +524,6 @@ export default function RegisterPage() {
 
   const onMembershipSelect = (membership: MembershipTier) => {
     setSelectedMembership(membership);
-    // Removed any step change logic
   };
 
   const handleFinalSubmit = () => {
@@ -526,7 +590,21 @@ export default function RegisterPage() {
                 )}
 
                 <Button
-                  onClick={nextStep}
+                  onClick={() => {
+                    if (currentStep === "account-info" || currentStep === "coach-info") {
+                      // Trigger form validation
+                      const form = document.querySelector('form') as HTMLFormElement;
+                      if (form) {
+                        const submitButton = form.querySelector('button[type="submit"]') as HTMLButtonElement;
+                        if (submitButton) {
+                          submitButton.click();
+                        }
+                      }
+                    } else {
+                      // For other steps, use existing nextStep logic
+                      nextStep();
+                    }
+                  }}
                   className={`
                     px-6 
                     ${currentStep === "account-info" ? "ml-auto" : ""}

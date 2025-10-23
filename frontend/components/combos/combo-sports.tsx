@@ -5,7 +5,9 @@ import { useSports } from "@/hooks/useSports";
 import { Select } from "../ui/select";
 
 type SportComboProps = {
-  value?: string[] | string | number[] | number | null | undefined;
+  valueType?: "id" | "item";
+  returnType?: "id" | "item";
+  value?: string[] | string | number[] | number | Option[] | Option | null;
   onChange?: (value: string[] | null | undefined) => void;
   onValueChange?: (value: string[]) => void;
   placeholder?: string;
@@ -14,7 +16,9 @@ type SportComboProps = {
   multiple?: boolean;
 };
 
-export function ComboSports({
+export default function ComboSports({
+  valueType = "id",
+  returnType = "id",
   value,
   onChange,
   onValueChange,
@@ -34,6 +38,8 @@ export function ComboSports({
     <Select
       data={sports}
       value={value}
+      valueType={valueType}
+      returnType={returnType}
       onChange={handleChange}
       placeholder={placeholder}
       disabled={disabled || loading}

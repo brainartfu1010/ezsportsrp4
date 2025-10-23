@@ -1,7 +1,7 @@
 import { TypeReorder, TypeSport } from "@/types/types";
 import { api } from "./api";
 
-const SportService = {
+const ServiceSport = {
   async getSports(): Promise<TypeSport[]> {
     try {
       const response = await api.get("/sports");
@@ -60,4 +60,4 @@ const SportService = {
   }
 };
 
-export default SportService;
+export default ServiceSport;

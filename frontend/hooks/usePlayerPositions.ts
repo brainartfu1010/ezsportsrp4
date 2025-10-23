@@ -1,16 +1,15 @@
 import { useState, useEffect } from 'react';
-import { ServicePlayerPosition, PlayerPosition, PlayerPositionQueryParams } from '@/lib/services/service-player-position';
+import { ServicePlayerPosition, PlayerPosition } from '@/lib/services/service-player-position';
 
-export function usePlayerPositions(initialParams?: PlayerPositionQueryParams) {
+export function usePlayerPositions(sportId?: string) {
   const [playerPositions, setPlayerPositions] = useState<PlayerPosition[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
+  const [loading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const [params, setParams] = useState<PlayerPositionQueryParams>(initialParams || {});
 
   const fetchPlayerPositions = async () => {
     try {
       setIsLoading(true);
-      const data = await ServicePlayerPosition.getAll(params);
+      const data = await ServicePlayerPosition.getAll({ sportId });
       setPlayerPositions(data);
       setError(null);
     } catch (err: any) {
@@ -36,9 +35,9 @@ export function usePlayerPositions(initialParams?: PlayerPositionQueryParams) {
   const updatePlayerPosition = async (playerPositionId: string, playerPositionData: Partial<PlayerPosition>) => {
     try {
       const updatedPlayerPosition = await ServicePlayerPosition.update(playerPositionId, playerPositionData);
-      setPlayerPositions(prevPlayerPositions => 
-        prevPlayerPositions.map(playerPosition => 
-          playerPosition.id === playerPositionId ? { ...playerPosition, ...updatedPlayerPosition } : playerPosition
+      setPlayerPositions(prevPlayerPositions =>
+        prevPlayerPositions.map(playerPosition =>
+          playerPosition.id?.toString() === playerPositionId ? { ...playerPosition, ...updatedPlayerPosition } : playerPosition
         )
       );
       return updatedPlayerPosition;
@@ -52,7 +51,11 @@ export function usePlayerPositions(initialParams?: PlayerPositionQueryParams) {
   const deletePlayerPosition = async (playerPositionId: string) => {
     try {
       await ServicePlayerPosition.delete(playerPositionId);
-      setPlayerPositions(prevPlayerPositions => prevPlayerPositions.filter(playerPosition => playerPosition.id !== playerPositionId));
+      setPlayerPositions(prevPlayerPositions =>
+        prevPlayerPositions.filter(playerPosition =>
+          playerPosition.id?.toString() !== playerPositionId
+        )
+      );
     } catch (err: any) {
       setError(err.message || 'Failed to delete player position');
       console.error(err);
@@ -60,22 +63,17 @@ export function usePlayerPositions(initialParams?: PlayerPositionQueryParams) {
     }
   };
 
-  const updateParams = (newParams: PlayerPositionQueryParams) => {
-    setParams(prevParams => ({ ...prevParams, ...newParams }));
-  };
-
   useEffect(() => {
     fetchPlayerPositions();
-  }, [JSON.stringify(params)]);
+  }, [sportId]);
 
   return {
     playerPositions,
-    isLoading,
+    loading,
     error,
     fetchPlayerPositions,
     createPlayerPosition,
     updatePlayerPosition,
     deletePlayerPosition,
-    updateParams
   };
 }

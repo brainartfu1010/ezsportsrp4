@@ -1,5 +1,5 @@
 import { useState, useEffect, useMemo, useCallback } from 'react';
-import { ServiceTeam, Team, TeamQueryParams } from '@/lib/services/service-team';
+import ServiceTeam from '@/lib/services/service-team';
 
 // Create a simple cache mechanism
 const teamCache = new Map<string, { 

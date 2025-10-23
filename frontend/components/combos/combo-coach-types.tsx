@@ -14,7 +14,7 @@ type CoachTypeComboProps = {
   sportId?: string | null;
 };
 
-export function ComboCoachTypes({
+export default function ComboCoachTypes({
   value,
   onChange,
   placeholder = "Select Coach Type",

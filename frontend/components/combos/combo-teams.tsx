@@ -4,36 +4,52 @@ import React from "react";
 import { useTeams } from "@/hooks/useTeams";
 import { Select } from "../ui/select";
 import { BaseItem } from "@/types/types";
+import { components } from "@/types/api-types";
 
 type TeamComboProps = {
-  value?: string[] | string | number[] | number | null | undefined;
-  onChange?: (value: string[]) => void;
-  onValueChange?: (value: string[]) => void;
+  valueType?: "id" | "item";
+  returnType?: "id" | "item";
+  value?:
+    | string[]
+    | string
+    | number[]
+    | number
+    | components["schemas"]["OrgTeamDto"][]
+    | components["schemas"]["OrgTeamDto"]
+    | null
+    | undefined;
+  onChange?: (
+    value: string[] | components["schemas"]["OrgTeamDto"][] | null | undefined
+  ) => void;
+  onValueChange?: (
+    value: components["schemas"]["OrgTeamDto"][] | null | undefined
+  ) => void;
   placeholder?: string;
   disabled?: boolean;
   className?: string;
   multiple?: boolean;
-  clubId?: string | null;
-  sportId?: string | null;
+  club?: components["schemas"]["OrgClubDto"] | null;
+  sport?: components["schemas"]["BaseSportDto"] | null;
 };
 
-export function ComboTeams({
+export default function ComboTeams({
   value,
+  valueType = "id",
+  returnType = "id",
   onChange,
   onValueChange,
   placeholder = "Select Team",
   disabled = false,
   className,
   multiple = false,
-  clubId,
-  sportId,
+  club,
+  sport,
 }: TeamComboProps) {
-  const { teams, isLoading, error } = useTeams(
-    clubId || undefined,
-    sportId || undefined
-  );
+  const { teams, isLoading, error } = useTeams(club?.id, sport?.id);
 
-  const handleChange = (value: string[]) => {
+  const handleChange = (
+    value: string[] | components["schemas"]["OrgTeamDto"][] | null | undefined
+  ) => {
     onChange?.(value);
     onValueChange?.(value);
   };
@@ -42,6 +58,8 @@ export function ComboTeams({
     <Select
       data={teams}
       value={value === null || value === undefined ? [] : value}
+      valueType={valueType}
+      returnType={returnType}
       onChange={handleChange}
       placeholder={placeholder}
       disabled={disabled || isLoading}

@@ -5,7 +5,7 @@ import z from "zod";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Form, FormItem } from "@/components/controls/form";
-import { ComboSports } from "@/components/combos/combo-sports";
+import ComboSports from "@/components/combos/combo-sports";
 
 // Team Manager information form configuration
 const teamManagerFormConfig = {

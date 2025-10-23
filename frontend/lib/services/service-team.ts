@@ -27,7 +27,7 @@ export interface TeamQueryParams {
   sortOrder?: 'asc' | 'desc';
 }
 
-export class ServiceTeam {
+export default class ServiceTeam {
   private static baseUrl = '/admin/teams';
 
   static async getAll(clubId?: string, sportId?: string): Promise<Team[]> {

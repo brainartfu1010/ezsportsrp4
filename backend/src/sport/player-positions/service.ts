@@ -18,7 +18,7 @@ export class PlayerPositionService {
   async findAll(sportId?: number) {
     const playerPositions = await (this.prisma as any).sportPlayerPosition.findMany({
       where: sportId !== undefined ? { sportId } : undefined,
-      orderBy: { name: 'asc' }
+      orderBy: { ord: 'asc' }
     });
 
     return playerPositions;

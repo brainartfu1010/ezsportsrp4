@@ -1,34 +1,36 @@
 "use client";
 
 import React from "react";
-import { useClubs } from "@/hooks/useClubs";
+import useClubs from "@/hooks/useClubs";
 import { Select } from "../ui/select";
-import { BaseItem } from "@/types/types";
+import { components } from "@/types/api-types";
 
 type ClubComboProps = {
-  value?: string[] | string | number[] | number | null | undefined;
-  onChange?: (value: string[]) => void;
-  onValueChange?: (value: string[]) => void;
+  valueType?: "id" | "item";
+  returnType?: "id" | "item";
+  value?: string[] | string | number[] | number | components["schemas"]["OrgClubDto"][] | components["schemas"]["OrgClubDto"] | null | undefined;
+  onChange?: (value: string[] | components["schemas"]["OrgClubDto"][] | null | undefined) => void;
+  onValueChange?: (value: components["schemas"]["OrgClubDto"][] | null | undefined) => void;
   placeholder?: string;
   disabled?: boolean;
   className?: string;
   multiple?: boolean;
-  sportId?: string | null;
 };
 
-export function ComboClubs({
+export default function ComboClubs({
   value,
+  valueType = "id",
+  returnType = "id",
   onChange,
   onValueChange,
   placeholder = "Select Club",
   disabled = false,
   className,
   multiple = false,
-  sportId,
 }: ClubComboProps) {
   const { clubs, isLoading, error } = useClubs();
 
-  const handleChange = (value: string[]) => {
+  const handleChange = (value: string[] | components["schemas"]["OrgClubDto"][] | null | undefined) => {
     onChange?.(value);
     onValueChange?.(value);
   };
@@ -37,6 +39,8 @@ export function ComboClubs({
     <Select
       data={clubs}
       value={value === null || value === undefined ? [] : value}
+      valueType={valueType}
+      returnType={returnType}
       onChange={handleChange}
       placeholder={placeholder}
       disabled={disabled || isLoading}

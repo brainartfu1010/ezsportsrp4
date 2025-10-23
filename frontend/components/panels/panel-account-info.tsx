@@ -1,61 +1,27 @@
 "use client";
 
-import React from "react";
+import React, { useEffect } from "react";
 import Link from "next/link";
 import { z } from "zod";
 import { useState } from "react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/controls/button";
 import { Form, FormItem } from "@/components/controls/form";
-import { 
-  CheckIcon 
-} from "lucide-react";
+import { CheckIcon } from "lucide-react";
 
 // Define schema for account info validation
-const accountInfoSchema = z.object({
-  email: z.string().email("Invalid email address"),
-  first_name: z.string().min(1, "First name is required"),
-  last_name: z.string().min(1, "Last name is required"),
-  password: z.string().min(6, "Password must be at least 6 characters"),
-  confirm_password: z.string()
-}).refine((data) => data.password === data.confirm_password, {
-  message: "Passwords do not match",
-  path: ["confirm_password"]
-});
-
-// Form configuration
-const formConfig = {
-  email: {
-    label: "Email",
-    schema: z.string().email("Invalid email address"),
-    control: <Input type="email" />,
-    required: true
-  },
-  first_name: {
-    label: "First Name",
-    schema: z.string().min(1, "First name is required"),
-    control: <Input type="text" />,
-    required: true
-  },
-  last_name: {
-    label: "Last Name",
-    schema: z.string().min(1, "Last name is required"),
-    control: <Input type="text" />,
-    // required: true
-  },
-  password: {
-    label: "Password",
-    schema: z.string().min(6, "Password must be at least 6 characters"),
-    control: <Input type="password" />,
-    required: true
-  },
-  confirm_password: {
-    label: "Confirm Password",
-    schema: z.string().min(6, "Password must be at least 6 characters"),
-    control: <Input type="password" />,
-    required: true
-  }
-};
+const accountInfoSchema = z
+  .object({
+    email: z.string().email("Invalid email address"),
+    first_name: z.string().min(1, "First name is required"),
+    last_name: z.string().min(1, "Last name is required"),
+    password: z.string().min(6, "Password must be at least 6 characters"),
+    confirm_password: z.string(),
+  })
+  .refine((data) => data.password === data.confirm_password, {
+    message: "Passwords do not match",
+    path: ["confirm_password"],
+  });
 
 // Social login buttons
 const socialLogins = [
@@ -78,7 +44,7 @@ const socialLogins = [
     name: "GitHub",
     icon: <CheckIcon className="w-5 h-5" />,
     color: "bg-gray-800",
-  }
+  },
 ];
 
 interface AccountInfoPanelProps {
@@ -86,9 +52,11 @@ interface AccountInfoPanelProps {
 }
 
 export default function PanelAccountInfo({ 
-  onSubmit 
+  onSubmit,
+  initialData = {} 
 }: { 
-  onSubmit: (data: z.infer<typeof accountInfoSchema>) => void 
+  onSubmit: (data: z.infer<typeof accountInfoSchema>) => void;
+  initialData?: Partial<z.infer<typeof accountInfoSchema>>;
 }) {
   const [formErrors, setFormErrors] = useState<string[]>([]);
 
@@ -97,12 +65,50 @@ export default function PanelAccountInfo({
     const validationResult = accountInfoSchema.safeParse(data);
     
     if (validationResult.success) {
+      // Clear any previous errors
+      setFormErrors([]);
+      
+      // Call onSubmit with validated data
       onSubmit(validationResult.data);
     } else {
       // Handle validation errors
       const errors = validationResult.error.issues.map((err) => err.message);
       setFormErrors(errors);
     }
+  };
+
+  // Form configuration
+  const formConfig = {
+    email: {
+      label: "Email",
+      schema: z.string().email("Invalid email address"),
+      control: <Input type="email" />,
+      required: true,
+    },
+    first_name: {
+      label: "First Name",
+      schema: z.string().min(1, "First name is required"),
+      control: <Input type="text" />,
+      required: true,
+    },
+    last_name: {
+      label: "Last Name",
+      schema: z.string().min(1, "Last name is required"),
+      control: <Input type="text" />,
+      // required: true
+    },
+    password: {
+      label: "Password",
+      schema: z.string().min(6, "Input at least 6 characters"),
+      control: <Input type="password" />,
+      required: true,
+    },
+    confirm_password: {
+      label: "Confirm Password",
+      schema: z.string().min(6, "Input at least 6 characters"),
+      control: <Input type="password" />,
+      required: true,
+    },
   };
 
   return (
@@ -117,6 +123,17 @@ export default function PanelAccountInfo({
         </p>
       </div>
 
+      {/* Display form-level errors */}
+      {formErrors.length > 0 && (
+        <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded relative" role="alert">
+          <ul className="list-disc list-inside">
+            {formErrors.map((error, index) => (
+              <li key={index}>{error}</li>
+            ))}
+          </ul>
+        </div>
+      )}
+
       <div className="grid md:grid-cols-2 gap-8 relative">
         {/* Left Column - Account Details */}
         <div className="space-y-6">
@@ -124,6 +141,7 @@ export default function PanelAccountInfo({
             config={formConfig} 
             onSubmit={handleSubmit}
             className="space-y-4"
+            initialValues={initialData}
           >
             <FormItem key="email" className="mb-4" />
             <div className="grid grid-cols-2 gap-4 mb-4">
@@ -134,6 +152,7 @@ export default function PanelAccountInfo({
               <FormItem key="password" />
               <FormItem key="confirm_password" />
             </div>
+            <button type="submit" className="hidden" />
           </Form>
         </div>
 

@@ -75,6 +75,7 @@ interface TableProps<T extends TableRowData> {
   onRowSelect?: (selectedRows: (string | number)[]) => void;
   // New prop to allow external control of selected rows
   selectedRows?: (string | number)[];
+  noDataMessage?: string;
 }
 
 export default function Table<T extends TableRowData>({
@@ -94,6 +95,7 @@ export default function Table<T extends TableRowData>({
   loading = false,
   onRowSelect,
   selectedRows: propSelectedRows,
+  noDataMessage = "No data",
 }: TableProps<T>) {
   // Use prop if provided, otherwise use internal state
   const [internalSelectedRows, setInternalSelectedRows] = useState<
@@ -480,123 +482,131 @@ export default function Table<T extends TableRowData>({
               </TableRow>
             </TableHeader>
             <TableBody>
-              {paginatedData.map((row, index) => (
-                <TableRow
-                  key={row.id ?? index}
-                  className={`
-                    ${selectedRows.includes(row.id) ? "bg-primary/10" : ""}
-                    ${
-                      draggedIndex !== null && dragOverIndex === index
-                        ? "bg-red-400/10"
-                        : ""
-                    }
-                    hover:bg-muted/20
-                  `}
-                  draggable={false}
-                  onDragOver={(e) => {
-                    if (draggedIndex !== null) {
-                      e.preventDefault();
-                      handleDragOver(index, e);
-                    }
-                  }}
-                  onDrop={(e) => {
-                    if (draggedIndex !== null) {
-                      handleDrop(index, e);
-                    }
-                  }}
-                  onClick={() => selectable && toggleRowSelection(row.id)}
-                  onDoubleClick={() => handleRowDoubleClick(row)}
-                >
-                  {preparedColumns.map((col) => {
-                    let cellContent;
-                    if (col.cell) {
-                      if (typeof col.cell === "function") {
-                        // If it's a function, call it with row and optional index
-                        if (
-                          col.accessor === "checkbox" ||
-                          col.accessor === "reorder"
-                        ) {
-                          cellContent = col.cell(row);
-                        } else {
-                          // Explicit type handling
-                          const cellRenderer = col.cell as
-                            | ((row: T, index?: number) => React.ReactNode)
-                            | ((row: T) => React.ReactNode);
-
-                          // Check if the renderer expects an index
-                          if (cellRenderer.length > 1) {
-                            cellContent = cellRenderer(row, index);
+              {data.length === 0 ? (
+                <TableRow className="hover:bg-transparent">
+                  <TableCell colSpan={preparedColumns.length + (onRowActionEdit || onRowActionDelete ? 1 : 0)} className="text-center text-muted-foreground py-8">
+                    {noDataMessage}
+                  </TableCell>
+                </TableRow>
+              ) : (
+                paginatedData.map((row, index) => (
+                  <TableRow
+                    key={row.id ?? index}
+                    className={`
+                      ${selectedRows.includes(row.id) ? "bg-primary/10" : ""}
+                      ${
+                        draggedIndex !== null && dragOverIndex === index
+                          ? "bg-red-400/10"
+                          : ""
+                      }
+                      hover:bg-muted/20
+                    `}
+                    draggable={false}
+                    onDragOver={(e) => {
+                      if (draggedIndex !== null) {
+                        e.preventDefault();
+                        handleDragOver(index, e);
+                      }
+                    }}
+                    onDrop={(e) => {
+                      if (draggedIndex !== null) {
+                        handleDrop(index, e);
+                      }
+                    }}
+                    onClick={() => selectable && toggleRowSelection(row.id)}
+                    onDoubleClick={() => handleRowDoubleClick(row)}
+                  >
+                    {preparedColumns.map((col) => {
+                      let cellContent;
+                      if (col.cell) {
+                        if (typeof col.cell === "function") {
+                          // If it's a function, call it with row and optional index
+                          if (
+                            col.accessor === "checkbox" ||
+                            col.accessor === "reorder"
+                          ) {
+                            cellContent = col.cell(row);
                           } else {
-                            cellContent = cellRenderer(row);
+                            // Explicit type handling
+                            const cellRenderer = col.cell as
+                              | ((row: T, index?: number) => React.ReactNode)
+                              | ((row: T) => React.ReactNode);
+
+                            // Check if the renderer expects an index
+                            if (cellRenderer.length > 1) {
+                              cellContent = cellRenderer(row, index);
+                            } else {
+                              cellContent = cellRenderer(row);
+                            }
                           }
+                        } else {
+                          // If it's a ReactNode, use it directly
+                          cellContent = col.cell;
                         }
                       } else {
-                        // If it's a ReactNode, use it directly
-                        cellContent = col.cell;
+                        // If no cell renderer, use default getCellValue
+                        cellContent = getCellValue(row, col, index);
                       }
-                    } else {
-                      // If no cell renderer, use default getCellValue
-                      cellContent = getCellValue(row, col, index);
-                    }
 
-                    return (
-                      <TableCell
-                        key={String(col.accessor)}
-                        className={
-                          col.accessor === "checkbox" ||
-                          col.accessor === "reorder"
-                            ? "w-[50px] text-center"
-                            : ""
-                        }
-                        onClick={(e) => {
-                          if (col.accessor === "checkbox") {
-                            e.stopPropagation();
+                      return (
+                        <TableCell
+                          key={String(col.accessor)}
+                          className={
+                            col.accessor === "checkbox" ||
+                            col.accessor === "reorder"
+                              ? "w-[50px] text-center"
+                              : ""
                           }
-                        }}
-                      >
-                        {cellContent}
-                      </TableCell>
-                    );
-                  })}
-                  {onRowActionEdit || onRowActionDelete ? (
-                    <TableCell className="text-center" data-column="actions">
-                      <div className="flex justify-center ">
-                        {onRowActionEdit && (
-                          <Button
-                            variant="link"
-                            size="sm"
-                            className="cursor-pointer text-primary/70 hover:text-primary"
-                            onClick={(e) => {
+                          onClick={(e) => {
+                            if (col.accessor === "checkbox") {
                               e.stopPropagation();
-                              onRowActionEdit?.(row.id);
-                            }}
-                          >
-                            <EditIcon className="h-4 w-4" />
-                          </Button>
-                        )}
-                        {onRowActionDelete && (
-                          <PopoverConfirm
-                            question="Are you sure?"
-                            onYes={() => onRowActionDelete?.(row.id)}
-                          >
+                            }
+                          }}
+                        >
+                          {cellContent}
+                        </TableCell>
+                      );
+                    })}
+                    {onRowActionEdit || onRowActionDelete ? (
+                      <TableCell className="text-center" data-column="actions">
+                        <div className="flex justify-center ">
+                          {onRowActionEdit && (
                             <Button
                               variant="link"
                               size="sm"
-                              className="cursor-pointer text-red-500/70 hover:text-red-500"
+                              className="cursor-pointer text-primary/70 hover:text-primary"
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                onRowActionEdit?.(row.id);
+                              }}
                             >
-                              <Trash2Icon className="h-4 w-4" />
+                              <EditIcon className="h-4 w-4" />
                             </Button>
-                          </PopoverConfirm>
-                        )}
-                      </div>
-                    </TableCell>
-                  ) : null}
-                </TableRow>
-              ))}
+                          )}
+                          {onRowActionDelete && (
+                            <PopoverConfirm
+                              question="Are you sure?"
+                              onYes={() => onRowActionDelete?.(row.id)}
+                            >
+                              <Button
+                                variant="link"
+                                size="sm"
+                                className="cursor-pointer text-red-500/70 hover:text-red-500"
+                              >
+                                <Trash2Icon className="h-4 w-4" />
+                              </Button>
+                            </PopoverConfirm>
+                          )}
+                        </div>
+                      </TableCell>
+                    ) : null}
+                  </TableRow>
+                ))
+              )}
             </TableBody>
           </ShadcnTable>
 
-          {currentRowsPerPage && (
+          {data.length > 0 && currentRowsPerPage && (
             <div className="flex items-center justify-between py-4">
               <div className="flex items-center space-x-2">
                 {selectable && (
@@ -676,7 +686,6 @@ export default function Table<T extends TableRowData>({
               </Pagination>
 
               <div className="flex items-center space-x-2">
-                {/* <span className="text-sm text-muted-foreground">Rows per page</span> */}
                 <Select
                   data={[
                     { id: 5, name: "5" },
@@ -688,9 +697,6 @@ export default function Table<T extends TableRowData>({
                   value={currentRowsPerPage}
                   onChange={(value) => handleRowsPerPageChange(Number(value))}
                 />
-                {/* <span className="text-sm text-muted-foreground w-32 text-right">
-                  Showing {(currentPage - 1) * currentRowsPerPage + 1}-{Math.min(currentPage * currentRowsPerPage, data.length)} / {data.length}
-                </span> */}
               </div>
             </div>
           )}

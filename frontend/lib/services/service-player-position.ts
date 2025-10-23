@@ -1,93 +1,77 @@
-import { fetchData, createData, updateData, deleteData } from './api';
+import { TypeReorder } from "@/types/types";
+import { api } from "./api";
+import { components } from "@/types/api-types";
 
-export interface PlayerPosition {
-  id?: string;
-  name: string;
-  description?: string;
-  sportId?: string;
-  sport?: {
-    id: string;
-    name: string;
-  };
-  abbreviation?: string;
-  responsibilities?: string[];
-  createdAt?: Date;
-  updatedAt?: Date;
-}
+export type PlayerPosition = components["schemas"]["SportPlayerPositionDto"]; 
 
-export interface PlayerPositionQueryParams {
-  page?: number;
-  limit?: number;
-  sportId?: string;
-  search?: string;
-  sortBy?: string;
-  sortOrder?: 'asc' | 'desc';
-}
-
-export class ServicePlayerPosition {
-  private static baseUrl = '/player-positions';
-
-  static async getAll(params?: PlayerPositionQueryParams): Promise<PlayerPosition[]> {
+const ServicePlayerPosition = {
+  async getAll(sportId?: string): Promise<PlayerPosition[]> {
     try {
-      const queryParams = {
-        page: params?.page || 1,
-        limit: params?.limit || 10,
-        ...(params?.sportId && { sportId: params.sportId }),
-        ...(params?.search && { search: params.search }),
-        ...(params?.sortBy && { sortBy: params.sortBy }),
-        ...(params?.sortOrder && { sortOrder: params.sortOrder }),
-      };
-
-      return await fetchData(this.baseUrl, queryParams);
+      console.log('Fetching player positions with params:', sportId);
+      const response = await api.get("/admin/player-positions", { 
+        params: sportId ? { sportId: sportId } : undefined 
+      });
+      console.log('Player positions response:', response.data);
+      
+      // Ensure response.data is an array
+      if (!Array.isArray(response.data)) {
+        console.error('Unexpected response format:', response.data);
+        return [];
+      }
+      
+      return response.data;
     } catch (error) {
-      console.error('Error fetching player positions:', error);
+      console.error("Error fetching player positions:", error);
+      throw error;
+    }
+  },
+
+  async create(playerPosition: Partial<PlayerPosition>): Promise<PlayerPosition> {
+    try {
+      const response = await api.post("/admin/player-positions", playerPosition);
+      return response.data;
+    } catch (error) {
+      console.error("Error creating player position:", error);
+      throw error;
+    }
+  },
+
+  async update(id: string, playerPosition: Partial<PlayerPosition>): Promise<PlayerPosition> {
+    try {
+      const response = await api.patch(`/admin/player-positions/${id}`, playerPosition);
+      return response.data;
+    } catch (error) {
+      console.error("Error updating player position:", error);
+      throw error;
+    }
+  },
+
+  async delete(id: string): Promise<void> {
+    try {
+      await api.delete(`/admin/player-positions/${id}`);
+    } catch (error) {
+      console.error("Error deleting player position:", error);
+      throw error;
+    }
+  },
+
+  async deleteMany(ids: string[]): Promise<void> {
+    try {
+      await api.delete(`/admin/player-positions/bulk`, { data: ids });
+    } catch (error) {
+      console.error("Error deleting player positions:", error);
+      throw error;
+    }
+  },
+
+  async reorder(orders: TypeReorder[]): Promise<void> {
+    try {
+      await api.post(`/admin/player-positions/reorder`, orders);
+    } catch (error) {
+      console.error("Error reordering player positions:", error);
       throw error;
     }
   }
+};
 
-  static async getById(id: string): Promise<PlayerPosition> {
-    try {
-      return await fetchData(`${this.baseUrl}/${id}`);
-    } catch (error) {
-      console.error(`Error fetching player position with id ${id}:`, error);
-      throw error;
-    }
-  }
-
-  static async create(playerPositionData: Omit<PlayerPosition, 'id'>): Promise<PlayerPosition> {
-    try {
-      return await createData(this.baseUrl, playerPositionData);
-    } catch (error) {
-      console.error('Error creating player position:', error);
-      throw error;
-    }
-  }
-
-  static async update(id: string, playerPositionData: Partial<PlayerPosition>): Promise<PlayerPosition> {
-    try {
-      return await updateData(`${this.baseUrl}/${id}`, playerPositionData);
-    } catch (error) {
-      console.error(`Error updating player position with id ${id}:`, error);
-      throw error;
-    }
-  }
-
-  static async delete(id: string): Promise<void> {
-    try {
-      await deleteData(`${this.baseUrl}/${id}`);
-    } catch (error) {
-      console.error(`Error deleting player position with id ${id}:`, error);
-      throw error;
-    }
-  }
-
-  // Additional utility methods
-  static async getPlayerPositionsBySport(sportId: string): Promise<PlayerPosition[]> {
-    try {
-      return await this.getAll({ sportId });
-    } catch (error) {
-      console.error(`Error fetching player positions for sport ${sportId}:`, error);
-      throw error;
-    }
-  }
-}
+export { ServicePlayerPosition };

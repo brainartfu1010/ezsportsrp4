@@ -4,13 +4,24 @@ import React, { useState } from "react";
 import { Button, Buttons } from "@/components/controls/button";
 import { PlusIcon, TrashIcon } from "lucide-react";
 import Table from "../controls/table";
+import { TypeOrgTeam } from "@/types/types";
+import { components } from "@/types/api-types";
+import ModalTeamEdit from "../modals/modal-team-edit";
+import ModalPlayerEdit from "../modals/modal-player-edit";
+import { Avatar } from "../controls/avatar";
 
 interface TeamSetupPanelProps {
+  sport: components["schemas"]["BaseSportDto"];
+  club: components["schemas"]["OrgClubDto"];
+  team: components["schemas"]["OrgTeamDto"];
   initialPlayers?: any[];
   onPlayersUpdate: (players: any[]) => void;
 }
 
 export default function PanelTeamSetup({
+  sport,
+  club,
+  team,
   initialPlayers = [],
   onPlayersUpdate,
 }: TeamSetupPanelProps) {
@@ -20,34 +31,50 @@ export default function PanelTeamSetup({
     position: "",
     age: "",
   });
-
-  const addPlayer = () => {
-    if (newPlayer.name && newPlayer.position && newPlayer.age) {
-      const updatedPlayers = [...players, newPlayer];
-      setPlayers(updatedPlayers);
-      onPlayersUpdate(updatedPlayers);
-      setNewPlayer({ name: "", position: "", age: "" });
-    }
-  };
-
-  const deletePlayer = (index: number) => {
-    const updatedPlayers = players.filter((_, i) => i !== index);
-    setPlayers(updatedPlayers);
-    onPlayersUpdate(updatedPlayers);
-  };
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [currentPlayer, setCurrentPlayer] =
+    useState<components["schemas"]["MemberPlayerDto"]>();
 
   const handlePlayersUpdate = (updatedPlayers: any[]) => {
-    // Validate players data if needed
     onPlayersUpdate(updatedPlayers);
   };
 
+  const deletePlayer = (playerId: string | number) => {
+    const updatedPlayers = players.filter((p) => p.id !== playerId);
+    setPlayers(updatedPlayers);
+    handlePlayersUpdate(updatedPlayers);
+  };
+
+  const rows: any[] = players.map((player) => ({
+    id: player.id,
+    firstName: player.firstName,
+    lastName: player.lastName,
+    base64: player.base64,
+    position: player.position,
+    jersey: player.jerseyNumber,
+    email: player.email,
+  }));
+
   const cols = [
-    { accessor: "name", header: "Name" },
-    { accessor: "position", header: "Position" },
+    {
+      accessor: "base64",
+      header: "Name",
+      cell: (row: any) => (
+        <div className="flex items-center gap-2">
+          <Avatar src={row.base64} size="xs" fallbackText={row?.name} />
+          {row?.firstName ?? ""} {row?.lastName ?? ""}
+        </div>
+      ),
+    },
+    {
+      accessor: "position",
+      header: "Position",
+      cell: (row: any) => {
+        console.log('row', row);
+      },
+    },
     { accessor: "jersey", header: "Jersey" },
     { accessor: "email", header: "Email" },
-    { accessor: "gender", header: "Gender" },
-    { accessor: "phone", header: "Phone" },
     {
       accessor: "actions",
       header: "Actions",
@@ -62,152 +89,6 @@ export default function PanelTeamSetup({
       ),
     },
   ];
-  const rows = [
-    {
-      id: 1,
-      name: "John Doe",
-      position: "Forward",
-      jersey: 10,
-      gender: "Male",
-      email: "john.doe@example.com",
-      phone: "1234567890",
-    },
-    {
-      id: 2,
-      name: "Jane Doe",
-      position: "Defense",
-      jersey: 11,
-      gender: "Female",
-      email: "jane.doe@example.com",
-      phone: "1234567890",
-    },
-    {
-      id: 3,
-      name: "Jim Beam",
-      position: "Midfielder",
-      jersey: 12,
-      gender: "Male",
-      email: "jim.beam@example.com",
-      phone: "1234567890",
-    },
-    {
-      id: 4,
-      name: "Jill Johnson",
-      position: "Forward",
-      jersey: 13,
-      gender: "Female",
-      email: "jill.johnson@example.com",
-      phone: "1234567890",
-    },
-    {
-      id: 5,
-      name: "Jack Smith",
-      position: "Defense",
-      jersey: 14,
-      gender: "Male",
-      email: "jack.smith@example.com",
-      phone: "1234567890",
-    },
-    {
-      id: 6,
-      name: "Jill Johnson",
-      position: "Midfielder",
-      jersey: 15,
-      gender: "Female",
-      email: "jill.johnson@example.com",
-      phone: "1234567890",
-    },
-    {
-      id: 7,
-      name: "Jack Smith",
-      position: "Forward",
-      jersey: 16,
-      gender: "Male",
-      email: "jack.smith@example.com",
-      phone: "1234567890",
-    },
-    {
-      id: 8,
-      name: "Jill Johnson",
-      position: "Defense",
-      jersey: 17,
-      gender: "Female",
-      email: "jill.johnson@example.com",
-      phone: "1234567890",
-    },
-    {
-      id: 9,
-      name: "Jack Smith",
-      position: "Midfielder",
-      jersey: 18,
-      gender: "Male",
-      email: "jack.smith@example.com",
-      phone: "1234567890",
-    },
-    {
-      id: 10,
-      name: "Jill Johnson",
-      position: "Forward",
-      jersey: 19,
-      gender: "Female",
-      email: "jill.johnson@example.com",
-      phone: "1234567890",
-    },
-    {
-      id: 11,
-      name: "Jack Smith",
-      position: "Defense",
-      jersey: 20,
-      gender: "Male",
-      email: "jack.smith@example.com",
-      phone: "1234567890",
-    },
-    {
-      id: 12,
-      name: "Jill Johnson",
-      position: "Midfielder",
-      jersey: 21,
-      gender: "Female",
-      email: "jill.johnson@example.com",
-      phone: "1234567890",
-    },
-    {
-      id: 13,
-      name: "Jack Smith",
-      position: "Forward",
-      jersey: 22,
-      gender: "Male",
-      email: "jack.smith@example.com",
-      phone: "1234567890",
-    },
-    {
-      id: 14,
-      name: "Jill Johnson",
-      position: "Defense",
-      jersey: 23,
-      gender: "Female",
-      email: "jill.johnson@example.com",
-      phone: "1234567890",
-    },
-    {
-      id: 15,
-      name: "Jack Smith",
-      position: "Midfielder",
-      jersey: 24,
-      gender: "Male",
-      email: "jack.smith@example.com",
-      phone: "1234567890",
-    },
-    {
-      id: 16,
-      name: "Jill Johnson",
-      position: "Forward",
-      jersey: 25,
-      gender: "Female",
-      email: "jill.johnson@example.com",
-      phone: "1234567890",
-    },
-  ];
   return (
     <div className="space-y-6">
       <div className="text-center mb-8">
@@ -219,12 +100,43 @@ export default function PanelTeamSetup({
 
       <div className="bg-white shadow rounded-lg">
         <div className="flex justify-between items-center p-4">
-          <h4 className="text-lg font-semibold">Team Roster</h4>
+          <div className="flex gap-2">
+            <h4 className="text-lg font-semibold">Team Roster</h4>
+            <div className="flex items-center gap-2 text-sm text-muted-foreground">
+              <div className="flex items-center gap-1">
+                <Avatar
+                  src={sport?.base64}
+                  alt={sport?.name}
+                  size="xs"
+                  fallbackText={sport?.abbr}
+                />
+                {sport?.abbr}
+              </div>
+              <div className="flex items-center gap-1">
+                <Avatar
+                  src={club?.base64}
+                  alt={club?.name}
+                  size="xs"
+                  fallbackText={club?.abbr}
+                />
+                {club?.abbr}
+              </div>
+              <div className="flex items-center gap-1">
+                <Avatar
+                  src={team?.base64}
+                  alt={team?.name}
+                  size="xs"
+                  fallbackText={team?.abbr}
+                />
+                {team?.name}
+              </div>
+            </div>
+          </div>
           <Button
             variant="outline"
             className="flex items-center"
             onClick={() => {
-              /* Open add player modal */
+              setIsModalOpen(true);
             }}
           >
             <PlusIcon className="w-4 h-4" />
@@ -238,9 +150,22 @@ export default function PanelTeamSetup({
             data={rows}
             draggable={false}
             rowsPerPage={5}
+            noDataMessage="No players found"
           />
         </div>
       </div>
+
+      <ModalPlayerEdit
+        team={team}
+        isOpen={isModalOpen}
+        onOpenChange={setIsModalOpen}
+        onSave={(player) => {
+          // Implement player save logic
+          const updatedPlayers = [...players, player];
+          setPlayers(updatedPlayers);
+          handlePlayersUpdate(updatedPlayers);
+        }}
+      />
     </div>
   );
 }
