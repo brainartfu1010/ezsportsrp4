@@ -109,7 +109,7 @@ export default function Table<T extends TableRowData>({
   const [draggedIndex, setDraggedIndex] = useState<number | null>(null);
   const [dragOverIndex, setDragOverIndex] = useState<number | null>(null);
   const [currentPage, setCurrentPage] = useState(1);
-  const [currentRowsPerPage, setCurrentRowsPerPage] = useState(rowsPerPage);
+  const [currentRowsPerPage, setCurrentRowsPerPage] = useState(rowsPerPage || 10);
 
   // Pagination logic
   const paginatedData = React.useMemo(() => {
@@ -678,22 +678,16 @@ export default function Table<T extends TableRowData>({
               <div className="flex items-center space-x-2">
                 {/* <span className="text-sm text-muted-foreground">Rows per page</span> */}
                 <Select
-                  value={String(currentRowsPerPage)}
-                  onValueChange={(value) =>
-                    handleRowsPerPageChange(Number(value))
-                  }
-                >
-                  <SelectTrigger className="w-[80px] h-8">
-                    <SelectValue placeholder="10" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="5">5</SelectItem>
-                    <SelectItem value="10">10</SelectItem>
-                    <SelectItem value="20">20</SelectItem>
-                    <SelectItem value="50">50</SelectItem>
-                    <SelectItem value="100">100</SelectItem>
-                  </SelectContent>
-                </Select>
+                  data={[
+                    { id: 5, name: "5" },
+                    { id: 10, name: "10" },
+                    { id: 20, name: "20" },
+                    { id: 50, name: "50" },
+                    { id: 100, name: "100" },
+                  ]}
+                  value={currentRowsPerPage}
+                  onChange={(value) => handleRowsPerPageChange(Number(value))}
+                />
                 {/* <span className="text-sm text-muted-foreground w-32 text-right">
                   Showing {(currentPage - 1) * currentRowsPerPage + 1}-{Math.min(currentPage * currentRowsPerPage, data.length)} / {data.length}
                 </span> */}

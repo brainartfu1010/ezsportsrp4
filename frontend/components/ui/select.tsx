@@ -131,7 +131,7 @@ export function Select<Option extends BaseItem = BaseItem>({
       if (selectedItem) {
         const finalValue =
           returnType === "id" ? String(selectedItem.id) : selectedItem;
-        onChange(finalValue);
+        onChange(finalValue as any);
       } else {
         onChange(null);
       }
@@ -182,7 +182,7 @@ export function Select<Option extends BaseItem = BaseItem>({
       classNames={{
         control: (state) =>
           cn(
-            "!min-h-[36px] !cursor-pointer !border-primary/40 !hover:border-primary/80",
+            "!min-h-[36px] min-w-[80px] !cursor-pointer !border-primary/40 !hover:border-primary/80",
             "!border !rounded-md !bg-background !shadow-sm",
             state.isDisabled && "!cursor-not-allowed !opacity-50 !bg-background",
             error && "!border-destructive",

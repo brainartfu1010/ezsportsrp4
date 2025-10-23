@@ -2,8 +2,6 @@
 
 import React, { useState } from "react";
 import { Button, Buttons } from "@/components/controls/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 import { PlusIcon, TrashIcon } from "lucide-react";
 import Table from "../controls/table";
 
@@ -53,7 +51,7 @@ export default function PanelTeamSetup({
     {
       accessor: "actions",
       header: "Actions",
-      cell: (row) => (
+      cell: (row: any) => (
         <Buttons.DeleteConfirm
           onYes={() => deletePlayer(row.id)}
           children=" "
@@ -229,12 +227,18 @@ export default function PanelTeamSetup({
               /* Open add player modal */
             }}
           >
-            <PlusIcon className="w-4 h-4" />Add Player
+            <PlusIcon className="w-4 h-4" />
+            Add Player
           </Button>
         </div>
 
         <div className="p-4 pt-0">
-          <Table cols={cols} data={rows} draggable={false} />
+          <Table
+            cols={cols as any}
+            data={rows}
+            draggable={false}
+            rowsPerPage={5}
+          />
         </div>
       </div>
     </div>
