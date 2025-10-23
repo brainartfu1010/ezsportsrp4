@@ -21,9 +21,9 @@ export class PlanMeetingsService {
   async findAll(params: {
     skip?: number;
     take?: number;
-    cursor?: Prisma.Decimal;
-    where?: Prisma.InputJsonObject;
-    orderBy?: Prisma.InputJsonObject | Prisma.SortOrder;
+    cursor?: any;
+    where?: any;
+    orderBy?: any;
   }) {
     const { skip, take, cursor, where, orderBy } = params;
     const meetings = await (this.prisma as any).planMeeting.findMany({

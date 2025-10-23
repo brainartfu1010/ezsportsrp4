@@ -26,7 +26,7 @@ export class SportsService {
   async findAll(active?: boolean) {
     const sports = await this.prisma.baseSport.findMany({
       where: active !== undefined
-        ? { isActive: active } as Prisma.BaseSportWhereInput
+        ? { isActive: active }
         : undefined,
       orderBy: { ord: 'asc' }
     });

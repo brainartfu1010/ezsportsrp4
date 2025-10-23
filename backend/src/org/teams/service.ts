@@ -26,9 +26,9 @@ export class TeamsService {
   async findAll(params: {
     skip?: number;
     take?: number;
-    cursor?: Prisma.Decimal;
-    where?: Prisma.InputJsonObject;
-    orderBy?: Prisma.InputJsonObject | Prisma.SortOrder;
+    cursor?: any;
+    where?: any;
+    orderBy?: any;
   }) {
     const { skip, take, cursor, where, orderBy } = params;
     const teams = await (this.prisma as any).orgTeam.findMany({

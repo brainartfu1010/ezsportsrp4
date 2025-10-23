@@ -28,7 +28,7 @@ export class FieldsService {
     sportId?: number | number[],
     countryId?: number
   ) {
-    const where: Prisma.BaseFieldWhereInput = {
+    const where: any = {
       ...(active !== undefined ? { isActive: active } : {}),
       ...(sportId !== undefined
         ? {
@@ -39,7 +39,7 @@ export class FieldsService {
         : {}
       ),
       ...(countryId !== undefined ? { countryId: Number(countryId) } : {})
-    } as Prisma.BaseFieldWhereInput;
+    } as any;
 
     const fields = await this.prisma.baseField.findMany({
       where,
@@ -144,7 +144,7 @@ export class FieldsService {
     return await this.prisma.baseField.findMany({
       where: {
         countryId: Number(countryId)
-      } as Prisma.BaseFieldWhereInput
+      } as any
     });
   }
 }

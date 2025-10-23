@@ -1,22 +1,23 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { BaseGroupLevelDto } from './dto';
 import { PrismaService } from '../../prisma/prisma.service';
-import { Prisma } from '@prisma/client';
 
 @Injectable()
 export class GroupLevelsService {
   constructor(private prisma: PrismaService) {}
 
   async create(data: BaseGroupLevelDto) {
-    return await (this.prisma as any).baseGroupLevel.create(data);
+    return await (this.prisma as any).baseGroupLevel.create({
+      data: data
+    });
   }
 
   async findAll(params: {
     skip?: number;
     take?: number;
-    cursor?: Prisma.BaseFieldWhereUniqueInput;
-    where?: Prisma.BaseFieldWhereInput;
-    orderBy?: Prisma.BaseFieldOrderByWithRelationInput;
+    cursor?: any;
+    where?: any;
+    orderBy?: any;
   }) {
     const { skip, take, cursor, where, orderBy } = params;
     return await (this.prisma as any).baseGroupLevel.findMany({

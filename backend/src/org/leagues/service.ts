@@ -26,9 +26,9 @@ export class LeaguesService {
   async findAll(params: {
     skip?: number;
     take?: number;
-    cursor?: Prisma.Decimal;
-    where?: Prisma.InputJsonObject;
-    orderBy?: Prisma.InputJsonObject | Prisma.SortOrder;
+    cursor?: any;
+    where?: any;
+    orderBy?: any;
   }) {
     const { skip, take, cursor, where, orderBy } = params;
     const leagues = await (this.prisma as any).orgLeague.findMany({

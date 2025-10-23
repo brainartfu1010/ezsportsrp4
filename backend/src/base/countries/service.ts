@@ -37,7 +37,7 @@ export class CountriesService {
   async findAll(active?: boolean) {
     const countries = await this.prisma.baseCountry.findMany({
       where: active !== undefined
-        ? { isActive: active } as Prisma.BaseCountryWhereInput
+        ? { isActive: active } as any
         : undefined,
       orderBy: { ord: 'asc' }
     });
